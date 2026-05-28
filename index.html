@@ -47,7 +47,6 @@
       background: url('otari.jpeg') center center / cover no-repeat;
       filter: brightness(.38) sepia(.25);
       animation: kzoom 40s ease-in-out infinite alternate;
-      
     }
     @keyframes kzoom {
       from { transform: scale(1); }
@@ -203,14 +202,14 @@
 
     .shop-tag {
       font-family: 'Cinzel', serif;
-      font-size: 0.95rem; /* Aumentato */
+      font-size: 0.95rem;
       font-weight: 600;
       letter-spacing: .12em;
       text-transform: uppercase;
       color: var(--gold-lt);
       border: 1px solid rgba(201,168,76,.5);
       background: rgba(14,11,6,.75);
-      padding: .65rem 1.5rem; /* Aumentato */
+      padding: .65rem 1.5rem;
       transition: all .3s;
       cursor: pointer;
       box-shadow: 0 2px 10px rgba(0,0,0,0.5);
@@ -311,7 +310,7 @@
       padding: 1.5rem; border-bottom: 1px solid rgba(201,168,76,.3);
       display: flex; justify-content: space-between; align-items: center;
     }
-    .cart-header h2 { font-family: 'Cinzel Decorative', serif; color: var(--gold); font-size: 1.3rem;}
+    .cart-header h2 { font-family: 'Cinzel Decorative', serif; color: var(--gold); font-size: 1.3rem; }
     .close-cart { background: none; border: none; color: var(--parchment); font-size: 1.5rem; cursor: pointer; }
     .close-cart:hover { color: var(--crimson); }
     
@@ -323,8 +322,8 @@
     .cart-item-info { display: flex; flex-direction: column; width: 60%; }
     .cart-item-title { font-family: 'Cinzel', serif; font-size: 0.85rem; color: var(--parchment); }
     .cart-item-weight { font-size: 0.7rem; color: rgba(201,168,76,.6); margin-top: 0.2rem; }
-    .cart-item-controls { display: flex; gap: 0.5rem; align-items: center; font-family: sans-serif; font-size: 0.8rem;}
-    .cart-btn-sm { background: none; border: 1px solid rgba(201,168,76,.5); color: var(--gold); cursor: pointer; padding: 0.1rem 0.4rem;}
+    .cart-item-controls { display: flex; gap: 0.5rem; align-items: center; font-family: sans-serif; font-size: 0.8rem; }
+    .cart-btn-sm { background: none; border: 1px solid rgba(201,168,76,.5); color: var(--gold); cursor: pointer; padding: 0.1rem 0.4rem; }
     .cart-btn-sm:hover { background: var(--gold); color: var(--ink); }
     
     .cart-footer { padding: 1.5rem; border-top: 1px solid rgba(201,168,76,.3); background: rgba(0,0,0,0.4); }
@@ -371,7 +370,7 @@
 
     <nav>
       <div class="dropdown" id="dd-personaggi">
-        <button class="nav-btn" onclick="toggleDD('dd-personaggi')" aria-haspopup="true">
+        <button class="nav-btn" onclick="toggleDD('dd-personaggi')" aria-haspopup="menu">
           Personaggi <span class="chevron">▾</span>
         </button>
         <div class="dropdown-menu" role="menu">
@@ -380,13 +379,13 @@
           <a href="Marco.html">Marco</a>
         </div>
       </div>
-      <a class="nav-link" href="javascript:void(0)" onclick="openMap()">Mappa della Città</a>
+      <button class="nav-link" onclick="openMap()">Mappa della Città</button>
       <a class="nav-link" href="Bestiario.html">Bestiario</a>
     </nav>
 
     <div class="shops-section" id="shops-wrapper">
       <p class="shops-label">✦ &nbsp; Mercanti & Negozi &nbsp; ✦</p>
-      </div>
+    </div>
 
     <div id="inventory-area" class="inventory-area">
       <h3 id="inventory-title" class="inventory-header">Negozio</h3>
@@ -407,8 +406,7 @@
     <h2>Carrello</h2>
     <button class="close-cart" onclick="toggleCart()">×</button>
   </div>
-  <div class="cart-items" id="cart-items">
-    </div>
+  <div class="cart-items" id="cart-items"></div>
   <div class="cart-footer">
     <div class="cart-total" id="cart-total">Totale: 0 mr</div>
     <div class="cart-weight" id="cart-weight">Peso: 0 Volume</div>
@@ -422,75 +420,75 @@
 <div id="item-tooltip" class="item-tooltip"></div>
 
 <script>
-  /* ─── DATI DEI NEGOZI E DEGLI OGGETTI (Estratti dai file YML) ─── */
+  /* ─── DATI DEI NEGOZI E DEGLI OGGETTI ─── */
   const shopsData = {
     "Lame per Radure": [
-      { name: "Dagger", type: "Weapon", price: { ma: 2 }, weight: 0.1, desc: "prova <b>prova</b> <p>This small, bladed weapon is held in one hand and used to stab a creature in close combat. It c[...]
-      { name: "Longspear", type: "Weapon", price: { ma: 5 }, weight: 7, desc: "<p>This very long spear, sometimes called a pike, is purely for thrusting rather than throwing. Used by many soldier[...]
-      { name: "Bastard Sword", type: "Weapon", price: { mo: 4 }, weight: 3, desc: "<p>This broad-bladed sword, sometimes called the hand-and-a-half sword, has a longer grip so it can be held in o[...]
-      { name: "Battle Axe", type: "Weapon", price: { mo: 1 }, weight: 4, desc: "<p>These axes are designed explicitly as weapons, rather than tools. They typically weigh less, with a shaft reinfo[...]
-      { name: "Chain Mail", type: "Armor", price: { mo: 6 }, weight: 48, desc: "<p>A suit of chain mail consists of several pieces of armor composed of small metal rings linked together in a prot[...]
-      { name: "Steel Shield", type: "Shield", price: { mo: 2 }, weight: 6, desc: "<p>Like wooden shields, steel shields come in a variety of shapes and sizes. Though more expensive than wooden sh[...]
+      { name: "Dagger", type: "Weapon", price: { ma: 2 }, weight: 0.1, desc: "<p>Un piccolo pugnale affilato tenuto in una mano per colpire in combattimento ravvicinato.</p>" },
+      { name: "Longspear", type: "Weapon", price: { ma: 5 }, weight: 7, desc: "<p>Una picca molto lunga, a volte chiamata lancia, usata esclusivamente per il combattimento a distanza ravvicinata.</p>" },
+      { name: "Bastard Sword", type: "Weapon", price: { mo: 4 }, weight: 3, desc: "<p>Una larga spada, talvolta chiamata spada da mano e mezza, con un'impugnatura più lunga per consentire l'uso con una o due mani.</p>" },
+      { name: "Battle Axe", type: "Weapon", price: { mo: 1 }, weight: 4, desc: "<p>Queste asce sono esplicitamente progettate come armi, piuttosto che come strumenti. Pesano meno di una comune ascia.</p>" },
+      { name: "Chain Mail", type: "Armor", price: { mo: 6 }, weight: 48, desc: "<p>Un'armatura composta da piccoli anelli metallici collegati insieme in una protezione intrecciata.</p>" },
+      { name: "Steel Shield", type: "Shield", price: { mo: 2 }, weight: 6, desc: "<p>Scudi in acciaio di varie forme e dimensioni. Più costosi degli scudi di legno ma anche più resistenti.</p>" }
     ],
     "Crook's Nook": [
-      { name: "Dagger of Eternal Sleep", type: "Weapon (Magical)", price: { mo: 25 }, weight: 0.1, desc: "<p>This tiny serrated dagger looks like a miniature sawtooth sabre. Until activated, it i[...]
-      { name: "Serpent Dagger", type: "Weapon (Magical)", price: { mo: 150 }, weight: 0.1, desc: "<p>The serrated blade of this +1 striking dagger has a greenish tinge. When you critically succee[...]
-      { name: "Flaying Knife", type: "Weapon (Magical)", price: { mo: 480 }, weight: 0.15, desc: "<p>This long, thin +1 striking Wounding dagger has a smooth edge on one side and a serrated edge [...]
-      { name: "Thieves' Toolkit", type: "Equipment", price: { mo: 3 }, weight: 1, desc: "<p>You need a thieves' toolkit to Pick Locks or Disable Devices using the Thievery skill.</p>" },
-      { name: "Arsenic", type: "Poison", price: { mo: 3 }, weight: 0.1, desc: "<p>This toxin is a compound of arsenic and other substances. You can't reduce your sickened condition while affected[...]
-      { name: "Spider Venom", type: "Poison", price: { mo: 25 }, weight: 0.1, desc: "<p>This venom erodes its target's defenses, aiding the spider in securing prey.</p>" }
+      { name: "Dagger of Eternal Sleep", type: "Weapon (Magical)", price: { mo: 25 }, weight: 0.1, desc: "<p>Un piccolo pugnale seghettato che assomiglia a una piccola sciabola a denti di sega. Fino all'attivazione è inerte.</p>" },
+      { name: "Serpent Dagger", type: "Weapon (Magical)", price: { mo: 150 }, weight: 0.1, desc: "<p>La lama seghettata di questo pugnale +1 ha una sfumatura verdognola. In caso di successo critico attiva effetti speciali.</p>" },
+      { name: "Flaying Knife", type: "Weapon (Magical)", price: { mo: 480 }, weight: 0.15, desc: "<p>Un lungo e sottile pugnale +1 da ferita con un bordo liscio su un lato e un bordo seghettato sull'altro.</p>" },
+      { name: "Thieves' Toolkit", type: "Equipment", price: { mo: 3 }, weight: 1, desc: "<p>Necessario per scassinare serrature o disattivare dispositivi di sicurezza usando l'abilità Furto.</p>" },
+      { name: "Arsenic", type: "Poison", price: { mo: 3 }, weight: 0.1, desc: "<p>Una tossina composta da arsenico e altre sostanze. Non è possibile ridurre la condizione avvelenato mentre colpiti.</p>" },
+      { name: "Spider Venom", type: "Poison", price: { mo: 25 }, weight: 0.1, desc: "<p>Questo veleno erode le difese del bersaglio, aiutando il ragno a catturare la preda.</p>" }
     ],
     "Dawnflower Library": [
-      { name: "Rapier", type: "Weapon", price: { mo: 2 }, weight: 1, desc: "<p>The rapier is a long and thin piercing blade with a basket hilt. It is prized among many as a dueling weapon.</p>" },
-      { name: "Staff of Healing", type: "Weapon (Magical)", price: { mo: 90 }, weight: 3.5, desc: "<p>This white wood staff grants a +1 item bonus to the Hit Points you restore anytime you cast t[...]
-      { name: "Healing Potion (Minor)", type: "Potion", price: { mo: 4 }, weight: 0.1, desc: "<p>A vial of a ruby-red liquid that imparts a tingling sensation as the drinker's wounds heal rapidly[...]
-      { name: "Healing Potion (Lesser)", type: "Potion", price: { mo: 12 }, weight: 0.1, desc: "<p>Regain 2d8+5 Hit Points.</p>" },
-      { name: "Holy Water", type: "Consumable", price: { mo: 3 }, weight: 0.1, desc: "<p>This vial contains water blessed by a benevolent deity. Deals 1d6 spirit damage and 1 spirit splash damage[...]
-      { name: "Scroll of Heal (Rank 1)", type: "Scroll", price: { mo: 4 }, weight: 0.1, desc: "<p>Contains the Heal spell. You channel vital energy to heal the living or damage the undead.</p>" },
-      { name: "Scroll of Sanctuary", type: "Scroll", price: { mo: 4 }, weight: 0.1, desc: "<p>Contains the Sanctuary spell. Wards a creature with protective energy that deters attacks.</p>" }
+      { name: "Rapier", type: "Weapon", price: { mo: 2 }, weight: 1, desc: "<p>Una lunga e sottile lama perforante con una guardia a cestello. Apprezzata come arma da duello.</p>" },
+      { name: "Staff of Healing", type: "Weapon (Magical)", price: { mo: 90 }, weight: 3.5, desc: "<p>Un bastone di legno bianco che concede un bonus di oggetto +1 ai punti vita ripristinati quando si lancia guarigione.</p>" },
+      { name: "Healing Potion (Minor)", type: "Potion", price: { mo: 4 }, weight: 0.1, desc: "<p>Una fiala di liquido rosso rubino che ripristina 1d8+1 punti vita quando bevuta.</p>" },
+      { name: "Healing Potion (Lesser)", type: "Potion", price: { mo: 12 }, weight: 0.1, desc: "<p>Ripristina 2d8+5 punti vita quando bevuta.</p>" },
+      { name: "Holy Water", type: "Consumable", price: { mo: 3 }, weight: 0.1, desc: "<p>Una fiala di acqua benedetta da una divinità benevola. Infligge 1d6 danno spirituale ai non-morti.</p>" },
+      { name: "Scroll of Heal (Rank 1)", type: "Scroll", price: { mo: 4 }, weight: 0.1, desc: "<p>Contiene l'incantesimo Guarigione. Canalizza energia vitale per guarire i vivi o danneggiare i non-morti.</p>" },
+      { name: "Scroll of Sanctuary", type: "Scroll", price: { mo: 4 }, weight: 0.1, desc: "<p>Contiene l'incantesimo Santuario. Protegge una creatura con energia protettiva che scoraggia gli attacchi.</p>" }
     ],
     "Odd Stories": [
-      { name: "Staff of Fire", type: "Weapon (Magical)", price: { mo: 60 }, weight: 4, desc: "<p>This staff resembles a blackened and burned length of ashen wood. Can cast Ignition and Breathe Fi[...]
-      { name: "Animal Staff", type: "Weapon (Magical)", price: { mo: 90 }, weight: 4, desc: "<p>Topped with carved animal heads. Grants a +2 circumstance bonus to Nature checks to identify animal[...]
-      { name: "Mentalist's Staff", type: "Weapon (Magical)", price: { mo: 90 }, weight: 4, desc: "<p>Grants a +2 circumstance bonus to identify mental magic. Casts Daze, Mindlink, and Phantom Pai[...]
-      { name: "Basic Crafter's Book", type: "Equipment", price: { ma: 1 }, weight: 1, desc: "<p>Contains the formulas for Crafting 0-level common items.</p>" },
-      { name: "Formula Book (Blank)", type: "Equipment", price: { mo: 1 }, weight: 1, desc: "<p>Can hold the formulas for up to 100 different items.</p>" },
-      { name: "Writing Set", type: "Equipment", price: { mo: 1 }, weight: 0.5, desc: "<p>Includes stationery, ink, a quill or inkpen, sealing wax, and a simple seal.</p>" }
+      { name: "Staff of Fire", type: "Weapon (Magical)", price: { mo: 60 }, weight: 4, desc: "<p>Un bastone che assomiglia a un pezzo di legno di frassino annerito e bruciato. Può lanciare Accensione e Fiato di Fuoco.</p>" },
+      { name: "Animal Staff", type: "Weapon (Magical)", price: { mo: 90 }, weight: 4, desc: "<p>Coronato da teste di animali intagliate. Concede un bonus circostanziale +2 ai controlli Natura per identificare animali.</p>" },
+      { name: "Mentalist's Staff", type: "Weapon (Magical)", price: { mo: 90 }, weight: 4, desc: "<p>Concede un bonus circostanziale +2 per identificare la magia mentale. Lancia Stordire, Collegamento Mentale e Dolore Fantasma.</p>" },
+      { name: "Basic Crafter's Book", type: "Equipment", price: { ma: 1 }, weight: 1, desc: "<p>Contiene le formule per creazione di oggetti comuni di livello 0.</p>" },
+      { name: "Formula Book (Blank)", type: "Equipment", price: { mo: 1 }, weight: 1, desc: "<p>Può contenere le formule per fino a 100 oggetti diversi.</p>" },
+      { name: "Writing Set", type: "Equipment", price: { mo: 1 }, weight: 0.5, desc: "<p>Include carta, inchiostro, una penna, cera sigillante e un semplice sigillo.</p>" }
     ],
     "Otari Garrison": [
-      { name: "Greatclub", type: "Weapon", price: { mo: 1 }, weight: 8, desc: "<p>These massive clubs are too heavy to wield with only one hand.</p>" },
-      { name: "Heavy Crossbow", type: "Weapon", price: { mo: 4 }, weight: 7, desc: "<p>Harder to load and more substantial than a regular crossbow, but packs a greater punch. Deals 1d10 piercing.[...]
-      { name: "Scale Mail", type: "Armor", price: { mo: 4 }, weight: 34, desc: "<p>Consists of many metal scales sewn onto a reinforced leather backing.</p>" },
-      { name: "Breastplate", type: "Armor", price: { mo: 8 }, weight: 28, desc: "<p>Strategically grants some of the protection of plate while allowing greater flexibility and speed.</p>" },
-      { name: "Tower Shield", type: "Shield", price: { mo: 10 }, weight: 12, desc: "<p>These massive shields can be used to provide cover to nearly the entire body. Hardness 5, HP 20.</p>" },
-      { name: "Weapon Potency (+1)", type: "Rune", price: { mo: 35 }, weight: 0, desc: "<p>Attack rolls with this weapon gain a +1 item bonus, and the weapon can be etched with one property rune.[...]
+      { name: "Greatclub", type: "Weapon", price: { mo: 1 }, weight: 8, desc: "<p>Questi enormi mazze sono troppo pesanti per essere impugnate con una sola mano.</p>" },
+      { name: "Heavy Crossbow", type: "Weapon", price: { mo: 4 }, weight: 7, desc: "<p>Più difficile da caricare di una balestra normale, ma colpisce più forte. Infligge 1d10 danno perforante.</p>" },
+      { name: "Scale Mail", type: "Armor", price: { mo: 4 }, weight: 34, desc: "<p>Consiste in molte scaglie metalliche cucite su un rinforzo di pelle cuoio.</p>" },
+      { name: "Breastplate", type: "Armor", price: { mo: 8 }, weight: 28, desc: "<p>Fornisce una buona protezione permettendo flessibilità e velocità di movimento superiori.</p>" },
+      { name: "Tower Shield", type: "Shield", price: { mo: 10 }, weight: 12, desc: "<p>Enormi scudi che possono fornire copertura a quasi tutto il corpo. Durezza 5, 20 punti vita.</p>" },
+      { name: "Weapon Potency (+1)", type: "Rune", price: { mo: 35 }, weight: 0, desc: "<p>I tiri di attacco con questa arma ottengono un bonus di oggetto +1, e l'arma può avere una runa di proprietà incisa.</p>" }
     ],
     "Otari Market": [
-      { name: "Explorer's Clothing", type: "Armor", price: { ma: 1 }, weight: 2, desc: "<p>Adventurers who don't wear armor travel in durable clothing. Can grant an item bonus to AC if etched wit[...]
-      { name: "Clothing (High-Fashion Fine)", type: "Equipment", price: { mo: 55 }, weight: 1, desc: "<p>Made with expensive fabrics. Grants a +1 item bonus to checks to Make an Impression on nob[...]
-      { name: "Rations", type: "Consumable", price: { ma: 4 }, weight: 1, desc: "<p>Food for a week of travel.</p>" },
-      { name: "Tent (Four-Person)", type: "Equipment", price: { mo: 5 }, weight: 20, desc: "<p>A large tent that sleeps four.</p>" },
-      { name: "Compass (Lensatic)", type: "Equipment", price: { mo: 20 }, weight: 0.2, desc: "<p>Helps you Sense Direction or navigate. Grants a +1 item bonus to Survival checks for navigation.</[...]
-      { name: "Disguise Kit", type: "Equipment", price: { mo: 2 }, weight: 1, desc: "<p>Contains cosmetics, false facial hair, spirit gum, and a few simple wigs.</p>" },
-      { name: "Spyglass", type: "Equipment", price: { mo: 20 }, weight: 1, desc: "<p>Lets you see eight times farther than normal.</p>" }
+      { name: "Explorer's Clothing", type: "Armor", price: { ma: 1 }, weight: 2, desc: "<p>Avventurieri che non indossano armature viaggeranno in abiti resistenti. Può dare un bonus se inciso con potenziamenti.</p>" },
+      { name: "Clothing (High-Fashion Fine)", type: "Equipment", price: { mo: 55 }, weight: 1, desc: "<p>Realizzato con tessuti costosi. Concede un bonus di oggetto +1 ai controlli per fare buona impressione sulla nobiltà.</p>" },
+      { name: "Rations", type: "Consumable", price: { ma: 4 }, weight: 1, desc: "<p>Cibo per una settimana di viaggio.</p>" },
+      { name: "Tent (Four-Person)", type: "Equipment", price: { mo: 5 }, weight: 20, desc: "<p>Una grande tenda che dorme quattro persone comodamente.</p>" },
+      { name: "Compass (Lensatic)", type: "Equipment", price: { mo: 20 }, weight: 0.2, desc: "<p>Aiuta a percepire la direzione e navigare. Concede un bonus di oggetto +1 ai controlli Sopravvivenza per la navigazione.</p>" },
+      { name: "Disguise Kit", type: "Equipment", price: { mo: 2 }, weight: 1, desc: "<p>Contiene cosmetici, falsi baffi, gomma per spirito e alcuni semplici parrucche.</p>" },
+      { name: "Spyglass", type: "Equipment", price: { mo: 20 }, weight: 1, desc: "<p>Consente di vedere otto volte più lontano del normale.</p>" }
     ],
     "Stone Ring Pond": [
-      { name: "Sickle", type: "Weapon", price: { ma: 2 }, weight: 1.5, desc: "<p>A one-handed weapon with a short wooden handle ending in a curved blade.</p>" },
-      { name: "Blowgun", type: "Weapon", price: { ma: 1 }, weight: 1, desc: "<p>This long, narrow tube is used for shooting blowgun darts.</p>" },
-      { name: "Leather Armor", type: "Armor", price: { mo: 2 }, weight: 10, desc: "<p>A mix of flexible and molded boiled leather.</p>" },
-      { name: "Wooden Shield", type: "Shield", price: { mo: 1 }, weight: 3, desc: "<p>Offers protection from the stoutness of their materials. Hardness 3, HP 12.</p>" },
-      { name: "Climbing Kit", type: "Equipment", price: { ma: 5 }, weight: 5, desc: "<p>Includes 50 feet of rope, pulleys, pitons, a hammer, a grappling hook, and crampons.</p>" },
-      { name: "Alchemist's Toolkit", type: "Equipment", price: { mo: 3 }, weight: 1, desc: "<p>A mobile collection of vials and chemicals used for simple alchemical tasks.</p>" },
-      { name: "Snare Kit", type: "Equipment", price: { mo: 5 }, weight: 2, desc: "<p>Contains tools and materials for creating snares.</p>" }
+      { name: "Sickle", type: "Weapon", price: { ma: 2 }, weight: 1.5, desc: "<p>Un'arma a una mano con un manico in legno corto che termina con una lama curva.</p>" },
+      { name: "Blowgun", type: "Weapon", price: { ma: 1 }, weight: 1, desc: "<p>Un lungo tubo stretto usato per sparare dardi da cerbottana.</p>" },
+      { name: "Leather Armor", type: "Armor", price: { mo: 2 }, weight: 10, desc: "<p>Un mix di pelle flessibile e modellata bollita.</p>" },
+      { name: "Wooden Shield", type: "Shield", price: { mo: 1 }, weight: 3, desc: "<p>Fornisce protezione dalla solidità dei materiali. Durezza 3, 12 punti vita.</p>" },
+      { name: "Climbing Kit", type: "Equipment", price: { ma: 5 }, weight: 5, desc: "<p>Include 50 piedi di corda, carrucole, chiodi, martello, uncino rampante e rampicanti.</p>" },
+      { name: "Alchemist's Toolkit", type: "Equipment", price: { mo: 3 }, weight: 1, desc: "<p>Una collezione mobile di fiale e sostanze chimiche utilizzate per compiti alchemici semplici.</p>" },
+      { name: "Snare Kit", type: "Equipment", price: { mo: 5 }, weight: 2, desc: "<p>Contiene strumenti e materiali per creare trappole.</p>" }
     ],
     "Wrin's Wonders": [
-      { name: "Returning Rune", type: "Rune", price: { mo: 55 }, weight: 0, desc: "<p>When you make a thrown Strike with this weapon, it flies back to your hand after the Strike is complete.</p>" },
-      { name: "Ghost Touch Rune", type: "Rune", price: { mo: 75 }, weight: 0, desc: "<p>A weapon etched with this rune can harm creatures without physical form.</p>" },
-      { name: "Wand of Heal (Rank 1)", type: "Wand", price: { mo: 60 }, weight: 0.3, desc: "<p>Contains a single spell. Can cast Heal once per day, plus overcharge.</p>" },
-      { name: "Emergency Disguise", type: "Talisman", price: { mo: 3 }, weight: 0.1, desc: "<p>When activated, applies a disguise to its wearer instantly, allowing them to Impersonate quickly.</p>" },
-      { name: "Potency Crystal", type: "Talisman", price: { mo: 4 }, weight: 0.1, desc: "<p>When activated, the weapon becomes a +1 striking weapon until the end of this turn.</p>" },
-      { name: "Snapleaf", type: "Talisman", price: { mo: 9 }, weight: 0.1, desc: "<p>Triggered when falling. Grants Gentle Landing and Invisibility for 1 minute.</p>" },
-      { name: "Crying Angel Pendant", type: "Talisman", price: { mo: 7 }, weight: 0.1, desc: "<p>Grants a +1 item bonus to Administer First Aid. On success when stabilizing, target regains 1 HP a[...]
+      { name: "Returning Rune", type: "Rune", price: { mo: 55 }, weight: 0, desc: "<p>Quando si effettua un attacco lanciato con questa arma, ritorna alla vostra mano dopo il colpo.</p>" },
+      { name: "Ghost Touch Rune", type: "Rune", price: { mo: 75 }, weight: 0, desc: "<p>Un'arma incisa con questa runa può danneggiare creature senza forma fisica.</p>" },
+      { name: "Wand of Heal (Rank 1)", type: "Wand", price: { mo: 60 }, weight: 0.3, desc: "<p>Contiene un unico incantesimo. Può lanciare Guarigione una volta al giorno, più sovraccarico.</p>" },
+      { name: "Emergency Disguise", type: "Talisman", price: { mo: 3 }, weight: 0.1, desc: "<p>Quando attivato, applica istantaneamente una maschera permettendo di imitare rapidamente altri.</p>" },
+      { name: "Potency Crystal", type: "Talisman", price: { mo: 4 }, weight: 0.1, desc: "<p>Quando attivato, l'arma diventa un'arma +1 colpente fino alla fine di questo turno.</p>" },
+      { name: "Snapleaf", type: "Talisman", price: { mo: 9 }, weight: 0.1, desc: "<p>Attivato quando si cade. Concede Atterraggio Dolce e Invisibilità per 1 minuto.</p>" },
+      { name: "Crying Angel Pendant", type: "Talisman", price: { mo: 7 }, weight: 0.1, desc: "<p>Concede un bonus di oggetto +1 a Amministrare Primo Soccorso. Al successo stabilizzando, il bersaglio recupera 1 PV.</p>" }
     ]
   };
 
@@ -511,11 +509,9 @@
   });
 
   function openShop(shopName, btnElement) {
-    // Gestisci lo stile attivo dei bottoni
     document.querySelectorAll('.shop-tag').forEach(b => b.classList.remove('active'));
     btnElement.classList.add('active');
 
-    // Popola l'inventario
     inventoryTitle.innerText = "Inventario: " + shopName;
     inventoryList.innerHTML = '';
     
@@ -525,9 +521,7 @@
       
       const row = document.createElement('div');
       row.className = 'item-row';
-      
-      // Sanitizzazione veloce per togliere tag strani da desc (es. @UUID)
-      const cleanDesc = item.desc.replace(/@UUID\[[^\]]+\]\{([^}]+)\}/g, "<strong>$1</strong>").replace(/"/g, '&quot;');
+      const cleanDesc = item.desc.replace(/"/g, '&quot;');
 
       row.innerHTML = `
         <div class="item-info">
@@ -546,23 +540,23 @@
     inventoryArea.classList.add('active');
   }
 
-  // Utilities Tooltip
   function showTooltip(e, htmlContent) {
     tooltip.innerHTML = htmlContent;
     tooltip.classList.add('visible');
     moveTooltip(e);
   }
+
   function moveTooltip(e) {
     let x = e.clientX + 15;
     let y = e.clientY + 15;
     
-    // Evita che il tooltip esca dallo schermo
     if (x + 320 > window.innerWidth) x = e.clientX - 335;
     if (y + tooltip.offsetHeight > window.innerHeight) y = e.clientY - tooltip.offsetHeight - 15;
     
     tooltip.style.left = x + 'px';
     tooltip.style.top = y + 'px';
   }
+
   function hideTooltip() {
     tooltip.classList.remove('visible');
   }
@@ -578,7 +572,6 @@
     return parts.join(', ') || '0 mr';
   }
 
-  // Converte tutto in monete di rame (Copper Pieces) per i calcoli
   function priceToCp(priceObj) {
     let total = 0;
     if (priceObj.mo) total += priceObj.mo * 100;
@@ -609,7 +602,6 @@
     }
     updateCartUI();
     
-    // Feedback visivo sul pulsante "Carrello"
     const badge = document.getElementById('cart-badge');
     badge.style.transform = 'scale(1.5)';
     setTimeout(() => badge.style.transform = 'scale(1)', 200);
@@ -670,20 +662,19 @@
     document.getElementById('cart-panel').classList.toggle('open');
   }
 
-  /* ─── MENU TENDINA PERSONAGGI ─── */
   function toggleDD(id) {
     const el = document.getElementById(id);
     const isOpen = el.classList.contains('open');
     document.querySelectorAll('.dropdown.open').forEach(d => d.classList.remove('open'));
     if (!isOpen) el.classList.add('open');
   }
+
   document.addEventListener('click', e => {
     if (!e.target.closest('.dropdown')) {
       document.querySelectorAll('.dropdown.open').forEach(d => d.classList.remove('open'));
     }
   });
 
-  /* ─── MODALE MAPPA ─── */
   const mapModal = document.getElementById('map-modal');
   function openMap() {
     mapModal.classList.add('active');
@@ -692,9 +683,7 @@
     mapModal.classList.remove('active');
   }
   
-  // Inizializza Carrello UI
   updateCartUI();
-
 </script>
 
 </body>
