@@ -1,102 +1,715 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Otari Campaign - Map</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Otari — Le Cripte degli Abomini</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #c9a84c;
+      --gold-light: #e8c97a;
+      --gold-dark: #8a6520;
+      --crimson: #7a1c1c;
+      --crimson-light: #a83232;
+      --parchment: #f0e6c8;
+      --parchment-dark: #d4c49a;
+      --ink: #1a1008;
+      --shadow: #0a0604;
+      --stone: #2a2218;
+      --mist: rgba(200,170,100,0.08);
+    }
 
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #000;
-        }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 1rem;
-        }
+    html { scroll-behavior: smooth; }
 
-        .map-container {
-            position: relative;
-            display: inline-block;
-            max-width: 100%;
-        }
+    body {
+      background: var(--ink);
+      color: var(--parchment);
+      font-family: 'IM Fell English', serif;
+      overflow-x: hidden;
+      cursor: default;
+    }
 
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-        }
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
 
-        .hotspot {
-            position: absolute;
-            cursor: pointer;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url('otari.webp') center center / cover no-repeat;
+      filter: brightness(0.45) sepia(0.3);
+      transform: scale(1.05);
+      animation: slowzoom 30s ease-in-out infinite alternate;
+    }
 
-        .hotspot:hover {
-            opacity: 0.3;
-            background-color: rgba(255, 215, 0, 0.5);
-        }
+    @keyframes slowzoom {
+      from { transform: scale(1.05); }
+      to   { transform: scale(1.12); }
+    }
 
-        .hotspot-label {
-            position: absolute;
-            background-color: rgba(0, 0, 0, 0.7);
-            color: #ffd700;
-            padding: 0.5rem;
-            border-radius: 4px;
-            font-size: 0.9rem;
-            white-space: nowrap;
-            pointer-events: none;
-            display: none;
-        }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 50% 60%, transparent 30%, rgba(10,6,4,0.7) 80%),
+        linear-gradient(to bottom, rgba(10,6,4,0.2) 0%, rgba(10,6,4,0.85) 100%);
+    }
 
-        .hotspot:hover .hotspot-label {
-            display: block;
-        }
+    .hero-particles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-    </style>
+    .particle {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: var(--gold-light);
+      border-radius: 50%;
+      opacity: 0;
+      animation: float-up linear infinite;
+    }
+
+    @keyframes float-up {
+      0%   { opacity: 0; transform: translateY(0) scale(1); }
+      20%  { opacity: 0.8; }
+      80%  { opacity: 0.4; }
+      100% { opacity: 0; transform: translateY(-80vh) scale(0.3); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 2rem;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(0.65rem, 1.5vw, 0.85rem);
+      letter-spacing: 0.4em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      opacity: 0;
+      animation: fadeSlideDown 1.2s ease 0.3s forwards;
+    }
+
+    .hero-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(2rem, 7vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      color: var(--gold-light);
+      text-shadow:
+        0 0 40px rgba(201,168,76,0.5),
+        0 4px 20px rgba(0,0,0,0.9),
+        2px 2px 0 rgba(122,28,28,0.4);
+      margin-bottom: 0.5rem;
+      opacity: 0;
+      animation: fadeSlideDown 1.2s ease 0.6s forwards;
+    }
+
+    .hero-subtitle {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(1rem, 3vw, 2rem);
+      font-weight: 400;
+      color: var(--crimson-light);
+      text-shadow: 0 2px 12px rgba(0,0,0,0.8);
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeSlideDown 1.2s ease 0.9s forwards;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 1.5rem auto;
+      width: 100%;
+      max-width: 500px;
+      opacity: 0;
+      animation: fadeSlideDown 1.2s ease 1.1s forwards;
+    }
+
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+    }
+
+    .divider-gem {
+      width: 10px;
+      height: 10px;
+      background: var(--gold);
+      transform: rotate(45deg);
+      box-shadow: 0 0 10px var(--gold);
+    }
+
+    .hero-desc {
+      font-style: italic;
+      font-size: clamp(0.9rem, 2vw, 1.15rem);
+      color: var(--parchment-dark);
+      max-width: 600px;
+      line-height: 1.8;
+      opacity: 0;
+      animation: fadeSlideDown 1.2s ease 1.3s forwards;
+    }
+
+    .scroll-cta {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0;
+      animation: fadeSlideDown 1.2s ease 1.8s forwards;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .scroll-cta span {
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+
+    .scroll-arrow {
+      width: 24px;
+      height: 24px;
+      border-right: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      transform: rotate(45deg);
+      animation: bounce 2s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: rotate(45deg) translateY(0); }
+      50% { transform: rotate(45deg) translateY(6px); }
+    }
+
+    @keyframes fadeSlideDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── LOCATION GRID ── */
+    .locations-section {
+      position: relative;
+      padding: 6rem 2rem;
+      background: var(--ink);
+    }
+
+    .locations-section::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 200px;
+      background: linear-gradient(to bottom, rgba(10,6,4,1), transparent);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .section-eyebrow {
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.5em;
+      color: var(--gold-dark);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(1.5rem, 4vw, 2.8rem);
+      color: var(--gold);
+      text-shadow: 0 0 30px rgba(201,168,76,0.3);
+    }
+
+    .ornament {
+      font-size: 1.5rem;
+      color: var(--gold-dark);
+      margin: 1rem 0;
+      letter-spacing: 0.3em;
+    }
+
+    /* ── CARD GRID ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+      max-width: 1300px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .card {
+      position: relative;
+      border: 1px solid rgba(201,168,76,0.2);
+      background: linear-gradient(135deg, rgba(42,34,24,0.9) 0%, rgba(26,16,8,0.95) 100%);
+      padding: 1.8rem 1.5rem 1.5rem;
+      text-decoration: none;
+      color: var(--parchment);
+      transition: all 0.35s ease;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(201,168,76,0.06), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+
+    .card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+
+    .card:hover {
+      border-color: rgba(201,168,76,0.5);
+      transform: translateY(-4px);
+      box-shadow:
+        0 20px 60px rgba(0,0,0,0.6),
+        0 0 30px rgba(201,168,76,0.08),
+        inset 0 0 20px rgba(201,168,76,0.04);
+    }
+
+    .card:hover::before { opacity: 1; }
+    .card:hover::after  { transform: scaleX(1); }
+
+    .card-number {
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      color: var(--gold-dark);
+      text-transform: uppercase;
+    }
+
+    .card-icon {
+      font-size: 1.8rem;
+      line-height: 1;
+      filter: drop-shadow(0 0 8px rgba(201,168,76,0.4));
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover .card-icon {
+      transform: scale(1.15);
+    }
+
+    .card-name {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(0.85rem, 1.5vw, 1rem);
+      font-weight: 600;
+      color: var(--gold-light);
+      line-height: 1.3;
+      transition: color 0.3s ease;
+    }
+
+    .card:hover .card-name {
+      color: #fff;
+      text-shadow: 0 0 15px rgba(232,201,122,0.5);
+    }
+
+    .card-desc {
+      font-size: 0.78rem;
+      color: rgba(212,196,154,0.6);
+      font-style: italic;
+      line-height: 1.5;
+    }
+
+    .card-arrow {
+      margin-top: auto;
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      color: var(--gold-dark);
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: color 0.3s ease, gap 0.3s ease;
+    }
+
+    .card:hover .card-arrow {
+      color: var(--gold);
+      gap: 0.8rem;
+    }
+
+    .card-arrow::after {
+      content: '→';
+      font-size: 0.9rem;
+    }
+
+    /* Corner ornaments */
+    .card-corner {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-color: rgba(201,168,76,0.3);
+      border-style: solid;
+      transition: border-color 0.35s ease;
+    }
+    .card-corner.tl { top: 6px; left: 6px; border-width: 1px 0 0 1px; }
+    .card-corner.br { bottom: 6px; right: 6px; border-width: 0 1px 1px 0; }
+    .card:hover .card-corner { border-color: rgba(201,168,76,0.7); }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: var(--shadow);
+      border-top: 1px solid rgba(201,168,76,0.15);
+    }
+
+    .footer-rune {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 2rem;
+      color: var(--gold-dark);
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    footer p {
+      font-style: italic;
+      color: rgba(212,196,154,0.4);
+      font-size: 0.82rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="map-container">
-            <img src="otari.webp" alt="Otari Map" usemap="#otari-map">
-            <map name="otari-map">
-                <area shape="rect" coords="4794,1572,3427,1758" href="location-1.html" title="La Rotta del Gigante">
-                <area shape="circle" coords="330,410" href="location-2.html" title="Canale di Carico">
-                <area shape="circle" coords="345,425" href="location-3.html" title="Maniero Medhasee">
-                <area shape="circle" coords="295,350" href="location-4.html" title="Meraviglie di Wrin">
-                <area shape="circle" coords="315,365" href="location-5.html" title="Cerveseria Calisprine">
-                <area shape="circle" coords="330,375" href="location-6.html" title="Lame per Radure">
-                <area shape="circle" coords="320,400" href="location-7.html" title="Stalle Rivendute">
-                <area shape="circle" coords="310,415" href="location-8.html" title="Guardiano di Otiori">
-                <area shape="circle" coords="340,420" href="location-9.html" title="Sala Guardiani">
-                <area shape="circle" coords="325,445" href="location-10.html" title="Batti dei Corvi">
-                <area shape="circle" coords="290,360" href="location-11.html" title="Angolina dell'Urtante">
-                <area shape="circle" coords="305,390" href="location-12.html" title="Mercato di Otari">
-                <area shape="circle" coords="335,470" href="location-13.html" title="Pescheria di Otari">
-                <area shape="circle" coords="275,350" href="location-14.html" title="Rovine dell'Alpaca Azzalata">
-                <area shape="circle" coords="240,380" href="location-15.html" title="Maniero Intelholtz">
-                <area shape="circle" coords="235,360" href="location-16.html" title="Maniero Libertai">
-                <area shape="circle" coords="250,410" href="location-17.html" title="Lo Scarlano Chiassone">
-                <area shape="circle" coords="235,450" href="location-18.html" title="Biblioteca del Fiore dell'Alba">
-                <area shape="circle" coords="270,425" href="location-19.html" title="Stagie dell'Aniello di Pietre">
-                <area shape="circle" coords="280,480" href="location-20.html" title="Cimitero di Otari">
-            </map>
-        </div>
+
+<!-- ══════════ HERO ══════════ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+
+  <div class="hero-particles" id="particles"></div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">Campagna Pathfinder 2e &nbsp;·&nbsp; Avventura</p>
+    <h1 class="hero-title">Otari</h1>
+    <h2 class="hero-subtitle">Le Cripte degli Abomini</h2>
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-gem"></div>
+      <div class="divider-line"></div>
     </div>
+    <p class="hero-desc">
+      Un porto sonnolento custodisce segreti antichi.<br>
+      Sotto le strade di pietra, qualcosa si muove nelle tenebre.
+    </p>
+  </div>
+
+  <a class="scroll-cta" href="#locations">
+    <span>Esplora</span>
+    <div class="scroll-arrow"></div>
+  </a>
+</section>
+
+<!-- ══════════ LOCATIONS ══════════ -->
+<section class="locations-section" id="locations">
+
+  <div class="section-header reveal">
+    <p class="section-eyebrow">Mappa della Città</p>
+    <h2 class="section-title">Luoghi di Otari</h2>
+    <div class="ornament">❧ ✦ ❧</div>
+  </div>
+
+  <div class="grid">
+
+    <a href="la-ruota-del-gigante.html" class="card reveal">
+      <div class="card-corner tl"></div>
+      <div class="card-corner br"></div>
+      <span class="card-number">I</span>
+      <span class="card-icon">⚙️</span>
+      <span class="card-name">La Ruota del Gigante</span>
+      <span class="card-desc">Un antico meccanismo che nessuno osa fermare.</span>
+      <span class="card-arrow">Entra</span>
+    </a>
+
+    <a href="canale-di-carico.html" class="card reveal">
+      <div class="card-corner tl"></div>
+      <div class="card-corner br"></div>
+      <span class="card-number">II</span>
+      <span class="card-icon">⚓</span>
+      <span class="card-name">Canale di Carico</span>
+      <span class="card-desc">Merci di ogni sorte sbarcano ogni alba sul molo.</span>
+      <span class="card-arrow">Entra</span>
+    </a>
+
+    <a href="maniero-menhemes.html" class="card reveal">
+      <div class="card-corner tl"></div>
+      <div class="card-corner br"></div>
+      <span class="card-number">III</span>
+      <span class="card-icon">🏰</span>
+      <span class="card-name">Maniero Menhemes</span>
+      <span class="card-desc">Dimora di un casato ricco di segreti e rivalità.</span>
+      <span class="card-arrow">Entra</span>
+    </a>
+
+    <a href="meraviglie-di-wrin.html" class="card reveal">
+      <div class="card-corner tl"></div>
+      <div class="card-corner br"></div>
+      <span class="card-number">IV</span>
+      <span class="card-icon">🔭</span>
+      <span class="card-name">Meraviglie di Wrin</span>
+      <span class="card-desc">Rarità e curiosità per chi sa cosa cercare.</span>
+      <span class="card-arrow">Entra</span>
+    </a>
+
+    <a href="consegne-gallentine.html" class="card reveal">
+      <div class="card-corner tl"></div>
+      <div class="card-corner br"></div>
+      <span class="card-number">V</span>
+      <span class="card-icon">📦</span>
+      <span class="card-name">Consegne Gallentine</span>
+      <span class="card-desc">Pacchi e missive consegnati con discrezione assoluta.</span>
+      <span class="card-arrow">Entra</span>
+    </a>
+
+    <a href="lame-per-radure.html" class="card reveal">
+      <div class="card-corner tl"></div>
+      <div class="card-corner br"></div>
+      <span class="card-number">VI</span>
+      <span class="card-icon">⚔️</span>
+      <span class="card-name">Lame per Radure</span>
+      <span class="card-desc">Armeria per cacciatori, taglialegna e avventurieri.</span>
+      <span class="card-arrow">Entra</span>
+    </a>
+
+    <a href="storie-bizzarre.html" class="card reveal">
+      <div class="card-corner tl"></div>
+      <div class="card-corner br"></div>
+      <span class="card-number">VII</span>
+      <span class="card-icon">📜</span>
+      <span class="card-name">Storie Bizzarre</span>
+      <span class="card-desc">Libri rari, pergamene e leggende dimenticate.</span>
+      <span class="card-arrow">Entra</span>
+    </a>
+
+    <a href="guarnigione-di-otari.html" class="card reveal">
+      <div class="card-corner tl"></div>
+      <div class="card-corner br"></div>
+      <span class="card-number">VIII</span>
+      <span class="card-icon">🛡️</span>
+      <span class="card-name">Guarnigione di Otari</span>
+      <span class="card-desc">L'ordine e la legge hanno qui la loro dimora.</span>
+      <span class="card-arrow">Entra</span>
+    </a>
+
+    <a href="gilda-dei-contadini.html" class="card reveal">
+      <div class="card-corner tl"></div>
+      <div class="card-corner br"></div>
+      <span class="card-number">IX</span>
+      <span class="card-icon">🌾</span>
+      <span class="card-name">Gilda dei Contadini</span>
+      <span class="card-desc">Terra, sementi e accordi stretti sotto il sole.</span>
+      <span class="card-arrow">Entra</span>
+    </a>
+
+    <a href="botti-del-corvo.html" class="card reveal">
+      <div class="card-corner tl"></div>
+      <div class="card-corner br"></div>
+      <span class="card-number">X</span>
+      <span class="card-icon">🍺</span>
+      <span class="card-name">Botti del Corvo</span>
+      <span class="card-desc">La migliore birra a ovest delle montagne, si dice.</span>
+      <span class="card-arrow">Entra</span>
+    </a>
+
+    <a href="angolino-del-furfante.html" class="card reveal">
+      <div class="card-corner tl"></div>
+      <div class="card-corner br"></div>
+      <span class="card-number">XI</span>
+      <span class="card-icon">🃏</span>
+      <span class="card-name">Angolino del Furfante</span>
+      <span class="card-desc">Dove le informazioni valgono quanto le monete d'oro.</span>
+      <span class="card-arrow">Entra</span>
+    </a>
+
+    <a href="mercato-di-otari.html" class="card reveal">
+      <div class="card-corner tl"></div>
+      <div class="card-corner br"></div>
+      <span class="card-number">XII</span>
+      <span class="card-icon">🏪</span>
+      <span class="card-name">Mercato di Otari</span>
+      <span class="card-desc">Voci, odori e commerci nel cuore pulsante della città.</span>
+      <span class="card-arrow">Entra</span>
+    </a>
+
+    <a href="pescheria-di-otari.html" class="card reveal">
+      <div class="card-corner tl"></div>
+      <div class="card-corner br"></div>
+      <span class="card-number">XIII</span>
+      <span class="card-icon">🐟</span>
+      <span class="card-name">Pescheria di Otari</span>
+      <span class="card-desc">Il mare cede ogni giorno i suoi doni sul bancone.</span>
+      <span class="card-arrow">Entra</span>
+    </a>
+
+    <a href="rovine-alpaca-assetata.html" class="card reveal">
+      <div class="card-corner tl"></div>
+      <div class="card-corner br"></div>
+      <span class="card-number">XIV</span>
+      <span class="card-icon">🏚️</span>
+      <span class="card-name">Rovine dell'Alpaca Assetata</span>
+      <span class="card-desc">Mura bruciate che celano più di quanto mostrino.</span>
+      <span class="card-arrow">Entra</span>
+    </a>
+
+    <a href="maniero-inkleholtz.html" class="card reveal">
+      <div class="card-corner tl"></div>
+      <div class="card-corner br"></div>
+      <span class="card-number">XV</span>
+      <span class="card-icon">🏯</span>
+      <span class="card-name">Maniero Inkleholtz</span>
+      <span class="card-desc">Una famiglia austera, finestre sempre chiuse.</span>
+      <span class="card-arrow">Entra</span>
+    </a>
+
+    <a href="maniero-chertel.html" class="card reveal">
+      <div class="card-corner tl"></div>
+      <div class="card-corner br"></div>
+      <span class="card-number">XVI</span>
+      <span class="card-icon">🗝️</span>
+      <span class="card-name">Maniero Chertel</span>
+      <span class="card-desc">Storie di gloria passata e di eredità contese.</span>
+      <span class="card-arrow">Entra</span>
+    </a>
+
+    <a href="lo-scorfano-chiassoso.html" class="card reveal">
+      <div class="card-corner tl"></div>
+      <div class="card-corner br"></div>
+      <span class="card-number">XVII</span>
+      <span class="card-icon">🎲</span>
+      <span class="card-name">Lo Scorfano Chiassoso</span>
+      <span class="card-desc">Taverna, risse e canzoni fino all'alba.</span>
+      <span class="card-arrow">Entra</span>
+    </a>
+
+    <a href="biblioteca-fiore-alba.html" class="card reveal">
+      <div class="card-corner tl"></div>
+      <div class="card-corner br"></div>
+      <span class="card-number">XVIII</span>
+      <span class="card-icon">📚</span>
+      <span class="card-name">Biblioteca del Fiore dell'Alba</span>
+      <span class="card-desc">Sapienza accumulata nei secoli, custodita con cura.</span>
+      <span class="card-arrow">Entra</span>
+    </a>
+
+    <a href="stagno-anello-pietre.html" class="card reveal">
+      <div class="card-corner tl"></div>
+      <div class="card-corner br"></div>
+      <span class="card-number">XIX</span>
+      <span class="card-icon">💧</span>
+      <span class="card-name">Stagno dell'Anello di Pietre</span>
+      <span class="card-desc">Acque ferme che riflettono antichi monoliti.</span>
+      <span class="card-arrow">Entra</span>
+    </a>
+
+    <a href="cimitero-di-otari.html" class="card reveal">
+      <div class="card-corner tl"></div>
+      <div class="card-corner br"></div>
+      <span class="card-number">XX</span>
+      <span class="card-icon">💀</span>
+      <span class="card-name">Cimitero di Otari</span>
+      <span class="card-desc">I morti riposano qui. O almeno, dovrebbero farlo.</span>
+      <span class="card-arrow">Entra</span>
+    </a>
+
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <span class="footer-rune">✦</span>
+  <p>Campagna Pathfinder 2e &nbsp;·&nbsp; Le Cripte degli Abomini &nbsp;·&nbsp; Otari</p>
+</footer>
+
+<script>
+  // ── Particles ──
+  const container = document.getElementById('particles');
+  for (let i = 0; i < 30; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.bottom = (Math.random() * 30) + '%';
+    p.style.animationDuration = (6 + Math.random() * 12) + 's';
+    p.style.animationDelay = (Math.random() * 10) + 's';
+    p.style.width = p.style.height = (1 + Math.random() * 2) + 'px';
+    container.appendChild(p);
+  }
+
+  // ── Scroll reveal ──
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        const cards = e.target.closest('.grid')?.querySelectorAll('.reveal');
+        if (cards) {
+          // stagger grid cards
+          const idx = Array.from(cards).indexOf(e.target);
+          setTimeout(() => e.target.classList.add('visible'), idx * 60);
+        } else {
+          e.target.classList.add('visible');
+        }
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
 </body>
 </html>
