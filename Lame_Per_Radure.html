@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Blades for Glades — Armeria</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@400;600&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --gold:       #c9a84c;
+            --gold-lt:    #e8d08a;
+            --gold-dk:    #7a5c1e;
+            --ink:        #0e0b06;
+            --parchment:  #ede0c0;
+            --parch-dim:  rgba(237,224,192,0.75);
+            --crimson:    #8b1a1a;
+        }
+
+        html, body {
+            min-height: 100%;
+            font-family: 'Lora', serif;
+            background: var(--ink);
+            color: var(--parchment);
+            overflow-x: hidden;
+            background: radial-gradient(ellipse at 50% top, rgba(30, 25, 15, 0.9) 0%, var(--ink) 100%);
+            background-attachment: fixed;
+        }
+
+        /* ── HEADER & TITLE ── */
+        header {
+            text-align: center;
+            padding: 3rem 1.5rem 1rem;
+            animation: fadeUp .9s ease both;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .title-eyebrow {
+            font-family: 'Cinzel', serif;
+            font-size: .75rem;
+            letter-spacing: .5em;
+            text-transform: uppercase;
+            color: var(--gold-dk);
+            margin-bottom: 1rem;
+        }
+
+        .title-main {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: clamp(2rem, 6vw, 4.5rem);
+            color: var(--gold-lt);
+            text-shadow: 0 0 40px rgba(201,168,76,.3), 0 4px 15px rgba(0,0,0,.9);
+            line-height: 1;
+            margin-bottom: .4rem;
+        }
+
+        .title-sub {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(.85rem, 2.5vw, 1.2rem);
+            color: var(--parch-dim);
+            letter-spacing: .12em;
+            margin-bottom: 2rem;
+        }
+
+        /* ── RULE (Linee di separazione) ── */
+        .rule {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: .9rem;
+            margin-bottom: 2rem;
+        }
+        .rule-line {
+            width: 150px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold));
+        }
+        .rule-line.r { background: linear-gradient(to left, transparent, var(--gold)); }
+        .rule-diamond {
+            width: 8px; height: 8px;
+            background: var(--gold);
+            transform: rotate(45deg);
+            box-shadow: 0 0 8px var(--gold);
+        }
+
+        /* ── BUTTONS & NAV ── */
+        .nav-btn {
+            font-family: 'Cinzel', serif;
+            font-size: .72rem;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: var(--parchment);
+            border: 1px solid rgba(201,168,76,.35);
+            background: rgba(14,11,6,.6);
+            padding: .55rem 1.25rem;
+            cursor: pointer;
+            position: relative;
+            transition: all .25s ease;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            display: inline-block;
+        }
+        .nav-btn::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(201,168,76,.12), transparent 60%);
+            opacity: 0;
+            transition: opacity .25s;
+        }
+        .nav-btn:hover {
+            border-color: var(--gold);
+            color: var(--gold-lt);
+            box-shadow: 0 0 15px rgba(201,168,76,.2);
+        }
+        .nav-btn:hover::before { opacity: 1; }
+
+        .btn-danger {
+            border-color: rgba(139, 26, 26, 0.4);
+        }
+        .btn-danger:hover {
+            border-color: var(--crimson);
+            color: #ff9999;
+            box-shadow: 0 0 15px rgba(139,26,26,.3);
+        }
+
+        /* ── LAYOUT NEGOZIO ── */
+        .container {
+            display: flex;
+            flex-wrap: wrap-reverse;
+            gap: 30px;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 20px 40px;
+            animation: fadeUp 1.2s ease both;
+        }
+
+        /* Vetrina Oggetti */
+        .shop-items {
+            flex: 1 1 65%;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .item-card {
+            background: rgba(14,11,6,.7);
+            border: 1px solid rgba(122,92,30,.4);
+            padding: 20px;
+            text-align: center;
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .item-card::before {
+            content: '';
+            position: absolute; inset: 0;
+            border: 1px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        .item-card:hover {
+            transform: translateY(-4px);
+            background: rgba(20, 16, 10, 0.85);
+            border-color: var(--gold);
+            box-shadow: 0 8px 25px rgba(0,0,0,.6), inset 0 0 20px rgba(201,168,76,.05);
+        }
+
+        .item-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: var(--gold-lt);
+            letter-spacing: .05em;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .item-desc {
+            font-size: 0.9rem;
+            color: var(--parch-dim);
+            font-style: italic;
+            margin-bottom: 15px;
+            flex-grow: 1;
+            line-height: 1.4;
+        }
+
+        .item-price {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        /* Pannello Carrello */
+        .cart-panel {
+            flex: 1 1 30%;
+            background: rgba(14,11,6,.85);
+            border: 1px solid var(--gold-dk);
+            padding: 25px;
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            box-shadow: 0 10px 30px rgba(0,0,0,.8);
+        }
+
+        .cart-panel h2 {
+            font-family: 'Cinzel Decorative', serif;
+            color: var(--gold-lt);
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .cart-subtitle {
+            text-align: center;
+            font-family: 'Cinzel', serif;
+            font-size: .65rem;
+            letter-spacing: .3em;
+            text-transform: uppercase;
+            color: var(--gold-dk);
+            margin-bottom: 20px;
+        }
+
+        .cart-items {
+            list-style: none;
+            max-height: 50vh;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            padding-right: 10px;
+        }
+
+        /* Scrollbar personalizzata per il carrello */
+        .cart-items::-webkit-scrollbar { width: 4px; }
+        .cart-items::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); }
+        .cart-items::-webkit-scrollbar-thumb { background: var(--gold-dk); border-radius: 2px; }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(201,168,76,.15);
+            font-family: 'Lora', serif;
+            font-size: 0.95rem;
+        }
+
+        .cart-item:last-child { border-bottom: none; }
+
+        .cart-total {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            text-align: right;
+            font-weight: 600;
+            color: var(--gold);
+            border-top: 1px dashed var(--gold-dk);
+            padding-top: 15px;
+            margin-bottom: 20px;
+        }
+
+        .cart-actions {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        
+        .cart-actions .nav-btn { flex: 1; text-align: center; }
+
+        @media (max-width: 800px) {
+            .cart-panel { position: static; margin-bottom: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <p class="title-eyebrow">Quartiere Commerciale di Otari</p>
+        <h1 class="title-main">Blades for Glades</h1>
+        <h2 class="title-sub">Armeria & Fucina</h2>
+        
+        <div class="rule">
+            <div class="rule-line"></div>
+            <div class="rule-diamond"></div>
+            <div class="rule-line r"></div>
+        </div>
+
+        <a href="index.html" class="nav-btn">✦ Torna alla Città ✦</a>
+    </header>
+
+    <div class="container">
+        <!-- Vetrina Negozio -->
+        <div class="shop-items" id="shop-items">
+            <!-- Oggetti caricati da JS -->
+        </div>
+
+        <!-- Carrello -->
+        <div class="cart-panel">
+            <h2>Il Tuo Zaino</h2>
+            <div class="cart-subtitle">Inventario Temporaneo</div>
+            
+            <ul class="cart-items" id="cart-items">
+                <li style="text-align:center; color:var(--parch-dim); font-style:italic; padding-top:20px;">
+                    Lo zaino è vuoto.
+                </li>
+            </ul>
+            
+            <div class="cart-total">
+                Totale: <span id="total-price">0 mo, 0 ma</span>
+            </div>
+            
+            <div class="cart-actions">
+                <button class="nav-btn btn-danger" onclick="clearCart()">Svuota</button>
+                <button class="nav-btn" onclick="checkout()">Acquista</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Database Oggetti
+        const products = [
+            { id: 'dagger', name: 'Dagger', priceSp: 2, displayPrice: '2 ma', desc: 'Una lama corta e versatile, bilanciata sia per gli scontri ravvicinati che per il lancio.' },
+            { id: 'gauntlet', name: 'Gauntlet', priceSp: 2, displayPrice: '2 ma', desc: 'Un robusto guanto corazzato, perfetto per parare e sferrare pesanti pugni di ferro.' },
+            { id: 'light-mace', name: 'Light Mace', priceSp: 4, displayPrice: '4 ma', desc: 'Una piccola mazza maneggevole, ottima per fracassare scudi e armature leggere.' },
+            { id: 'longspear', name: 'Longspear', priceSp: 5, displayPrice: '5 ma', desc: "Un'arma inastata lunga, ideale per tenere i nemici a bada senza esporsi." },
+            { id: 'mace', name: 'Mace', priceSp: 10, displayPrice: '1 mo', desc: 'Una pesante mazza contundente dal fusto solido in legno e testa in metallo.' },
+            { id: 'morningstar', name: 'Morningstar', priceSp: 10, displayPrice: '1 mo', desc: "Un'arma feroce con una testa sferica chiodata, capace di perforare e frantumare." },
+            { id: 'sickle', name: 'Sickle', priceSp: 2, displayPrice: '2 ma', desc: 'Un falcetto curvo, tradizionalmente agricolo ma letale nelle mani giuste.' },
+            { id: 'spear', name: 'Spear', priceSp: 1, displayPrice: '1 ma', desc: 'Una semplice ma efficace lancia da mischia, apprezzata da milizie e cacciatori.' },
+            { id: 'spiked-gauntlet', name: 'Spiked Gauntlet', priceSp: 3, displayPrice: '3 ma', desc: 'Un guanto d\'arme letale, rinforzato con aculei d\'acciaio per danni laceranti.' },
+            { id: 'staff', name: 'Staff', priceSp: 0, displayPrice: 'Gratis', desc: 'Un solido bastone di quercia, affidabile compagno di viaggio e arma improvvisata.' },
+            { id: 'clan-dagger', name: 'Clan Dagger', priceSp: 20, displayPrice: '2 mo', desc: 'Un pregiato pugnale nanico, con un pomo elaborato che ne identifica il clan d\'origine.' },
+            { id: 'katar', name: 'Katar', priceSp: 3, displayPrice: '3 ma', desc: 'Un pugnale a spinta letale e rapido, con impugnatura orizzontale.' },
+            { id: 'bastard-sword', name: 'Bastard Sword', priceSp: 40, displayPrice: '4 mo', desc: 'Una lama massiccia, bilanciata per essere brandita con destrezza a una o due mani.' },
+            { id: 'battle-axe', name: 'Battle Axe', priceSp: 10, displayPrice: '1 mo', desc: "Un'ascia da guerra progettata appositamente per infliggere colpi devastanti in battaglia." },
+            { id: 'bo-staff', name: 'Bo Staff', priceSp: 2, displayPrice: '2 ma', desc: 'Un bastone lungo in legno flessibile e levigato, preferito da monaci e combattenti agili.' },
+            { id: 'falchion', name: 'Falchion', priceSp: 30, displayPrice: '3 mo', desc: 'Una possente lama a curvatura larga, pesante sulla punta per falciare i nemici.' },
+            { id: 'flail', name: 'Flail', priceSp: 8, displayPrice: '8 ma', desc: 'Una testa di metallo incatenata all\'impugnatura, eccellente per aggirare gli scudi.' },
+            { id: 'glaive', name: 'Glaive', priceSp: 10, displayPrice: '1 mo', desc: "Un'elegante lama monofilare montata sulla sommità di una lunga asta." },
+            { id: 'greataxe', name: 'Greataxe', priceSp: 20, displayPrice: '2 mo', desc: "Un'enorme ascia a due mani, capace di spaccare a metà le difese più robuste." },
+            { id: 'greatpick', name: 'Greatpick', priceSp: 20, displayPrice: '2 mo', desc: 'Un piccone da guerra sovradimensionato, l\'incubo delle corazze a piastre.' },
+            { id: 'greatsword', name: 'Greatsword', priceSp: 20, displayPrice: '2 mo', desc: 'Un maestoso spadone a due mani per fendere schiere di nemici in un solo arco.' },
+            { id: 'guisarme', name: 'Guisarme', priceSp: 20, displayPrice: '2 mo', desc: "Un'arma inastata dotata di un uncino sul retro, usata per sbilanciare gli avversari." },
+            { id: 'halberd', name: 'Halberd', priceSp: 20, displayPrice: '2 mo', desc: 'Un mix micidiale tra ascia e lancia montato su una lunga e spessa asta.' },
+            { id: 'hatchet', name: 'Hatchet', priceSp: 4, displayPrice: '4 ma', desc: "Un'accetta leggera da lancio, ben bilanciata ed estremamente affilata." },
+            { id: 'light-hammer', name: 'Light Hammer', priceSp: 3, displayPrice: '3 ma', desc: 'Un piccolo martello versatile, formidabile in mischia e letale se scagliato.' },
+            { id: 'light-pick', name: 'Light Pick', priceSp: 4, displayPrice: '4 ma', desc: 'Un piccone militare leggero e veloce, perfetto per trovare le giunture delle armature.' },
+            { id: 'longsword', name: 'Longsword', priceSp: 10, displayPrice: '1 mo', desc: 'La classica e nobile spada a lama dritta, essenziale nell\'armeria di ogni cavaliere.' },
+            { id: 'main-gauche', name: 'Main-Gauche', priceSp: 5, displayPrice: '5 ma', desc: 'Un pugnale dotato di un\'elsa a cesto spessa, progettato per deviare i colpi nella mano secondaria.' },
+            { id: 'maul', name: 'Maul', priceSp: 30, displayPrice: '3 mo', desc: 'Un gigantesco e brutale martello da guerra, in grado di scuotere la terra.' },
+            { id: 'pick', name: 'Pick', priceSp: 7, displayPrice: '7 ma', desc: 'Un piccone concepito per la guerra, col cui becco si perfora facilmente l\'acciaio.' },
+            { id: 'ranseur', name: 'Ranseur', priceSp: 20, displayPrice: '2 mo', desc: "Un'asta con una punta centrale affilata e due rebbi sporgenti per intrappolare le armi." },
+            { id: 'rapier', name: 'Rapier', priceSp: 20, displayPrice: '2 mo', desc: 'Una striscia d\'acciaio sottile, elegante e micidiale nelle stoccate di precisione.' },
+            { id: 'scimitar', name: 'Scimitar', priceSp: 10, displayPrice: '1 mo', desc: 'Una spada corta e curva, perfetta per attacchi rapidi e fluidi movimenti circolari.' },
+            { id: 'scythe', name: 'Scythe', priceSp: 20, displayPrice: '2 mo', desc: 'Una falce da mietitore, convertita in un\'arma temibile dai colpi ampi e imprevedibili.' },
+            { id: 'shield-boss', name: 'Shield Boss', priceSp: 5, displayPrice: '5 ma', desc: 'Una massiccia borchia metallica centrale per rinforzare lo scudo e usarlo come arma.' },
+            { id: 'shield-spikes', name: 'Shield Spikes', priceSp: 5, displayPrice: '5 ma', desc: 'Spuntoni letali applicati al bordo o alla fronte di uno scudo per danni perforanti.' },
+            { id: 'shortsword', name: 'Shortsword', priceSp: 9, displayPrice: '9 ma', desc: 'Una spada corta e rapida, compagna fidata di ladri e schermagliatori.' },
+            { id: 'starknife', name: 'Starknife', priceSp: 20, displayPrice: '2 mo', desc: 'Una lama a croce concepita per il lancio, considerata sacra ai seguaci di Desna.' },
+            { id: 'trident', name: 'Trident', priceSp: 10, displayPrice: '1 mo', desc: "Un'arma a tre punte per perforare, amata dai gladiatori d'arena e dai marinai." },
+            { id: 'war-flail', name: 'War Flail', priceSp: 0, displayPrice: 'Consultare', desc: 'Un mazzafrusto da guerra massiccio, distruttivo e quasi inarrestabile in buone mani.' }
+        ];
+
+        let cart = {};
+
+        // Stampa gli oggetti
+        function renderShop() {
+            const shopContainer = document.getElementById('shop-items');
+            products.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'item-card';
+                card.innerHTML = `
+                    <div class="item-name">${product.name}</div>
+                    <div class="item-desc">${product.desc}</div>
+                    <div class="item-price">${product.displayPrice}</div>
+                    <button class="nav-btn" onclick="addToCart('${product.id}')">Aggiungi</button>
+                `;
+                shopContainer.appendChild(card);
+            });
+        }
+
+        // Aggiungi al carrello
+        function addToCart(productId) {
+            if (cart[productId]) {
+                cart[productId].quantity += 1;
+            } else {
+                const product = products.find(p => p.id === productId);
+                cart[productId] = { ...product, quantity: 1 };
+            }
+            updateCartDisplay();
+        }
+
+        // Rimuovi dal carrello
+        function removeFromCart(productId) {
+            if (cart[productId]) {
+                cart[productId].quantity -= 1;
+                if (cart[productId].quantity <= 0) {
+                    delete cart[productId];
+                }
+            }
+            updateCartDisplay();
+        }
+
+        // Aggiorna l'HTML del carrello
+        function updateCartDisplay() {
+            const cartContainer = document.getElementById('cart-items');
+            const totalDisplay = document.getElementById('total-price');
+            cartContainer.innerHTML = '';
+
+            let totalSp = 0;
+            let itemsCount = 0;
+
+            for (const id in cart) {
+                const item = cart[id];
+                totalSp += item.priceSp * item.quantity;
+                itemsCount++;
+
+                const li = document.createElement('li');
+                li.className = 'cart-item';
+                li.innerHTML = `
+                    <span><span style="color:var(--gold-lt)">${item.quantity}x</span> ${item.name}</span>
+                    <button class="nav-btn btn-danger" onclick="removeFromCart('${id}')" style="padding: 4px 8px; font-size: 0.6rem;">X</button>
+                `;
+                cartContainer.appendChild(li);
+            }
+
+            if(itemsCount === 0) {
+                cartContainer.innerHTML = '<li style="text-align:center; color:var(--parch-dim); font-style:italic; padding-top:20px;">Lo zaino è vuoto.</li>';
+            }
+
+            const gold = Math.floor(totalSp / 10);
+            const silver = totalSp % 10;
+            
+            totalDisplay.innerText = `${gold} mo, ${silver} ma`;
+        }
+
+        // Svuota Carrello
+        function clearCart() {
+            cart = {};
+            updateCartDisplay();
+        }
+
+        // Checkout fittizio
+        function checkout() {
+            if(Object.keys(cart).length === 0) {
+                alert("Il tuo zaino è vuoto! Aggiungi qualche arma prima di parlare con il Fabbro.");
+                return;
+            }
+            const total = document.getElementById('total-price').innerText;
+            alert(`Acquisto completato! Hai versato sul bancone ${total}. Le armi sono tue.`);
+            clearCart();
+        }
+
+        window.onload = renderShop;
+    </script>
+
+</body>
+</html>
