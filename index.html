@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Otari — Le Cripte degli Abomini</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@400;600&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+    :root {
+      --gold:       #c9a84c;
+      --gold-lt:    #e8d08a;
+      --gold-dk:    #7a5c1e;
+      --ink:        #0e0b06;
+      --parchment:  #ede0c0;
+      --parch-dim:  rgba(237,224,192,0.75);
+      --crimson:    #8b1a1a;
+      --panel-bg:   rgba(14,11,6,0.95);
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Lora', serif;
+      background: var(--ink);
+      color: var(--parchment);
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    /* ── FULL-SCREEN HERO ── */
+    .hero {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: 10vh;
+      padding-bottom: 5vh;
+    }
+
+    .hero-bg {
+      position: fixed; inset: 0;
+      background: url('otari.jpeg') center center / cover no-repeat;
+      filter: brightness(.38) sepia(.25);
+      animation: kzoom 40s ease-in-out infinite alternate;
+      z-index: -1;
+    }
+    @keyframes kzoom {
+      from { transform: scale(1); }
+      to   { transform: scale(1.07); }
+    }
+
+    .hero-vignette {
+      position: fixed; inset: 0;
+      background: radial-gradient(ellipse at 50% 40%, transparent 25%, rgba(14,11,6,.75) 80%),
+                  linear-gradient(to bottom, rgba(14,11,6,.15) 0%, rgba(14,11,6,.9) 100%);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* ── TITLE BLOCK ── */
+    .title-block {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 0 1.5rem;
+      animation: fadeUp .9s ease both;
+    }
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(24px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    .title-eyebrow {
+      font-family: 'Cinzel', serif;
+      font-size: .65rem;
+      letter-spacing: .5em;
+      text-transform: uppercase;
+      color: var(--gold-dk);
+      margin-bottom: 1rem;
+    }
+
+    .title-main {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(2.2rem, 8vw, 5.5rem);
+      color: var(--gold-lt);
+      text-shadow: 0 0 50px rgba(201,168,76,.45), 0 4px 20px rgba(0,0,0,.9);
+      line-height: 1;
+      margin-bottom: .4rem;
+    }
+
+    .title-sub {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(.85rem, 2.5vw, 1.4rem);
+      color: var(--parch-dim);
+      letter-spacing: .12em;
+      margin-bottom: 2.8rem;
+    }
+
+    /* ── RULE ── */
+    .rule {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .9rem;
+      margin-bottom: 2.8rem;
+    }
+    .rule-line {
+      width: 90px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold));
+    }
+    .rule-line.r { background: linear-gradient(to left, transparent, var(--gold)); }
+    .rule-diamond {
+      width: 8px; height: 8px;
+      background: var(--gold);
+      transform: rotate(45deg);
+      box-shadow: 0 0 8px var(--gold);
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem;
+      justify-content: center;
+    }
+
+    .nav-link, .nav-btn {
+      font-family: 'Cinzel', serif;
+      font-size: .72rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--parchment);
+      border: 1px solid rgba(201,168,76,.35);
+      background: rgba(14,11,6,.6);
+      padding: .55rem 1.25rem;
+      cursor: pointer;
+      position: relative;
+      transition: color .25s, border-color .25s, background .25s, box-shadow .25s;
+      backdrop-filter: blur(4px);
+    }
+    .nav-link::before, .nav-btn::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(201,168,76,.12), transparent 60%);
+      opacity: 0;
+      transition: opacity .25s;
+    }
+    .nav-link:hover, .nav-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold-lt);
+      box-shadow: 0 0 18px rgba(201,168,76,.25);
+      outline: none;
+    }
+    .nav-link:hover::before, .nav-btn:hover::before { opacity:1; }
+
+    /* DROPDOWN */
+    .dropdown { position: relative; }
+    .dropdown-menu {
+      position: absolute; top: calc(100% + 8px); left: 50%;
+      transform: translateX(-50%) scaleY(0); transform-origin: top center;
+      min-width: 160px; background: rgba(14,11,6,.96);
+      border: 1px solid rgba(201,168,76,.35);
+      transition: transform .22s ease, opacity .22s ease;
+      opacity: 0; pointer-events: none; z-index: 100;
+    }
+    .dropdown.open .dropdown-menu {
+      transform: translateX(-50%) scaleY(1); opacity: 1; pointer-events: all;
+    }
+    .dropdown-menu a {
+      display: block; font-family: 'Cinzel', serif; font-size: .68rem;
+      letter-spacing: .15em; text-transform: uppercase; text-decoration: none;
+      color: var(--parch-dim); padding: .65rem 1.2rem;
+      border-bottom: 1px solid rgba(201,168,76,.1); transition: color .2s, background .2s;
+    }
+    .dropdown-menu a:hover { color: var(--gold-lt); background: rgba(201,168,76,.08); }
+
+    /* ── SHOPS ── */
+    .shops-section {
+      position: relative;
+      z-index: 2;
+      margin-top: 3rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      max-width: 800px;
+    }
+
+    .shops-label {
+      width: 100%; text-align: center; font-family: 'Cinzel', serif; font-size: 0.8rem;
+      letter-spacing: .4em; text-transform: uppercase; color: rgba(201,168,76,.6);
+      margin-bottom: 1rem;
+    }
+
+    .shop-tag {
+      font-family: 'Cinzel', serif;
+      font-size: 0.95rem; /* Aumentato */
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--gold-lt);
+      border: 1px solid rgba(201,168,76,.5);
+      background: rgba(14,11,6,.75);
+      padding: .65rem 1.5rem; /* Aumentato */
+      transition: all .3s;
+      cursor: pointer;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+    .shop-tag:hover, .shop-tag.active {
+      color: #fff; border-color: var(--gold); background: rgba(201,168,76,.15);
+      box-shadow: 0 0 20px rgba(201,168,76,.4); transform: translateY(-2px);
+    }
+
+    /* ── INVENTORY AREA ── */
+    .inventory-area {
+      display: none;
+      width: 100%; max-width: 800px; margin-top: 2rem;
+      background: var(--panel-bg); border: 1px solid var(--gold-dk);
+      padding: 1.5rem; border-radius: 4px; box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+      position: relative; z-index: 5;
+    }
+    .inventory-area.active {
+      display: block;
+      animation: fadeInDown 0.4s ease forwards;
+    }
+    .inventory-header {
+      font-family: 'Cinzel Decorative', serif; font-size: 1.5rem; color: var(--gold);
+      border-bottom: 1px solid rgba(201,168,76,.3); padding-bottom: 0.5rem; margin-bottom: 1rem;
+      text-align: left;
+    }
+    .item-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.75rem 0; border-bottom: 1px dashed rgba(201,168,76,.15);
+    }
+    .item-row:last-child { border-bottom: none; }
+    
+    .item-info { display: flex; flex-direction: column; }
+    .item-name { 
+      font-family: 'Cinzel', serif; font-size: 1rem; color: var(--parchment); 
+      cursor: help; text-decoration: underline dotted rgba(201,168,76,.5);
+      transition: color 0.2s;
+    }
+    .item-name:hover { color: var(--gold-lt); }
+    .item-type { font-size: 0.75rem; color: var(--parch-dim); font-style: italic; }
+    
+    .item-actions { display: flex; align-items: center; gap: 1.5rem; }
+    .item-price { font-family: 'Cinzel', serif; color: var(--gold-lt); font-weight: bold; }
+    .btn-add {
+      background: rgba(201,168,76,.1); border: 1px solid var(--gold-dk); color: var(--gold-lt);
+      padding: 0.4rem 0.8rem; cursor: pointer; font-family: 'Cinzel', serif; font-size: 0.7rem;
+      text-transform: uppercase; transition: all 0.2s;
+    }
+    .btn-add:hover { background: var(--gold-dk); color: var(--ink); box-shadow: 0 0 10px var(--gold); }
+
+    /* ── MAP MODAL ── */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+      z-index: 1000; display: flex; justify-content: center; align-items: center;
+      opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+      backdrop-filter: blur(5px);
+    }
+    .modal-overlay.active { opacity: 1; pointer-events: all; }
+    .modal-content {
+      position: relative; max-width: 90vw; max-height: 90vh;
+      transform: scale(0.95); transition: transform 0.3s ease;
+    }
+    .modal-overlay.active .modal-content { transform: scale(1); }
+    .modal-content img {
+      display: block; max-width: 100%; max-height: 90vh;
+      border: 2px solid var(--gold); border-radius: 4px; box-shadow: 0 0 40px rgba(201,168,76,0.3);
+    }
+    .close-modal {
+      position: absolute; top: -15px; right: -15px; background: var(--ink); color: var(--gold);
+      border: 1px solid var(--gold); width: 34px; height: 34px; border-radius: 50%;
+      font-size: 1.2rem; cursor: pointer; font-family: sans-serif; display: flex;
+      justify-content: center; align-items: center; transition: all 0.2s;
+    }
+    .close-modal:hover { background: var(--gold); color: var(--ink); transform: scale(1.1); }
+
+    /* ── FLOATING CART & PANEL ── */
+    .cart-float-btn {
+      position: fixed; bottom: 2rem; right: 2rem; background: var(--ink);
+      border: 1px solid var(--gold); color: var(--gold-lt); padding: 0.8rem 1.5rem;
+      font-family: 'Cinzel', serif; font-size: 1rem; cursor: pointer; z-index: 90;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.8); transition: all 0.3s;
+    }
+    .cart-float-btn:hover { background: var(--gold-dk); color: var(--ink); }
+    .cart-float-btn .badge {
+      background: var(--crimson); color: #fff; border-radius: 50%; padding: 0.1rem 0.5rem;
+      font-size: 0.8rem; margin-left: 0.5rem; font-family: sans-serif;
+    }
+
+    .cart-panel {
+      position: fixed; top: 0; right: -400px; width: 350px; height: 100%;
+      background: var(--panel-bg); border-left: 1px solid var(--gold);
+      z-index: 900; transition: right 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+      display: flex; flex-direction: column; box-shadow: -5px 0 30px rgba(0,0,0,0.8);
+    }
+    .cart-panel.open { right: 0; }
+    .cart-header {
+      padding: 1.5rem; border-bottom: 1px solid rgba(201,168,76,.3);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .cart-header h2 { font-family: 'Cinzel Decorative', serif; color: var(--gold); font-size: 1.3rem;}
+    .close-cart { background: none; border: none; color: var(--parchment); font-size: 1.5rem; cursor: pointer; }
+    .close-cart:hover { color: var(--crimson); }
+    
+    .cart-items { flex-grow: 1; overflow-y: auto; padding: 1rem; }
+    .cart-item {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .cart-item-info { display: flex; flex-direction: column; width: 60%; }
+    .cart-item-title { font-family: 'Cinzel', serif; font-size: 0.85rem; color: var(--parchment); }
+    .cart-item-controls { display: flex; gap: 0.5rem; align-items: center; font-family: sans-serif; font-size: 0.8rem;}
+    .cart-btn-sm { background: none; border: 1px solid rgba(201,168,76,.5); color: var(--gold); cursor: pointer; padding: 0.1rem 0.4rem;}
+    .cart-btn-sm:hover { background: var(--gold); color: var(--ink); }
+    
+    .cart-footer { padding: 1.5rem; border-top: 1px solid rgba(201,168,76,.3); background: rgba(0,0,0,0.4); }
+    .cart-total { font-family: 'Cinzel', serif; font-size: 1.2rem; color: var(--gold-lt); text-align: right; }
+
+    /* ── TOOLTIP ── */
+    .item-tooltip {
+      position: fixed; background: rgba(14,11,6,.98); border: 1px solid var(--gold);
+      color: var(--parch-dim); padding: 1rem; width: 320px; z-index: 2000;
+      pointer-events: none; opacity: 0; transition: opacity 0.2s;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.9); font-size: 0.85rem; border-radius: 4px;
+      line-height: 1.4; font-family: sans-serif;
+    }
+    .item-tooltip.visible { opacity: 1; }
+    .item-tooltip strong { color: var(--gold-lt); font-family: 'Cinzel', serif; font-weight: normal; }
+    .item-tooltip hr { border: 0; border-top: 1px solid rgba(201,168,76,.2); margin: 0.5rem 0; }
+    .item-tooltip p { margin-bottom: 0.5rem; }
+    .item-tooltip p:last-child { margin-bottom: 0; }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+  </style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-vignette"></div>
+
+  <div class="title-block">
+    <p class="title-eyebrow">Campagna Pathfinder 2e</p>
+    <h1 class="title-main">Otari</h1>
+    <h2 class="title-sub">Le Cripte degli Abomini</h2>
+
+    <div class="rule">
+      <div class="rule-line"></div>
+      <div class="rule-diamond"></div>
+      <div class="rule-line r"></div>
+    </div>
+
+    <nav>
+      <div class="dropdown" id="dd-personaggi">
+        <button class="nav-btn" onclick="toggleDD('dd-personaggi')" aria-haspopup="true">
+          Personaggi <span class="chevron">▾</span>
+        </button>
+        <div class="dropdown-menu" role="menu">
+          <a href="Raffaele.html">Raffaele</a>
+          <a href="Alessandro.html">Alessandro</a>
+          <a href="Marco.html">Marco</a>
+        </div>
+      </div>
+      <a class="nav-link" href="javascript:void(0)" onclick="openMap()">Mappa della Città</a>
+      <a class="nav-link" href="Bestiario.html">Bestiario</a>
+    </nav>
+
+    <div class="shops-section" id="shops-wrapper">
+      <p class="shops-label">✦ &nbsp; Mercanti & Negozi &nbsp; ✦</p>
+      </div>
+
+    <div id="inventory-area" class="inventory-area">
+      <h3 id="inventory-title" class="inventory-header">Negozio</h3>
+      <div id="inventory-list"></div>
+    </div>
+  </div>
+</section>
+
+<div id="map-modal" class="modal-overlay" onclick="closeMap()">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <button class="close-modal" onclick="closeMap()">×</button>
+    <img src="mappadellacitta.webp" alt="Mappa della Città di Otari">
+  </div>
+</div>
+
+<div id="cart-panel" class="cart-panel">
+  <div class="cart-header">
+    <h2>Carrello</h2>
+    <button class="close-cart" onclick="toggleCart()">×</button>
+  </div>
+  <div class="cart-items" id="cart-items">
+    </div>
+  <div class="cart-footer">
+    <div class="cart-total" id="cart-total">Totale: 0 cp</div>
+  </div>
+</div>
+
+<button class="cart-float-btn" onclick="toggleCart()">
+  Carrello <span class="badge" id="cart-badge">0</span>
+</button>
+
+<div id="item-tooltip" class="item-tooltip"></div>
+
+<script>
+  /* ─── DATI DEI NEGOZI E DEGLI OGGETTI (Estratti dai file YML) ─── */
+  const shopsData = {
+    "Lame per Radure": [
+      { name: "Dagger", type: "Weapon", price: { sp: 2 }, desc: "<p>This small, bladed weapon is held in one hand and used to stab a creature in close combat. It can also be thrown.</p>" },
+      { name: "Longspear", type: "Weapon", price: { sp: 5 }, desc: "<p>This very long spear, sometimes called a pike, is purely for thrusting rather than throwing. Used by many soldiers and city watch for crowd control and defense against charging enemies, it must be wielded with two hands.</p>" },
+      { name: "Bastard Sword", type: "Weapon", price: { gp: 4 }, desc: "<p>This broad-bladed sword, sometimes called the hand-and-a-half sword, has a longer grip so it can be held in one hand or used with two hands to provide extra slashing power.</p>" },
+      { name: "Battle Axe", type: "Weapon", price: { gp: 1 }, desc: "<p>These axes are designed explicitly as weapons, rather than tools. They typically weigh less, with a shaft reinforced with metal bands or bolts, and have a sharper blade, making them ideal for chopping limbs rather than wood.</p>" },
+      { name: "Chain Mail", type: "Armor", price: { gp: 6 }, desc: "<p>A suit of chain mail consists of several pieces of armor composed of small metal rings linked together in a protective mesh.</p>" },
+      { name: "Steel Shield", type: "Shield", price: { gp: 2 }, desc: "<p>Like wooden shields, steel shields come in a variety of shapes and sizes. Though more expensive than wooden shields, they are much more durable.</p>" }
+    ],
+    "Crook's Nook": [
+      { name: "Dagger of Eternal Sleep", type: "Weapon (Magical)", price: { gp: 25 }, desc: "<p>This tiny serrated dagger looks like a miniature sawtooth sabre. Until activated, it is too small and ornamental to function as a weapon.</p><p><strong>Activate</strong> Interact</p><p><strong>Effect</strong> You transform the dagger into a +1 Grievous striking dagger and Strike an unconscious target. If you roll a hit, you get a critical hit instead.</p>" },
+      { name: "Serpent Dagger", type: "Weapon (Magical)", price: { gp: 150 }, desc: "<p>The serrated blade of this +1 striking dagger has a greenish tinge. When you critically succeed at an attack roll, the target becomes Sickened 1.</p>" },
+      { name: "Flaying Knife", type: "Weapon (Magical)", price: { gp: 480 }, desc: "<p>This long, thin +1 striking Wounding dagger has a smooth edge on one side and a serrated edge on the other. It deals 1d8 bleed on a hit instead of 1d6.</p>" },
+      { name: "Thieves' Toolkit", type: "Equipment", price: { gp: 3 }, desc: "<p>You need a thieves' toolkit to Pick Locks or Disable Devices using the Thievery skill.</p>" },
+      { name: "Arsenic", type: "Poison", price: { gp: 3 }, desc: "<p>This toxin is a compound of arsenic and other substances. You can't reduce your sickened condition while affected.</p>" },
+      { name: "Spider Venom", type: "Poison", price: { gp: 25 }, desc: "<p>This venom erodes its target's defenses, aiding the spider in securing prey.</p>" }
+    ],
+    "Dawnflower Library": [
+      { name: "Rapier", type: "Weapon", price: { gp: 2 }, desc: "<p>The rapier is a long and thin piercing blade with a basket hilt. It is prized among many as a dueling weapon.</p>" },
+      { name: "Staff of Healing", type: "Weapon (Magical)", price: { gp: 90 }, desc: "<p>This white wood staff grants a +1 item bonus to the Hit Points you restore anytime you cast the heal spell.</p><p><strong>Activate</strong> Cast a Spell to cast Stabilize or Heal.</p>" },
+      { name: "Healing Potion (Minor)", type: "Potion", price: { gp: 4 }, desc: "<p>A vial of a ruby-red liquid that imparts a tingling sensation as the drinker's wounds heal rapidly. Regain 1d8 Hit Points.</p>" },
+      { name: "Healing Potion (Lesser)", type: "Potion", price: { gp: 12 }, desc: "<p>Regain 2d8+5 Hit Points.</p>" },
+      { name: "Holy Water", type: "Consumable", price: { gp: 3 }, desc: "<p>This vial contains water blessed by a benevolent deity. Deals 1d6 spirit damage and 1 spirit splash damage to creatures with the unholy trait.</p>" },
+      { name: "Scroll of Heal (Rank 1)", type: "Scroll", price: { gp: 4 }, desc: "<p>Contains the Heal spell. You channel vital energy to heal the living or damage the undead.</p>" },
+      { name: "Scroll of Sanctuary", type: "Scroll", price: { gp: 4 }, desc: "<p>Contains the Sanctuary spell. Wards a creature with protective energy that deters attacks.</p>" }
+    ],
+    "Odd Stories": [
+      { name: "Staff of Fire", type: "Weapon (Magical)", price: { gp: 60 }, desc: "<p>This staff resembles a blackened and burned length of ashen wood. Can cast Ignition and Breathe Fire.</p>" },
+      { name: "Animal Staff", type: "Weapon (Magical)", price: { gp: 90 }, desc: "<p>Topped with carved animal heads. Grants a +2 circumstance bonus to Nature checks to identify animals. Can cast Know the Way, Runic Body, and Summon Animal.</p>" },
+      { name: "Mentalist's Staff", type: "Weapon (Magical)", price: { gp: 90 }, desc: "<p>Grants a +2 circumstance bonus to identify mental magic. Casts Daze, Mindlink, and Phantom Pain.</p>" },
+      { name: "Basic Crafter's Book", type: "Equipment", price: { sp: 1 }, desc: "<p>Contains the formulas for Crafting 0-level common items.</p>" },
+      { name: "Formula Book (Blank)", type: "Equipment", price: { gp: 1 }, desc: "<p>Can hold the formulas for up to 100 different items.</p>" },
+      { name: "Writing Set", type: "Equipment", price: { gp: 1 }, desc: "<p>Includes stationery, ink, a quill or inkpen, sealing wax, and a simple seal.</p>" }
+    ],
+    "Otari Garrison": [
+      { name: "Greatclub", type: "Weapon", price: { gp: 1 }, desc: "<p>These massive clubs are too heavy to wield with only one hand.</p>" },
+      { name: "Heavy Crossbow", type: "Weapon", price: { gp: 4 }, desc: "<p>Harder to load and more substantial than a regular crossbow, but packs a greater punch. Deals 1d10 piercing.</p>" },
+      { name: "Scale Mail", type: "Armor", price: { gp: 4 }, desc: "<p>Consists of many metal scales sewn onto a reinforced leather backing.</p>" },
+      { name: "Breastplate", type: "Armor", price: { gp: 8 }, desc: "<p>Strategically grants some of the protection of plate while allowing greater flexibility and speed.</p>" },
+      { name: "Tower Shield", type: "Shield", price: { gp: 10 }, desc: "<p>These massive shields can be used to provide cover to nearly the entire body. Hardness 5, HP 20.</p>" },
+      { name: "Weapon Potency (+1)", type: "Rune", price: { gp: 35 }, desc: "<p>Attack rolls with this weapon gain a +1 item bonus, and the weapon can be etched with one property rune.</p>" }
+    ],
+    "Otari Market": [
+      { name: "Explorer's Clothing", type: "Armor", price: { sp: 1 }, desc: "<p>Adventurers who don't wear armor travel in durable clothing. Can grant an item bonus to AC if etched with potency runes.</p>" },
+      { name: "Clothing (High-Fashion Fine)", type: "Equipment", price: { gp: 55 }, desc: "<p>Made with expensive fabrics. Grants a +1 item bonus to checks to Make an Impression on nobility.</p>" },
+      { name: "Rations", type: "Consumable", price: { sp: 4 }, desc: "<p>Food for a week of travel.</p>" },
+      { name: "Tent (Four-Person)", type: "Equipment", price: { gp: 5 }, desc: "<p>A large tent that sleeps four.</p>" },
+      { name: "Compass (Lensatic)", type: "Equipment", price: { gp: 20 }, desc: "<p>Helps you Sense Direction or navigate. Grants a +1 item bonus to Survival checks for navigation.</p>" },
+      { name: "Disguise Kit", type: "Equipment", price: { gp: 2 }, desc: "<p>Contains cosmetics, false facial hair, spirit gum, and a few simple wigs.</p>" },
+      { name: "Spyglass", type: "Equipment", price: { gp: 20 }, desc: "<p>Lets you see eight times farther than normal.</p>" }
+    ],
+    "Stone Ring Pond": [
+      { name: "Sickle", type: "Weapon", price: { sp: 2 }, desc: "<p>A one-handed weapon with a short wooden handle ending in a curved blade.</p>" },
+      { name: "Blowgun", type: "Weapon", price: { sp: 1 }, desc: "<p>This long, narrow tube is used for shooting blowgun darts.</p>" },
+      { name: "Leather Armor", type: "Armor", price: { gp: 2 }, desc: "<p>A mix of flexible and molded boiled leather.</p>" },
+      { name: "Wooden Shield", type: "Shield", price: { gp: 1 }, desc: "<p>Offers protection from the stoutness of their materials. Hardness 3, HP 12.</p>" },
+      { name: "Climbing Kit", type: "Equipment", price: { sp: 5 }, desc: "<p>Includes 50 feet of rope, pulleys, pitons, a hammer, a grappling hook, and crampons.</p>" },
+      { name: "Alchemist's Toolkit", type: "Equipment", price: { gp: 3 }, desc: "<p>A mobile collection of vials and chemicals used for simple alchemical tasks.</p>" },
+      { name: "Snare Kit", type: "Equipment", price: { gp: 5 }, desc: "<p>Contains tools and materials for creating snares.</p>" }
+    ],
+    "Wrin's Wonders": [
+      { name: "Returning Rune", type: "Rune", price: { gp: 55 }, desc: "<p>When you make a thrown Strike with this weapon, it flies back to your hand after the Strike is complete.</p>" },
+      { name: "Ghost Touch Rune", type: "Rune", price: { gp: 75 }, desc: "<p>A weapon etched with this rune can harm creatures without physical form.</p>" },
+      { name: "Wand of Heal (Rank 1)", type: "Wand", price: { gp: 60 }, desc: "<p>Contains a single spell. Can cast Heal once per day, plus overcharge.</p>" },
+      { name: "Emergency Disguise", type: "Talisman", price: { gp: 3 }, desc: "<p>When activated, applies a disguise to its wearer instantly, allowing them to Impersonate quickly.</p>" },
+      { name: "Potency Crystal", type: "Talisman", price: { gp: 4 }, desc: "<p>When activated, the weapon becomes a +1 striking weapon until the end of this turn.</p>" },
+      { name: "Snapleaf", type: "Talisman", price: { gp: 9 }, desc: "<p>Triggered when falling. Grants Gentle Landing and Invisibility for 1 minute.</p>" },
+      { name: "Crying Angel Pendant", type: "Talisman", price: { gp: 7 }, desc: "<p>Grants a +1 item bonus to Administer First Aid. On success when stabilizing, target regains 1 HP and wakes up.</p>" }
+    ]
+  };
+
+  /* ─── GESTIONE INTERFACCIA E NEGOZI ─── */
+  const shopsWrapper = document.getElementById('shops-wrapper');
+  const inventoryArea = document.getElementById('inventory-area');
+  const inventoryTitle = document.getElementById('inventory-title');
+  const inventoryList = document.getElementById('inventory-list');
+  const tooltip = document.getElementById('item-tooltip');
+
+  // Genera i bottoni dei negozi
+  Object.keys(shopsData).forEach(shopName => {
+    const btn = document.createElement('button');
+    btn.className = 'shop-tag';
+    btn.innerText = shopName;
+    btn.onclick = () => openShop(shopName, btn);
+    shopsWrapper.appendChild(btn);
+  });
+
+  function openShop(shopName, btnElement) {
+    // Gestisci lo stile attivo dei bottoni
+    document.querySelectorAll('.shop-tag').forEach(b => b.classList.remove('active'));
+    btnElement.classList.add('active');
+
+    // Popola l'inventario
+    inventoryTitle.innerText = "Inventario: " + shopName;
+    inventoryList.innerHTML = '';
+    
+    const items = shopsData[shopName];
+    items.forEach(item => {
+      const priceStr = formatPriceObj(item.price);
+      
+      const row = document.createElement('div');
+      row.className = 'item-row';
+      
+      // Sanitizzazione veloce per togliere tag strani da desc (es. @UUID)
+      const cleanDesc = item.desc.replace(/@UUID\[[^\]]+\]\{([^}]+)\}/g, "<strong>$1</strong>").replace(/"/g, '&quot;');
+
+      row.innerHTML = `
+        <div class="item-info">
+          <span class="item-name" onmouseenter="showTooltip(event, '${cleanDesc}')" onmouseleave="hideTooltip()" onmousemove="moveTooltip(event)">${item.name}</span>
+          <span class="item-type">${item.type}</span>
+        </div>
+        <div class="item-actions">
+          <span class="item-price">${priceStr}</span>
+          <button class="btn-add" onclick='addToCart(${JSON.stringify(item).replace(/'/g, "\\'")})'>Aggiungi</button>
+        </div>
+      `;
+      inventoryList.appendChild(row);
+    });
+
+    inventoryArea.classList.add('active');
+  }
+
+  // Utilities Tooltip
+  function showTooltip(e, htmlContent) {
+    tooltip.innerHTML = htmlContent;
+    tooltip.classList.add('visible');
+    moveTooltip(e);
+  }
+  function moveTooltip(e) {
+    let x = e.clientX + 15;
+    let y = e.clientY + 15;
+    
+    // Evita che il tooltip esca dallo schermo
+    if (x + 320 > window.innerWidth) x = e.clientX - 335;
+    if (y + tooltip.offsetHeight > window.innerHeight) y = e.clientY - tooltip.offsetHeight - 15;
+    
+    tooltip.style.left = x + 'px';
+    tooltip.style.top = y + 'px';
+  }
+  function hideTooltip() {
+    tooltip.classList.remove('visible');
+  }
+
+  /* ─── SISTEMA DEL CARRELLO ─── */
+  let cart = [];
+
+  function formatPriceObj(priceObj) {
+    let parts = [];
+    if (priceObj.gp) parts.push(`${priceObj.gp} gp`);
+    if (priceObj.sp) parts.push(`${priceObj.sp} sp`);
+    if (priceObj.cp) parts.push(`${priceObj.cp} cp`);
+    return parts.join(', ') || '0 cp';
+  }
+
+  // Converte tutto in monete di rame (Copper Pieces) per i calcoli
+  function priceToCp(priceObj) {
+    let total = 0;
+    if (priceObj.gp) total += priceObj.gp * 100;
+    if (priceObj.sp) total += priceObj.sp * 10;
+    if (priceObj.cp) total += priceObj.cp;
+    return total;
+  }
+
+  function cpToFormattedPrice(totalCp) {
+    if (totalCp === 0) return '0 cp';
+    const gp = Math.floor(totalCp / 100);
+    const sp = Math.floor((totalCp % 100) / 10);
+    const cp = totalCp % 10;
+    
+    let parts = [];
+    if (gp > 0) parts.push(`${gp} gp`);
+    if (sp > 0) parts.push(`${sp} sp`);
+    if (cp > 0) parts.push(`${cp} cp`);
+    return parts.join(', ');
+  }
+
+  function addToCart(itemData) {
+    const existing = cart.find(i => i.name === itemData.name);
+    if (existing) {
+      existing.qty += 1;
+    } else {
+      cart.push({ ...itemData, qty: 1 });
+    }
+    updateCartUI();
+    
+    // Feedback visivo sul pulsante "Carrello"
+    const badge = document.getElementById('cart-badge');
+    badge.style.transform = 'scale(1.5)';
+    setTimeout(() => badge.style.transform = 'scale(1)', 200);
+  }
+
+  function removeFromCart(index) {
+    if (cart[index].qty > 1) {
+      cart[index].qty -= 1;
+    } else {
+      cart.splice(index, 1);
+    }
+    updateCartUI();
+  }
+
+  function updateCartUI() {
+    const cartItemsContainer = document.getElementById('cart-items');
+    const cartBadge = document.getElementById('cart-badge');
+    const cartTotalEl = document.getElementById('cart-total');
+    
+    cartItemsContainer.innerHTML = '';
+    let totalCp = 0;
+    let totalItems = 0;
+
+    cart.forEach((item, index) => {
+      const itemTotalCp = priceToCp(item.price) * item.qty;
+      totalCp += itemTotalCp;
+      totalItems += item.qty;
+
+      const div = document.createElement('div');
+      div.className = 'cart-item';
+      div.innerHTML = `
+        <div class="cart-item-info">
+          <span class="cart-item-title">${item.name}</span>
+          <span style="color:var(--parch-dim); font-size:0.75rem;">${formatPriceObj(item.price)} cad.</span>
+        </div>
+        <div class="cart-item-controls">
+          <span>x${item.qty}</span>
+          <button class="cart-btn-sm" onclick="removeFromCart(${index})">Rimuovi</button>
+        </div>
+      `;
+      cartItemsContainer.appendChild(div);
+    });
+
+    if (cart.length === 0) {
+      cartItemsContainer.innerHTML = '<p style="color:var(--parch-dim); font-size:0.9rem; text-align:center; margin-top:2rem;">Il carrello è vuoto.</p>';
+    }
+
+    cartBadge.innerText = totalItems;
+    cartTotalEl.innerText = 'Totale: ' + cpToFormattedPrice(totalCp);
+  }
+
+  function toggleCart() {
+    document.getElementById('cart-panel').classList.toggle('open');
+  }
+
+  /* ─── MENU TENDINA PERSONAGGI ─── */
+  function toggleDD(id) {
+    const el = document.getElementById(id);
+    const isOpen = el.classList.contains('open');
+    document.querySelectorAll('.dropdown.open').forEach(d => d.classList.remove('open'));
+    if (!isOpen) el.classList.add('open');
+  }
+  document.addEventListener('click', e => {
+    if (!e.target.closest('.dropdown')) {
+      document.querySelectorAll('.dropdown.open').forEach(d => d.classList.remove('open'));
+    }
+  });
+
+  /* ─── MODALE MAPPA ─── */
+  const mapModal = document.getElementById('map-modal');
+  function openMap() {
+    mapModal.classList.add('active');
+  }
+  function closeMap() {
+    mapModal.classList.remove('active');
+  }
+  
+  // Inizializza Carrello UI
+  updateCartUI();
+
+</script>
+
+</body>
+</html>
