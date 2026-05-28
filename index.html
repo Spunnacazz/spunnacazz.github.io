@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Otari Campaign</title>
+    <title>Otari Campaign - Map</title>
     <style>
         * {
             margin: 0;
@@ -24,16 +24,79 @@
             padding: 1rem;
         }
 
+        .map-container {
+            position: relative;
+            display: inline-block;
+            max-width: 100%;
+        }
+
         img {
             max-width: 100%;
             height: auto;
             display: block;
         }
+
+        .hotspot {
+            position: absolute;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .hotspot:hover {
+            opacity: 0.3;
+            background-color: rgba(255, 215, 0, 0.5);
+        }
+
+        .hotspot-label {
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #ffd700;
+            padding: 0.5rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            pointer-events: none;
+            display: none;
+        }
+
+        .hotspot:hover .hotspot-label {
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <img src="otari.webp" alt="Otari Map" />
+        <div class="map-container">
+            <img src="otari.webp" alt="Otari Map" usemap="#otari-map">
+            <map name="otari-map">
+                <area shape="circle" coords="320,380" href="location-1.html" title="La Rotta del Gigante">
+                <area shape="circle" coords="330,410" href="location-2.html" title="Canale di Carico">
+                <area shape="circle" coords="345,425" href="location-3.html" title="Maniero Medhasee">
+                <area shape="circle" coords="295,350" href="location-4.html" title="Meraviglie di Wrin">
+                <area shape="circle" coords="315,365" href="location-5.html" title="Cerveseria Calisprine">
+                <area shape="circle" coords="330,375" href="location-6.html" title="Lame per Radure">
+                <area shape="circle" coords="320,400" href="location-7.html" title="Stalle Rivendute">
+                <area shape="circle" coords="310,415" href="location-8.html" title="Guardiano di Otiori">
+                <area shape="circle" coords="340,420" href="location-9.html" title="Sala Guardiani">
+                <area shape="circle" coords="325,445" href="location-10.html" title="Batti dei Corvi">
+                <area shape="circle" coords="290,360" href="location-11.html" title="Angolina dell'Urtante">
+                <area shape="circle" coords="305,390" href="location-12.html" title="Mercato di Otari">
+                <area shape="circle" coords="335,470" href="location-13.html" title="Pescheria di Otari">
+                <area shape="circle" coords="275,350" href="location-14.html" title="Rovine dell'Alpaca Azzalata">
+                <area shape="circle" coords="240,380" href="location-15.html" title="Maniero Intelholtz">
+                <area shape="circle" coords="235,360" href="location-16.html" title="Maniero Libertai">
+                <area shape="circle" coords="250,410" href="location-17.html" title="Lo Scarlano Chiassone">
+                <area shape="circle" coords="235,450" href="location-18.html" title="Biblioteca del Fiore dell'Alba">
+                <area shape="circle" coords="270,425" href="location-19.html" title="Stagie dell'Aniello di Pietre">
+                <area shape="circle" coords="280,480" href="location-20.html" title="Cimitero di Otari">
+            </map>
+        </div>
     </div>
 </body>
 </html>
