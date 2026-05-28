@@ -411,7 +411,7 @@
     </div>
   <div class="cart-footer">
     <div class="cart-total" id="cart-total">Totale: 0 cp</div>
-    <div class="cart-weight" id="cart-weight">Peso: 0 lb</div>
+    <div class="cart-weight" id="cart-weight">Peso: 0 Volume</div>
   </div>
 </div>
 
@@ -533,7 +533,7 @@
         <div class="item-info">
           <span class="item-name" onmouseenter="showTooltip(event, '${cleanDesc}')" onmouseleave="hideTooltip()" onmousemove="moveTooltip(event)">${item.name}</span>
           <span class="item-type">${item.type}</span>
-          <span class="item-weight">${item.weight} lb</span>
+          <span class="item-weight">${item.weight} Volume</span>
         </div>
         <div class="item-actions">
           <span class="item-price">${priceStr}</span>
@@ -575,15 +575,15 @@
     if (priceObj.gp) parts.push(`${priceObj.gp} gp`);
     if (priceObj.sp) parts.push(`${priceObj.sp} sp`);
     if (priceObj.cp) parts.push(`${priceObj.cp} cp`);
-    return parts.join(', ') || '0 cp';
+    return parts.join(', ') || '0 mr';
   }
 
   // Converte tutto in monete di rame (Copper Pieces) per i calcoli
   function priceToCp(priceObj) {
     let total = 0;
-    if (priceObj.gp) total += priceObj.gp * 100;
-    if (priceObj.sp) total += priceObj.sp * 10;
-    if (priceObj.cp) total += priceObj.cp;
+    if (priceObj.gp) total += priceObj.mo * 100;
+    if (priceObj.sp) total += priceObj.ma * 10;
+    if (priceObj.cp) total += priceObj.mr;
     return total;
   }
 
@@ -594,9 +594,9 @@
     const cp = totalCp % 10;
     
     let parts = [];
-    if (gp > 0) parts.push(`${gp} gp`);
-    if (sp > 0) parts.push(`${sp} sp`);
-    if (cp > 0) parts.push(`${cp} cp`);
+    if (mo > 0) parts.push(`${mo} mo`);
+    if (ma > 0) parts.push(`${ma} ma`);
+    if (mr > 0) parts.push(`${mr} mr`);
     return parts.join(', ');
   }
 
@@ -647,7 +647,7 @@
         <div class="cart-item-info">
           <span class="cart-item-title">${item.name}</span>
           <span style="color:var(--parch-dim); font-size:0.75rem;">${formatPriceObj(item.price)} cad.</span>
-          <span class="cart-item-weight">${item.weight} lb cad.</span>
+          <span class="cart-item-weight">${item.weight} Volume cad.</span>
         </div>
         <div class="cart-item-controls">
           <span>x${item.qty}</span>
@@ -663,7 +663,7 @@
 
     cartBadge.innerText = totalItems;
     cartTotalEl.innerText = 'Totale: ' + cpToFormattedPrice(totalCp);
-    cartWeightEl.innerText = 'Peso: ' + totalWeight.toFixed(1) + ' lb';
+    cartWeightEl.innerText = 'Peso: ' + totalWeight.toFixed(1) + ' Volume';
   }
 
   function toggleCart() {
