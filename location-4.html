@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meraviglie di Wrin - Otari</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #f0e6d2;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+        }
+
+        header {
+            background: linear-gradient(180deg, rgba(20,10,0,0.8) 0%, rgba(40,20,0,0.9) 100%);
+            border-bottom: 3px solid #d4af37;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #d4af37;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: #b8860b;
+            font-style: italic;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            background: #d4af37;
+            color: #1a1a2e;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            border: 2px solid #b8860b;
+        }
+
+        .back-link:hover {
+            background: #b8860b;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(212, 175, 55, 0.4);
+        }
+
+        .section {
+            background: rgba(30, 20, 10, 0.7);
+            border: 2px solid #d4af37;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+        }
+
+        .section h2 {
+            color: #d4af37;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #d4af37;
+            padding-bottom: 0.5rem;
+        }
+
+        .section h3 {
+            color: #d4af37;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .item-card {
+            background: rgba(50, 30, 10, 0.8);
+            border: 2px solid #b8860b;
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .item-card:hover {
+            background: rgba(70, 40, 10, 0.9);
+            border-color: #d4af37;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(212, 175, 55, 0.3);
+        }
+
+        .item-name {
+            color: #d4af37;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-type {
+            color: #b8860b;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-level {
+            color: #f0e6d2;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-price {
+            color: #ffd700;
+            font-weight: bold;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .item-rarity {
+            display: inline-block;
+            padding: 0.3rem 0.6rem;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .rarity-common {
+            background: rgba(100, 100, 100, 0.5);
+            color: #ccc;
+        }
+
+        .rarity-uncommon {
+            background: rgba(100, 150, 100, 0.5);
+            color: #90EE90;
+        }
+
+        .item-description {
+            color: #d0d0d0;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .category-section {
+            margin-bottom: 2rem;
+        }
+
+        .placeholder-text {
+            font-style: italic;
+            color: #b8860b;
+            margin: 1rem 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #b8860b;
+            border-top: 2px solid #d4af37;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .shop-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Meraviglie di Wrin</h1>
+        <p class="subtitle">Location 4 - Magical Wonders Shop</p>
+    </header>
+
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to Map</a>
+
+        <div class="section">
+            <h2>Welcome to Wrin's Wonders</h2>
+            <p class="placeholder-text">A mysterious shop filled with magical items and rare treasures. Wrin, the proprietor, is known for curating the finest magical goods in Otari.</p>
+        </div>
+
+        <div class="section">
+            <h2>⚔️ Weapons & Runes</h2>
+            <div class="shop-grid">
+                <div class="item-card">
+                    <div class="item-name">Dagger of Eternal Sleep</div>
+                    <div class="item-type">Magical Weapon</div>
+                    <div class="item-level">Level 5</div>
+                    <div class="rarity-uncommon item-rarity">Uncommon</div>
+                    <div class="item-price">25 gp</div>
+                    <div class="item-description">A tiny serrated dagger that transforms into a +1 Grievous striking dagger. Strike an unconscious target for automatic critical hit. Disintegrates after use.</div>
+                </div>
+
+                <div class="item-card">
+                    <div class="item-name">Striking Rune</div>
+                    <div class="item-type">Weapon Enhancement (Qty: 3)</div>
+                    <div class="item-level">Level 4</div>
+                    <div class="rarity-common item-rarity">Common</div>
+                    <div class="item-price">65 gp each</div>
+                    <div class="item-description">Increases weapon damage dice from 1 to 2. Can be upgraded to stronger versions.</div>
+                </div>
+
+                <div class="item-card">
+                    <div class="item-name">Returning Rune</div>
+                    <div class="item-type">Weapon Enhancement (Qty: 2)</div>
+                    <div class="item-level">Level 3</div>
+                    <div class="rarity-common item-rarity">Common</div>
+                    <div class="item-price">55 gp each</div>
+                    <div class="item-description">Thrown weapons return to your hand after a strike.</div>
+                </div>
+
+                <div class="item-card">
+                    <div class="item-name">Ghost Touch Rune</div>
+                    <div class="item-type">Weapon Enhancement (Qty: 2)</div>
+                    <div class="item-level">Level 4</div>
+                    <div class="rarity-common item-rarity">Common</div>
+                    <div class="item-price">75 gp each</div>
+                    <div class="item-description">Weapon can harm incorporeal creatures and is effective against ghosts.</div>
+                </div>
+
+                <div class="item-card">
+                    <div class="item-name">Cunning Rune</div>
+                    <div class="item-type">Weapon Enhancement (Qty: 2)</div>
+                    <div class="item-level">Level 5</div>
+                    <div class="rarity-uncommon item-rarity">Uncommon</div>
+                    <div class="item-price">140 gp each</div>
+                    <div class="item-description">Grants insight into foes' abilities after hitting them. Gain bonus to Recall Knowledge checks.</div>
+                </div>
+
+                <div class="item-card">
+                    <div class="item-name">Vitalizing Rune</div>
+                    <div class="item-type">Weapon Enhancement (Qty: 2)</div>
+                    <div class="item-level">Level 5</div>
+                    <div class="rarity-common item-rarity">Common</div>
+                    <div class="item-price">150 gp each</div>
+                    <div class="item-description">Extra 1d6 persistent vitality damage to undead. Critical hits enfeeble undead.</div>
+                </div>
+
+                <div class="item-card">
+                    <div class="item-name">Fearsome Rune</div>
+                    <div class="item-type">Weapon Enhancement (Qty: 2)</div>
+                    <div class="item-level">Level 5</div>
+                    <div class="rarity-common item-rarity">Common</div>
+                    <div class="item-price">160 gp each</div>
+                    <div class="item-description">Critical hits with this weapon frighten the target.</div>
+                </div>
+
+                <div class="item-card">
+                    <div class="item-name">Weapon Potency (+1)</div>
+                    <div class="item-type">Weapon Enhancement (Qty: 4)</div>
+                    <div class="item-level">Level 2</div>
+                    <div class="rarity-common item-rarity">Common</div>
+                    <div class="item-price">35 gp each</div>
+                    <div class="item-description">+1 item bonus to attack rolls. Weapon can be etched with one property rune.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🧪 Consumables & Potions</h2>
+            <div class="shop-grid">
+                <div class="item-card">
+                    <div class="item-name">Wand of Heal (Rank 1)</div>
+                    <div class="item-type">Magical Wand (Qty: 2)</div>
+                    <div class="item-level">Level 3</div>
+                    <div class="rarity-common item-rarity">Common</div>
+                    <div class="item-price">60 gp each</div>
+                    <div class="item-description">Cast 1st-rank Heal spell once per day. Restore health or damage undead.</div>
+                </div>
+
+                <div class="item-card">
+                    <div class="item-name">Healing Potion (Minor)</div>
+                    <div class="item-type">Potion (Qty: 5)</div>
+                    <div class="item-level">Level 1</div>
+                    <div class="rarity-common item-rarity">Common</div>
+                    <div class="item-price">4 gp each</div>
+                    <div class="item-description">Restore 1d8 Hit Points when consumed.</div>
+                </div>
+
+                <div class="item-card">
+                    <div class="item-name">Healing Potion (Lesser)</div>
+                    <div class="item-type">Potion (Qty: 5)</div>
+                    <div class="item-level">Level 3</div>
+                    <div class="rarity-common item-rarity">Common</div>
+                    <div class="item-price">12 gp each</div>
+                    <div class="item-description">Restore 2d8+5 Hit Points when consumed.</div>
+                </div>
+
+                <div class="item-card">
+                    <div class="item-name">Healing Potion (Moderate)</div>
+                    <div class="item-type">Potion (Qty: 5)</div>
+                    <div class="item-level">Level 6</div>
+                    <div class="rarity-common item-rarity">Common</div>
+                    <div class="item-price">50 gp each</div>
+                    <div class="item-description">Restore 3d8+10 Hit Points when consumed.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>✨ Talismans & Magical Items</h2>
+            <div class="shop-grid">
+                <div class="item-card">
+                    <div class="item-name">Emergency Disguise</div>
+                    <div class="item-type">Talisman (Qty: 3)</div>
+                    <div class="item-level">Level 1</div>
+                    <div class="rarity-uncommon item-rarity">Uncommon</div>
+                    <div class="item-price">3 gp each</div>
+                    <div class="item-description">Apply instant disguise. -2 penalty to Impersonate without Quick Disguise feat. Lasts 24 hours.</div>
+                </div>
+
+                <div class="item-card">
+                    <div class="item-name">Predator's Claw</div>
+                    <div class="item-type">Talisman (Qty: 3)</div>
+                    <div class="item-level">Level 1</div>
+                    <div class="rarity-common item-rarity">Common</div>
+                    <div class="item-price">3 gp each</div>
+                    <div class="item-description">On critical hit with affixed weapon, weapon gains its critical specialization effect.</div>
+                </div>
+
+                <div class="item-card">
+                    <div class="item-name">Potency Crystal</div>
+                    <div class="item-type">Talisman (Qty: 3)</div>
+                    <div class="item-level">Level 1</div>
+                    <div class="rarity-common item-rarity">Common</div>
+                    <div class="item-price">4 gp each</div>
+                    <div class="item-description">Make affixed weapon a +1 striking weapon for one Strike.</div>
+                </div>
+
+                <div class="item-card">
+                    <div class="item-name">Wolf Fang</div>
+                    <div class="item-type">Talisman (Qty: 3)</div>
+                    <div class="item-level">Level 1</div>
+                    <div class="rarity-common item-rarity">Common</div>
+                    <div class="item-price">4 gp each</div>
+                    <div class="item-description">On successful Trip, deal Strength modifier bludgeoning damage to target.</div>
+                </div>
+
+                <div class="item-card">
+                    <div class="item-name">Hunter's Bane</div>
+                    <div class="item-type">Talisman (Qty: 3)</div>
+                    <div class="item-level">Level 2</div>
+                    <div class="rarity-common item-rarity">Common</div>
+                    <div class="item-price">6 gp each</div>
+                    <div class="item-description">When undetected enemy hits you, sense their exact location instead.</div>
+                </div>
+
+                <div class="item-card">
+                    <div class="item-name">Jade Cat</div>
+                    <div class="item-type">Talisman</div>
+                    <div class="item-level">Level 1</div>
+                    <div class="rarity-common item-rarity">Common</div>
+                    <div class="item-price">Coming Soon</div>
+                    <div class="item-description">Treat falls as 20 feet shorter. Not off-guard when balancing. Difficult terrain becomes normal for 1 minute.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📝 About Wrin</h2>
+            <p class="placeholder-text">Add details about Wrin's character, personality, and background here. What drives them to maintain this shop? Do they have any quirks or special services?</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>Otari Campaign</p>
+    </footer>
+</body>
+</html>
