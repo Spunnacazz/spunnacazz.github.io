@@ -423,9 +423,7 @@
   /* ─── DATI DEI NEGOZI E DEGLI OGGETTI ─── */
   const shopsData = {
     "Lame per Radure": [
-      { name: "Dagger", type: "Weapon", price: { ma: 2 }, weight: 0.1, desc: " <b>Volume</b>: L<br><b>Mani</b>: 1<br><b>Categoria</b>: Semplice<br><b>Gruppo</b>: Coltello; <b>Tratti</b>: <a href="/wiki/Tratti/Agile" title="Tratti/Agile">Agile</a>, <a href="/wiki/Tratti/Accurata" title="Tratti/Accurata">Accurata</a>, <a href="/wiki/Tratti/Lancio" title="Tratti/Lancio">Lancio</a> 3 metri, <a href="/wiki/Tratti/Versatile" title="Tratti/Versatile">Versatile</a> T
-</p> <p>Questa piccola arma a lama viene tenuta con una mano ed è usata per trafiggere una creatura in combattimento ravvicinato. Può anche essere lanciato.
-</p>" },
+      { name: "Dagger", type: "Weapon", price: { ma: 2 }, weight: 0.1, desc: "<p>Un piccolo pugnale affilato tenuto in una mano per colpire in combattimento ravvicinato.</p>" },
       { name: "Longspear", type: "Weapon", price: { ma: 5 }, weight: 7, desc: "<p>Una picca molto lunga, a volte chiamata lancia, usata esclusivamente per il combattimento a distanza ravvicinata.</p>" },
       { name: "Bastard Sword", type: "Weapon", price: { mo: 4 }, weight: 3, desc: "<p>Una larga spada, talvolta chiamata spada da mano e mezza, con un'impugnatura più lunga per consentire l'uso con una o due mani.</p>" },
       { name: "Battle Axe", type: "Weapon", price: { mo: 1 }, weight: 4, desc: "<p>Queste asce sono esplicitamente progettate come armi, piuttosto che come strumenti. Pesano meno di una comune ascia.</p>" },
@@ -657,7 +655,7 @@
 
     cartBadge.innerText = totalItems;
     cartTotalEl.innerText = 'Totale: ' + cpToFormattedPrice(totalCp);
-    cartWeightEl.innerText = 'Volume: ' + totalWeight.toFixed(1) + ' ';
+    cartWeightEl.innerText = 'Peso: ' + totalWeight.toFixed(1) + ' Volume';
   }
 
   function toggleCart() {
