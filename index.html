@@ -251,6 +251,7 @@
     }
     .item-name:hover { color: var(--gold-lt); }
     .item-type { font-size: 0.75rem; color: var(--parch-dim); font-style: italic; }
+    .item-weight { font-size: 0.7rem; color: rgba(201,168,76,.6); margin-top: 0.2rem; }
     
     .item-actions { display: flex; align-items: center; gap: 1.5rem; }
     .item-price { font-family: 'Cinzel', serif; color: var(--gold-lt); font-weight: bold; }
@@ -321,12 +322,14 @@
     }
     .cart-item-info { display: flex; flex-direction: column; width: 60%; }
     .cart-item-title { font-family: 'Cinzel', serif; font-size: 0.85rem; color: var(--parchment); }
+    .cart-item-weight { font-size: 0.7rem; color: rgba(201,168,76,.6); margin-top: 0.2rem; }
     .cart-item-controls { display: flex; gap: 0.5rem; align-items: center; font-family: sans-serif; font-size: 0.8rem;}
     .cart-btn-sm { background: none; border: 1px solid rgba(201,168,76,.5); color: var(--gold); cursor: pointer; padding: 0.1rem 0.4rem;}
     .cart-btn-sm:hover { background: var(--gold); color: var(--ink); }
     
     .cart-footer { padding: 1.5rem; border-top: 1px solid rgba(201,168,76,.3); background: rgba(0,0,0,0.4); }
-    .cart-total { font-family: 'Cinzel', serif; font-size: 1.2rem; color: var(--gold-lt); text-align: right; }
+    .cart-total { font-family: 'Cinzel', serif; font-size: 1rem; color: var(--gold-lt); text-align: right; margin-bottom: 0.5rem; }
+    .cart-weight { font-family: 'Cinzel', serif; font-size: 0.9rem; color: rgba(201,168,76,.7); text-align: right; }
 
     /* ── TOOLTIP ── */
     .item-tooltip {
@@ -408,6 +411,7 @@
     </div>
   <div class="cart-footer">
     <div class="cart-total" id="cart-total">Totale: 0 cp</div>
+    <div class="cart-weight" id="cart-weight">Peso: 0 lb</div>
   </div>
 </div>
 
@@ -421,72 +425,72 @@
   /* ─── DATI DEI NEGOZI E DEGLI OGGETTI (Estratti dai file YML) ─── */
   const shopsData = {
     "Lame per Radure": [
-      { name: "Dagger", type: "Weapon", price: { sp: 2 }, desc: "<p>This small, bladed weapon is held in one hand and used to stab a creature in close combat. It can also be thrown.</p>" },
-      { name: "Longspear", type: "Weapon", price: { sp: 5 }, desc: "<p>This very long spear, sometimes called a pike, is purely for thrusting rather than throwing. Used by many soldiers and city watch for crowd control and defense against charging enemies, it must be wielded with two hands.</p>" },
-      { name: "Bastard Sword", type: "Weapon", price: { gp: 4 }, desc: "<p>This broad-bladed sword, sometimes called the hand-and-a-half sword, has a longer grip so it can be held in one hand or used with two hands to provide extra slashing power.</p>" },
-      { name: "Battle Axe", type: "Weapon", price: { gp: 1 }, desc: "<p>These axes are designed explicitly as weapons, rather than tools. They typically weigh less, with a shaft reinforced with metal bands or bolts, and have a sharper blade, making them ideal for chopping limbs rather than wood.</p>" },
-      { name: "Chain Mail", type: "Armor", price: { gp: 6 }, desc: "<p>A suit of chain mail consists of several pieces of armor composed of small metal rings linked together in a protective mesh.</p>" },
-      { name: "Steel Shield", type: "Shield", price: { gp: 2 }, desc: "<p>Like wooden shields, steel shields come in a variety of shapes and sizes. Though more expensive than wooden shields, they are much more durable.</p>" }
+      { name: "Dagger", type: "Weapon", price: { sp: 2 }, weight: 0.1, desc: "<p>This small, bladed weapon is held in one hand and used to stab a creature in close combat. It can also be thrown.</p>" },
+      { name: "Longspear", type: "Weapon", price: { sp: 5 }, weight: 7, desc: "<p>This very long spear, sometimes called a pike, is purely for thrusting rather than throwing. Used by many soldiers and city watch.</p>" },
+      { name: "Bastard Sword", type: "Weapon", price: { gp: 4 }, weight: 3, desc: "<p>This broad-bladed sword, sometimes called the hand-and-a-half sword, has a longer grip so it can be held in one hand or used with two hands.</p>" },
+      { name: "Battle Axe", type: "Weapon", price: { gp: 1 }, weight: 4, desc: "<p>These axes are designed explicitly as weapons, rather than tools. They typically weigh less, with a shaft reinforced with metal bands.</p>" },
+      { name: "Chain Mail", type: "Armor", price: { gp: 6 }, weight: 48, desc: "<p>A suit of chain mail consists of several pieces of armor composed of small metal rings linked together in a protective mesh.</p>" },
+      { name: "Steel Shield", type: "Shield", price: { gp: 2 }, weight: 6, desc: "<p>Like wooden shields, steel shields come in a variety of shapes and sizes. Though more expensive than wooden shields, they are stronger.</p>" }
     ],
     "Crook's Nook": [
-      { name: "Dagger of Eternal Sleep", type: "Weapon (Magical)", price: { gp: 25 }, desc: "<p>This tiny serrated dagger looks like a miniature sawtooth sabre. Until activated, it is too small and ornamental to function as a weapon.</p><p><strong>Activate</strong> Interact</p><p><strong>Effect</strong> You transform the dagger into a +1 Grievous striking dagger and Strike an unconscious target. If you roll a hit, you get a critical hit instead.</p>" },
-      { name: "Serpent Dagger", type: "Weapon (Magical)", price: { gp: 150 }, desc: "<p>The serrated blade of this +1 striking dagger has a greenish tinge. When you critically succeed at an attack roll, the target becomes Sickened 1.</p>" },
-      { name: "Flaying Knife", type: "Weapon (Magical)", price: { gp: 480 }, desc: "<p>This long, thin +1 striking Wounding dagger has a smooth edge on one side and a serrated edge on the other. It deals 1d8 bleed on a hit instead of 1d6.</p>" },
-      { name: "Thieves' Toolkit", type: "Equipment", price: { gp: 3 }, desc: "<p>You need a thieves' toolkit to Pick Locks or Disable Devices using the Thievery skill.</p>" },
-      { name: "Arsenic", type: "Poison", price: { gp: 3 }, desc: "<p>This toxin is a compound of arsenic and other substances. You can't reduce your sickened condition while affected.</p>" },
-      { name: "Spider Venom", type: "Poison", price: { gp: 25 }, desc: "<p>This venom erodes its target's defenses, aiding the spider in securing prey.</p>" }
+      { name: "Dagger of Eternal Sleep", type: "Weapon (Magical)", price: { gp: 25 }, weight: 0.1, desc: "<p>This tiny serrated dagger looks like a miniature sawtooth sabre. Until activated, it is too small.</p>" },
+      { name: "Serpent Dagger", type: "Weapon (Magical)", price: { gp: 150 }, weight: 0.1, desc: "<p>The serrated blade of this +1 striking dagger has a greenish tinge. When you critically succeed at an attack roll.</p>" },
+      { name: "Flaying Knife", type: "Weapon (Magical)", price: { gp: 480 }, weight: 0.15, desc: "<p>This long, thin +1 striking Wounding dagger has a smooth edge on one side and a serrated edge on the other.</p>" },
+      { name: "Thieves' Toolkit", type: "Equipment", price: { gp: 3 }, weight: 1, desc: "<p>You need a thieves' toolkit to Pick Locks or Disable Devices using the Thievery skill.</p>" },
+      { name: "Arsenic", type: "Poison", price: { gp: 3 }, weight: 0.1, desc: "<p>This toxin is a compound of arsenic and other substances. You can't reduce your sickened condition while affected.</p>" },
+      { name: "Spider Venom", type: "Poison", price: { gp: 25 }, weight: 0.1, desc: "<p>This venom erodes its target's defenses, aiding the spider in securing prey.</p>" }
     ],
     "Dawnflower Library": [
-      { name: "Rapier", type: "Weapon", price: { gp: 2 }, desc: "<p>The rapier is a long and thin piercing blade with a basket hilt. It is prized among many as a dueling weapon.</p>" },
-      { name: "Staff of Healing", type: "Weapon (Magical)", price: { gp: 90 }, desc: "<p>This white wood staff grants a +1 item bonus to the Hit Points you restore anytime you cast the heal spell.</p><p><strong>Activate</strong> Cast a Spell to cast Stabilize or Heal.</p>" },
-      { name: "Healing Potion (Minor)", type: "Potion", price: { gp: 4 }, desc: "<p>A vial of a ruby-red liquid that imparts a tingling sensation as the drinker's wounds heal rapidly. Regain 1d8 Hit Points.</p>" },
-      { name: "Healing Potion (Lesser)", type: "Potion", price: { gp: 12 }, desc: "<p>Regain 2d8+5 Hit Points.</p>" },
-      { name: "Holy Water", type: "Consumable", price: { gp: 3 }, desc: "<p>This vial contains water blessed by a benevolent deity. Deals 1d6 spirit damage and 1 spirit splash damage to creatures with the unholy trait.</p>" },
-      { name: "Scroll of Heal (Rank 1)", type: "Scroll", price: { gp: 4 }, desc: "<p>Contains the Heal spell. You channel vital energy to heal the living or damage the undead.</p>" },
-      { name: "Scroll of Sanctuary", type: "Scroll", price: { gp: 4 }, desc: "<p>Contains the Sanctuary spell. Wards a creature with protective energy that deters attacks.</p>" }
+      { name: "Rapier", type: "Weapon", price: { gp: 2 }, weight: 1, desc: "<p>The rapier is a long and thin piercing blade with a basket hilt. It is prized among many as a dueling weapon.</p>" },
+      { name: "Staff of Healing", type: "Weapon (Magical)", price: { gp: 90 }, weight: 3.5, desc: "<p>This white wood staff grants a +1 item bonus to the Hit Points you restore anytime you cast the heal spell.</p>" },
+      { name: "Healing Potion (Minor)", type: "Potion", price: { gp: 4 }, weight: 0.1, desc: "<p>A vial of a ruby-red liquid that imparts a tingling sensation as the drinker's wounds heal rapidly. Regain 1d8 HP.</p>" },
+      { name: "Healing Potion (Lesser)", type: "Potion", price: { gp: 12 }, weight: 0.1, desc: "<p>Regain 2d8+5 Hit Points.</p>" },
+      { name: "Holy Water", type: "Consumable", price: { gp: 3 }, weight: 0.1, desc: "<p>This vial contains water blessed by a benevolent deity. Deals 1d6 spirit damage and 1 spirit splash damage to creatures.</p>" },
+      { name: "Scroll of Heal (Rank 1)", type: "Scroll", price: { gp: 4 }, weight: 0.1, desc: "<p>Contains the Heal spell. You channel vital energy to heal the living or damage the undead.</p>" },
+      { name: "Scroll of Sanctuary", type: "Scroll", price: { gp: 4 }, weight: 0.1, desc: "<p>Contains the Sanctuary spell. Wards a creature with protective energy that deters attacks.</p>" }
     ],
     "Odd Stories": [
-      { name: "Staff of Fire", type: "Weapon (Magical)", price: { gp: 60 }, desc: "<p>This staff resembles a blackened and burned length of ashen wood. Can cast Ignition and Breathe Fire.</p>" },
-      { name: "Animal Staff", type: "Weapon (Magical)", price: { gp: 90 }, desc: "<p>Topped with carved animal heads. Grants a +2 circumstance bonus to Nature checks to identify animals. Can cast Know the Way, Runic Body, and Summon Animal.</p>" },
-      { name: "Mentalist's Staff", type: "Weapon (Magical)", price: { gp: 90 }, desc: "<p>Grants a +2 circumstance bonus to identify mental magic. Casts Daze, Mindlink, and Phantom Pain.</p>" },
-      { name: "Basic Crafter's Book", type: "Equipment", price: { sp: 1 }, desc: "<p>Contains the formulas for Crafting 0-level common items.</p>" },
-      { name: "Formula Book (Blank)", type: "Equipment", price: { gp: 1 }, desc: "<p>Can hold the formulas for up to 100 different items.</p>" },
-      { name: "Writing Set", type: "Equipment", price: { gp: 1 }, desc: "<p>Includes stationery, ink, a quill or inkpen, sealing wax, and a simple seal.</p>" }
+      { name: "Staff of Fire", type: "Weapon (Magical)", price: { gp: 60 }, weight: 4, desc: "<p>This staff resembles a blackened and burned length of ashen wood. Can cast Ignition and Breathe Fire.</p>" },
+      { name: "Animal Staff", type: "Weapon (Magical)", price: { gp: 90 }, weight: 4, desc: "<p>Topped with carved animal heads. Grants a +2 circumstance bonus to Nature checks to identify animals.</p>" },
+      { name: "Mentalist's Staff", type: "Weapon (Magical)", price: { gp: 90 }, weight: 4, desc: "<p>Grants a +2 circumstance bonus to identify mental magic. Casts Daze, Mindlink, and Phantom Pain.</p>" },
+      { name: "Basic Crafter's Book", type: "Equipment", price: { sp: 1 }, weight: 1, desc: "<p>Contains the formulas for Crafting 0-level common items.</p>" },
+      { name: "Formula Book (Blank)", type: "Equipment", price: { gp: 1 }, weight: 1, desc: "<p>Can hold the formulas for up to 100 different items.</p>" },
+      { name: "Writing Set", type: "Equipment", price: { gp: 1 }, weight: 0.5, desc: "<p>Includes stationery, ink, a quill or inkpen, sealing wax, and a simple seal.</p>" }
     ],
     "Otari Garrison": [
-      { name: "Greatclub", type: "Weapon", price: { gp: 1 }, desc: "<p>These massive clubs are too heavy to wield with only one hand.</p>" },
-      { name: "Heavy Crossbow", type: "Weapon", price: { gp: 4 }, desc: "<p>Harder to load and more substantial than a regular crossbow, but packs a greater punch. Deals 1d10 piercing.</p>" },
-      { name: "Scale Mail", type: "Armor", price: { gp: 4 }, desc: "<p>Consists of many metal scales sewn onto a reinforced leather backing.</p>" },
-      { name: "Breastplate", type: "Armor", price: { gp: 8 }, desc: "<p>Strategically grants some of the protection of plate while allowing greater flexibility and speed.</p>" },
-      { name: "Tower Shield", type: "Shield", price: { gp: 10 }, desc: "<p>These massive shields can be used to provide cover to nearly the entire body. Hardness 5, HP 20.</p>" },
-      { name: "Weapon Potency (+1)", type: "Rune", price: { gp: 35 }, desc: "<p>Attack rolls with this weapon gain a +1 item bonus, and the weapon can be etched with one property rune.</p>" }
+      { name: "Greatclub", type: "Weapon", price: { gp: 1 }, weight: 8, desc: "<p>These massive clubs are too heavy to wield with only one hand.</p>" },
+      { name: "Heavy Crossbow", type: "Weapon", price: { gp: 4 }, weight: 7, desc: "<p>Harder to load and more substantial than a regular crossbow, but packs a greater punch. Deals 1d10 piercing.</p>" },
+      { name: "Scale Mail", type: "Armor", price: { gp: 4 }, weight: 34, desc: "<p>Consists of many metal scales sewn onto a reinforced leather backing.</p>" },
+      { name: "Breastplate", type: "Armor", price: { gp: 8 }, weight: 28, desc: "<p>Strategically grants some of the protection of plate while allowing greater flexibility and speed.</p>" },
+      { name: "Tower Shield", type: "Shield", price: { gp: 10 }, weight: 12, desc: "<p>These massive shields can be used to provide cover to nearly the entire body. Hardness 5, HP 20.</p>" },
+      { name: "Weapon Potency (+1)", type: "Rune", price: { gp: 35 }, weight: 0, desc: "<p>Attack rolls with this weapon gain a +1 item bonus, and the weapon can be etched with one property rune.</p>" }
     ],
     "Otari Market": [
-      { name: "Explorer's Clothing", type: "Armor", price: { sp: 1 }, desc: "<p>Adventurers who don't wear armor travel in durable clothing. Can grant an item bonus to AC if etched with potency runes.</p>" },
-      { name: "Clothing (High-Fashion Fine)", type: "Equipment", price: { gp: 55 }, desc: "<p>Made with expensive fabrics. Grants a +1 item bonus to checks to Make an Impression on nobility.</p>" },
-      { name: "Rations", type: "Consumable", price: { sp: 4 }, desc: "<p>Food for a week of travel.</p>" },
-      { name: "Tent (Four-Person)", type: "Equipment", price: { gp: 5 }, desc: "<p>A large tent that sleeps four.</p>" },
-      { name: "Compass (Lensatic)", type: "Equipment", price: { gp: 20 }, desc: "<p>Helps you Sense Direction or navigate. Grants a +1 item bonus to Survival checks for navigation.</p>" },
-      { name: "Disguise Kit", type: "Equipment", price: { gp: 2 }, desc: "<p>Contains cosmetics, false facial hair, spirit gum, and a few simple wigs.</p>" },
-      { name: "Spyglass", type: "Equipment", price: { gp: 20 }, desc: "<p>Lets you see eight times farther than normal.</p>" }
+      { name: "Explorer's Clothing", type: "Armor", price: { sp: 1 }, weight: 2, desc: "<p>Adventurers who don't wear armor travel in durable clothing. Can grant an item bonus to AC if etched with potency runes.</p>" },
+      { name: "Clothing (High-Fashion Fine)", type: "Equipment", price: { gp: 55 }, weight: 1, desc: "<p>Made with expensive fabrics. Grants a +1 item bonus to checks to Make an Impression on nobility.</p>" },
+      { name: "Rations", type: "Consumable", price: { sp: 4 }, weight: 1, desc: "<p>Food for a week of travel.</p>" },
+      { name: "Tent (Four-Person)", type: "Equipment", price: { gp: 5 }, weight: 20, desc: "<p>A large tent that sleeps four.</p>" },
+      { name: "Compass (Lensatic)", type: "Equipment", price: { gp: 20 }, weight: 0.2, desc: "<p>Helps you Sense Direction or navigate. Grants a +1 item bonus to Survival checks for navigation.</p>" },
+      { name: "Disguise Kit", type: "Equipment", price: { gp: 2 }, weight: 1, desc: "<p>Contains cosmetics, false facial hair, spirit gum, and a few simple wigs.</p>" },
+      { name: "Spyglass", type: "Equipment", price: { gp: 20 }, weight: 1, desc: "<p>Lets you see eight times farther than normal.</p>" }
     ],
     "Stone Ring Pond": [
-      { name: "Sickle", type: "Weapon", price: { sp: 2 }, desc: "<p>A one-handed weapon with a short wooden handle ending in a curved blade.</p>" },
-      { name: "Blowgun", type: "Weapon", price: { sp: 1 }, desc: "<p>This long, narrow tube is used for shooting blowgun darts.</p>" },
-      { name: "Leather Armor", type: "Armor", price: { gp: 2 }, desc: "<p>A mix of flexible and molded boiled leather.</p>" },
-      { name: "Wooden Shield", type: "Shield", price: { gp: 1 }, desc: "<p>Offers protection from the stoutness of their materials. Hardness 3, HP 12.</p>" },
-      { name: "Climbing Kit", type: "Equipment", price: { sp: 5 }, desc: "<p>Includes 50 feet of rope, pulleys, pitons, a hammer, a grappling hook, and crampons.</p>" },
-      { name: "Alchemist's Toolkit", type: "Equipment", price: { gp: 3 }, desc: "<p>A mobile collection of vials and chemicals used for simple alchemical tasks.</p>" },
-      { name: "Snare Kit", type: "Equipment", price: { gp: 5 }, desc: "<p>Contains tools and materials for creating snares.</p>" }
+      { name: "Sickle", type: "Weapon", price: { sp: 2 }, weight: 1.5, desc: "<p>A one-handed weapon with a short wooden handle ending in a curved blade.</p>" },
+      { name: "Blowgun", type: "Weapon", price: { sp: 1 }, weight: 1, desc: "<p>This long, narrow tube is used for shooting blowgun darts.</p>" },
+      { name: "Leather Armor", type: "Armor", price: { gp: 2 }, weight: 10, desc: "<p>A mix of flexible and molded boiled leather.</p>" },
+      { name: "Wooden Shield", type: "Shield", price: { gp: 1 }, weight: 3, desc: "<p>Offers protection from the stoutness of their materials. Hardness 3, HP 12.</p>" },
+      { name: "Climbing Kit", type: "Equipment", price: { sp: 5 }, weight: 5, desc: "<p>Includes 50 feet of rope, pulleys, pitons, a hammer, a grappling hook, and crampons.</p>" },
+      { name: "Alchemist's Toolkit", type: "Equipment", price: { gp: 3 }, weight: 1, desc: "<p>A mobile collection of vials and chemicals used for simple alchemical tasks.</p>" },
+      { name: "Snare Kit", type: "Equipment", price: { gp: 5 }, weight: 2, desc: "<p>Contains tools and materials for creating snares.</p>" }
     ],
     "Wrin's Wonders": [
-      { name: "Returning Rune", type: "Rune", price: { gp: 55 }, desc: "<p>When you make a thrown Strike with this weapon, it flies back to your hand after the Strike is complete.</p>" },
-      { name: "Ghost Touch Rune", type: "Rune", price: { gp: 75 }, desc: "<p>A weapon etched with this rune can harm creatures without physical form.</p>" },
-      { name: "Wand of Heal (Rank 1)", type: "Wand", price: { gp: 60 }, desc: "<p>Contains a single spell. Can cast Heal once per day, plus overcharge.</p>" },
-      { name: "Emergency Disguise", type: "Talisman", price: { gp: 3 }, desc: "<p>When activated, applies a disguise to its wearer instantly, allowing them to Impersonate quickly.</p>" },
-      { name: "Potency Crystal", type: "Talisman", price: { gp: 4 }, desc: "<p>When activated, the weapon becomes a +1 striking weapon until the end of this turn.</p>" },
-      { name: "Snapleaf", type: "Talisman", price: { gp: 9 }, desc: "<p>Triggered when falling. Grants Gentle Landing and Invisibility for 1 minute.</p>" },
-      { name: "Crying Angel Pendant", type: "Talisman", price: { gp: 7 }, desc: "<p>Grants a +1 item bonus to Administer First Aid. On success when stabilizing, target regains 1 HP and wakes up.</p>" }
+      { name: "Returning Rune", type: "Rune", price: { gp: 55 }, weight: 0, desc: "<p>When you make a thrown Strike with this weapon, it flies back to your hand after the Strike is complete.</p>" },
+      { name: "Ghost Touch Rune", type: "Rune", price: { gp: 75 }, weight: 0, desc: "<p>A weapon etched with this rune can harm creatures without physical form.</p>" },
+      { name: "Wand of Heal (Rank 1)", type: "Wand", price: { gp: 60 }, weight: 0.3, desc: "<p>Contains a single spell. Can cast Heal once per day, plus overcharge.</p>" },
+      { name: "Emergency Disguise", type: "Talisman", price: { gp: 3 }, weight: 0.1, desc: "<p>When activated, applies a disguise to its wearer instantly, allowing them to Impersonate quickly.</p>" },
+      { name: "Potency Crystal", type: "Talisman", price: { gp: 4 }, weight: 0.1, desc: "<p>When activated, the weapon becomes a +1 striking weapon until the end of this turn.</p>" },
+      { name: "Snapleaf", type: "Talisman", price: { gp: 9 }, weight: 0.1, desc: "<p>Triggered when falling. Grants Gentle Landing and Invisibility for 1 minute.</p>" },
+      { name: "Crying Angel Pendant", type: "Talisman", price: { gp: 7 }, weight: 0.1, desc: "<p>Grants a +1 item bonus to Administer First Aid. On success when stabilizing, target regains 1 HP and wakes up.</p>" }
     ]
   };
 
@@ -529,6 +533,7 @@
         <div class="item-info">
           <span class="item-name" onmouseenter="showTooltip(event, '${cleanDesc}')" onmouseleave="hideTooltip()" onmousemove="moveTooltip(event)">${item.name}</span>
           <span class="item-type">${item.type}</span>
+          <span class="item-weight">${item.weight} lb</span>
         </div>
         <div class="item-actions">
           <span class="item-price">${priceStr}</span>
@@ -623,15 +628,18 @@
     const cartItemsContainer = document.getElementById('cart-items');
     const cartBadge = document.getElementById('cart-badge');
     const cartTotalEl = document.getElementById('cart-total');
+    const cartWeightEl = document.getElementById('cart-weight');
     
     cartItemsContainer.innerHTML = '';
     let totalCp = 0;
     let totalItems = 0;
+    let totalWeight = 0;
 
     cart.forEach((item, index) => {
       const itemTotalCp = priceToCp(item.price) * item.qty;
       totalCp += itemTotalCp;
       totalItems += item.qty;
+      totalWeight += (item.weight || 0) * item.qty;
 
       const div = document.createElement('div');
       div.className = 'cart-item';
@@ -639,6 +647,7 @@
         <div class="cart-item-info">
           <span class="cart-item-title">${item.name}</span>
           <span style="color:var(--parch-dim); font-size:0.75rem;">${formatPriceObj(item.price)} cad.</span>
+          <span class="cart-item-weight">${item.weight} lb cad.</span>
         </div>
         <div class="cart-item-controls">
           <span>x${item.qty}</span>
@@ -654,6 +663,7 @@
 
     cartBadge.innerText = totalItems;
     cartTotalEl.innerText = 'Totale: ' + cpToFormattedPrice(totalCp);
+    cartWeightEl.innerText = 'Peso: ' + totalWeight.toFixed(1) + ' lb';
   }
 
   function toggleCart() {
