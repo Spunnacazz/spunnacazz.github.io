@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@400;600&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/js-yaml@4/dist/js-yaml.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"></script>
   <style>
     * {
       margin: 0;
@@ -739,6 +740,7 @@
       font-size: 0.8rem;
       border-radius: 4px;
       line-height: 1.55;
+      text-align: left;
     }
 
     .item-tooltip.visible {
@@ -806,6 +808,7 @@
       border-collapse: collapse;
       margin-bottom: 0.5rem;
       font-size: 0.75rem;
+      text-align: left;
     }
 
     .item-tooltip td, .item-tooltip th {
@@ -819,6 +822,7 @@
       font-size: 0.65rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
+      text-align: left;
     }
 
     @keyframes fadeInDown {
@@ -948,6 +952,12 @@
   const tooltip = document.getElementById('item-tooltip');
   let cart = [];
 
+  // Utility Functions
+  function capitalizeFirst(str) {
+    if (!str) return '';
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+  }
+
   async function loadShops() {
     for (const [yamlFile, shopName] of Object.entries(yamlShopMapping)) {
       try {
@@ -985,13 +995,10 @@
   }
 
   function calculateWeight(bulkValue) {
-    // Bulk value from PF2e system; used as "Volume" in the UI
     return bulkValue !== undefined ? parseFloat(bulkValue) : 0;
   }
 
   function extractPrice(priceObj) {
-    // Maps PF2e currency keys (gp/sp/cp) to the campaign's Italian names:
-    // mo = monete d'oro (gp), ma = monete d'argento (sp), mr = monete di rame (cp)
     if (!priceObj || !priceObj.value) return { mo: 0, ma: 0, mr: 0 };
     const value = priceObj.value;
     return {
@@ -1001,201 +1008,229 @@
     };
   }
 
-  function capitalizeFirst(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
+  function formatPrice(price) {
+    const parts = [];
+    if (price.mo) parts.push(`${price.mo}mo`);
+    if (price.ma) parts.push(`${price.ma}ma`);
+    if (price.mr) parts.push(`${price.mr}mr`);
+    return parts.length ? parts.join(' ') : 'Gratis';
   }
 
   function initializeShops() {
-    document.querySelectorAll('.shop-tag').forEach(btn => btn.remove());
-    Object.keys(shopsData).forEach(shopName => {
-      const btn = document.createElement('button');
-      btn.className = 'shop-tag';
-      btn.innerText = shopName;
-      btn.onclick = () => openShop(shopName, btn);
-      shopsWrapper.appendChild(btn);
-    });
+    const label = shopsWrapper.querySelector('.shops-label');
+    shopsWrapper.innerHTML = '';
+    shopsWrapper.appendChild(label);
+
+    for (const shopName of Object.keys(shopsData)) {
+      const button = document.createElement('button');
+      button.className = 'shop-tag';
+      button.textContent = shopName;
+      button.onclick = () => selectShop(shopName, button);
+      shopsWrapper.appendChild(button);
+    }
   }
 
-  function openShop(shopName, btnElement) {
+  function selectShop(shopName, buttonEl) {
     document.querySelectorAll('.shop-tag').forEach(b => b.classList.remove('active'));
-    btnElement.classList.add('active');
+    buttonEl.classList.add('active');
+    displayInventory(shopName);
+  }
 
-    inventoryTitle.innerText = "Inventario: " + shopName;
-    // Wax-seal stamp animation on title change
-    inventoryTitle.classList.remove('stamp');
-    void inventoryTitle.offsetWidth; // force reflow to restart animation
+  function displayInventory(shopName) {
+    const items = shopsData[shopName];
+    inventoryTitle.textContent = shopName;
     inventoryTitle.classList.add('stamp');
-    inventoryList.innerHTML = '';
 
-    const items = shopsData[shopName] || [];
-    items.forEach(item => {
-      const priceStr = formatPriceObj(item.price);
+    inventoryList.innerHTML = '';
+    items.forEach((item, idx) => {
       const row = document.createElement('div');
       row.className = 'item-row';
-      const cleanDesc = item.desc.replace(/"/g, '&quot;');
 
-      row.innerHTML = `
-        <div class="item-info">
-          <span class="item-name" onmouseenter="showTooltip(event, '${cleanDesc}')" onmouseleave="hideTooltip()" onmousemove="moveTooltip(event)">${item.name}</span>
-          <span class="item-type">${item.type}</span>
-          <span class="item-weight">${item.weight} Volume</span>
-        </div>
-        <div class="item-actions">
-          <span class="item-price">${priceStr}</span>
-          <button class="btn-add" onclick='addToCart(${JSON.stringify(item).replace(/'/g, "\\'")})'>Aggiungi</button>
-        </div>
-      `;
+      const info = document.createElement('div');
+      info.className = 'item-info';
+
+      const name = document.createElement('span');
+      name.className = 'item-name';
+      name.textContent = item.name;
+      name.onclick = (e) => showTooltip(item, e);
+
+      const type = document.createElement('span');
+      type.className = 'item-type';
+      type.textContent = item.type;
+
+      const weight = document.createElement('span');
+      weight.className = 'item-weight';
+      weight.textContent = `Volume: ${item.weight}`;
+
+      info.appendChild(name);
+      info.appendChild(type);
+      info.appendChild(weight);
+
+      const actions = document.createElement('div');
+      actions.className = 'item-actions';
+
+      const price = document.createElement('span');
+      price.className = 'item-price';
+      price.textContent = formatPrice(item.price);
+
+      const btn = document.createElement('button');
+      btn.className = 'btn-add';
+      btn.textContent = 'Aggiungi';
+      btn.onclick = () => addToCart(item);
+
+      actions.appendChild(price);
+      actions.appendChild(btn);
+
+      row.appendChild(info);
+      row.appendChild(actions);
       inventoryList.appendChild(row);
     });
 
     inventoryArea.classList.add('active');
   }
 
-  function showTooltip(e, htmlContent) {
-    tooltip.innerHTML = htmlContent;
+  function showTooltip(item, event) {
+    const sanitized = DOMPurify.sanitize(item.desc);
+    tooltip.innerHTML = sanitized;
     tooltip.classList.add('visible');
-    moveTooltip(e);
-  }
 
-  function moveTooltip(e) {
-    let x = e.clientX + 15;
-    let y = e.clientY + 15;
-
-    if (x + 300 > window.innerWidth) x = e.clientX - 315;
-    if (y + tooltip.offsetHeight > window.innerHeight) y = e.clientY - tooltip.offsetHeight - 15;
-
-    tooltip.style.left = x + 'px';
-    tooltip.style.top = y + 'px';
+    const rect = event.target.getBoundingClientRect();
+    tooltip.style.left = (rect.left + rect.width / 2 - 150) + 'px';
+    tooltip.style.top = (rect.bottom + 10) + 'px';
   }
 
   function hideTooltip() {
     tooltip.classList.remove('visible');
   }
 
-  function formatPriceObj(priceObj) {
-    let parts = [];
-    if (priceObj.mo) parts.push(`${priceObj.mo} mo`);
-    if (priceObj.ma) parts.push(`${priceObj.ma} ma`);
-    if (priceObj.mr) parts.push(`${priceObj.mr} mr`);
-    return parts.join(', ') || '0 mr';
-  }
-
-  // Converts a price object to its total value in mr (monete di rame)
-  // 1 mo = 100 mr, 1 ma = 10 mr
-  function priceToMr(priceObj) {
-    let total = 0;
-    if (priceObj.mo) total += priceObj.mo * 100;
-    if (priceObj.ma) total += priceObj.ma * 10;
-    if (priceObj.mr) total += priceObj.mr;
-    return total;
-  }
-
-  // Converts a total in mr back to a formatted price string (mo / ma / mr)
-  function mrToFormattedPrice(totalMr) {
-    if (totalMr === 0) return '0 mr';
-    const mo = Math.floor(totalMr / 100);
-    const ma = Math.floor((totalMr % 100) / 10);
-    const mr = totalMr % 10;
-
-    let parts = [];
-    if (mo > 0) parts.push(`${mo} mo`);
-    if (ma > 0) parts.push(`${ma} ma`);
-    if (mr > 0) parts.push(`${mr} mr`);
-    return parts.join(', ');
-  }
-
-  function addToCart(itemData) {
-    const existing = cart.find(i => i.name === itemData.name);
+  function addToCart(item) {
+    const existing = cart.find(c => c.name === item.name);
     if (existing) {
-      existing.qty += 1;
+      existing.quantity++;
     } else {
-      cart.push({ ...itemData, qty: 1 });
+      cart.push({ ...item, quantity: 1 });
     }
-    updateCartUI();
-
-    const badge = document.getElementById('cart-badge');
-    badge.style.transform = 'scale(1.5)';
-    setTimeout(() => badge.style.transform = 'scale(1)', 200);
+    updateCart();
   }
 
-  function removeFromCart(index) {
-    if (cart[index].qty > 1) {
-      cart[index].qty -= 1;
-    } else {
-      cart.splice(index, 1);
-    }
-    updateCartUI();
+  function removeFromCart(itemName) {
+    cart = cart.filter(c => c.name !== itemName);
+    updateCart();
   }
 
-  function updateCartUI() {
+  function updateQuantity(itemName, delta) {
+    const item = cart.find(c => c.name === itemName);
+    if (item) {
+      item.quantity += delta;
+      if (item.quantity <= 0) {
+        removeFromCart(itemName);
+      } else {
+        updateCart();
+      }
+    }
+  }
+
+  function updateCart() {
     const cartItemsContainer = document.getElementById('cart-items');
-    const cartBadge = document.getElementById('cart-badge');
-    const cartTotalEl = document.getElementById('cart-total');
-    const cartWeightEl = document.getElementById('cart-weight');
-
     cartItemsContainer.innerHTML = '';
-    let totalCp = 0;
-    let totalItems = 0;
-    let totalWeight = 0;
-
-    cart.forEach((item, index) => {
-      const itemTotalCp = priceToMr(item.price) * item.qty;
-      totalCp += itemTotalCp;
-      totalItems += item.qty;
-      totalWeight += (item.weight || 0) * item.qty;
-
-      const div = document.createElement('div');
-      div.className = 'cart-item';
-      div.innerHTML = `
-        <div class="cart-item-info">
-          <span class="cart-item-title">${item.name}</span>
-          <span style="color:var(--parch-dim); font-size:0.7rem;">${formatPriceObj(item.price)} cad.</span>
-          <span class="cart-item-weight">${item.weight} V cad.</span>
-        </div>
-        <div class="cart-item-controls">
-          <span>x${item.qty}</span>
-          <button class="cart-btn-sm" onclick="removeFromCart(${index})" aria-label="Rimuovi">−</button>
-        </div>
-      `;
-      cartItemsContainer.appendChild(div);
-    });
 
     if (cart.length === 0) {
-      cartItemsContainer.innerHTML = '<p style="color:var(--parch-dim); font-size:0.85rem; text-align:center; margin-top:2rem;">Il carrello è vuoto.</p>';
+      cartItemsContainer.innerHTML = '<p style="text-align: center; color: var(--parch-dim); padding: 2rem;">Il carrello è vuoto</p>';
+    } else {
+      cart.forEach(item => {
+        const cartItem = document.createElement('div');
+        cartItem.className = 'cart-item';
+
+        const itemInfo = document.createElement('div');
+        itemInfo.className = 'cart-item-info';
+
+        const title = document.createElement('div');
+        title.className = 'cart-item-title';
+        title.textContent = item.name;
+
+        const weight = document.createElement('div');
+        weight.className = 'cart-item-weight';
+        weight.textContent = `Vol: ${item.weight * item.quantity}`;
+
+        itemInfo.appendChild(title);
+        itemInfo.appendChild(weight);
+
+        const controls = document.createElement('div');
+        controls.className = 'cart-item-controls';
+
+        const btnMinus = document.createElement('button');
+        btnMinus.className = 'cart-btn-sm';
+        btnMinus.textContent = '−';
+        btnMinus.onclick = () => updateQuantity(item.name, -1);
+
+        const qty = document.createElement('span');
+        qty.textContent = item.quantity;
+
+        const btnPlus = document.createElement('button');
+        btnPlus.className = 'cart-btn-sm';
+        btnPlus.textContent = '+';
+        btnPlus.onclick = () => updateQuantity(item.name, 1);
+
+        const btnRemove = document.createElement('button');
+        btnRemove.className = 'cart-btn-sm';
+        btnRemove.textContent = '✕';
+        btnRemove.onclick = () => removeFromCart(item.name);
+
+        controls.appendChild(btnMinus);
+        controls.appendChild(qty);
+        controls.appendChild(btnPlus);
+        controls.appendChild(btnRemove);
+
+        cartItem.appendChild(itemInfo);
+        cartItem.appendChild(controls);
+        cartItemsContainer.appendChild(cartItem);
+      });
     }
 
-    cartBadge.innerText = totalItems;
-    cartTotalEl.innerText = 'Totale: ' + mrToFormattedPrice(totalCp);
-    cartWeightEl.innerText = 'Peso: ' + totalWeight.toFixed(1) + ' Volume';
+    // Update totals
+    const totalPrice = cart.reduce((acc, item) => {
+      acc.mo += item.price.mo * item.quantity;
+      acc.ma += item.price.ma * item.quantity;
+      acc.mr += item.price.mr * item.quantity;
+      return acc;
+    }, { mo: 0, ma: 0, mr: 0 });
+
+    const totalWeight = cart.reduce((sum, item) => sum + (item.weight * item.quantity), 0);
+
+    document.getElementById('cart-total').textContent = `Totale: ${formatPrice(totalPrice)}`;
+    document.getElementById('cart-weight').textContent = `Peso: ${totalWeight} Volume`;
+    document.getElementById('cart-badge').textContent = cart.length;
   }
 
   function toggleCart() {
     document.getElementById('cart-panel').classList.toggle('open');
   }
 
-  function toggleDD(id) {
-    const el = document.getElementById(id);
-    const isOpen = el.classList.contains('open');
-    document.querySelectorAll('.dropdown.open').forEach(d => d.classList.remove('open'));
-    if (!isOpen) el.classList.add('open');
+  function toggleDD(ddId) {
+    const dropdown = document.getElementById(ddId);
+    dropdown.classList.toggle('open');
+    document.addEventListener('click', function closeDD(e) {
+      if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove('open');
+        document.removeEventListener('click', closeDD);
+      }
+    });
   }
 
-  document.addEventListener('click', e => {
-    if (!e.target.closest('.dropdown')) {
-      document.querySelectorAll('.dropdown.open').forEach(d => d.classList.remove('open'));
-    }
-  });
-
-  const mapModal = document.getElementById('map-modal');
   function openMap() {
-    mapModal.classList.add('active');
-  }
-  function closeMap() {
-    mapModal.classList.remove('active');
+    document.getElementById('map-modal').classList.add('active');
   }
 
+  function closeMap() {
+    document.getElementById('map-modal').classList.remove('active');
+  }
+
+  // Event listeners
+  document.addEventListener('click', hideTooltip);
+  tooltip.addEventListener('click', (e) => e.stopPropagation());
+
+  // Initialize
   loadShops();
-  updateCartUI();
 </script>
 
 </body>
