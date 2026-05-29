@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Otari — Le Cripte degli Abomini</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@400;600&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/js-yaml@4/dist/js-yaml.min.js"></script>
   <style>
-    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     :root {
-      --gold:       #c9a84c;
-      --gold-lt:    #e8d08a;
-      --gold-dk:    #7a5c1e;
-      --ink:        #0e0b06;
-      --parchment:  #ede0c0;
-      --parch-dim:  rgba(237,224,192,0.75);
-      --crimson:    #8b1a1a;
-      --panel-bg:   rgba(14,11,6,0.95);
+      --gold: #c9a84c;
+      --gold-lt: #e8d08a;
+      --gold-dk: #7a5c1e;
+      --ink: #0e0b06;
+      --parchment: #ede0c0;
+      --parch-dim: rgba(237, 224, 192, 0.75);
+      --crimson: #8b1a1a;
+      --panel-bg: rgba(14, 11, 6, 0.95);
     }
 
     html, body {
@@ -30,7 +34,7 @@
       scroll-behavior: smooth;
     }
 
-    /* ── FULL-SCREEN HERO ── */
+    /* HERO SECTION */
     .hero {
       position: relative;
       width: 100%;
@@ -39,46 +43,56 @@
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      padding-top: 10vh;
-      padding-bottom: 5vh;
+      padding: 10vh 1.5rem 5vh;
     }
 
     .hero-bg {
-      position: fixed; inset: 0;
+      position: fixed;
+      inset: 0;
       background: url('otari.jpeg') center center / cover no-repeat;
-      filter: brightness(.38) sepia(.25);
+      filter: brightness(0.38) sepia(0.25);
       animation: kzoom 40s ease-in-out infinite alternate;
+      z-index: 0;
     }
+
     @keyframes kzoom {
       from { transform: scale(1); }
-      to   { transform: scale(1.07); }
+      to { transform: scale(1.07); }
     }
 
     .hero-vignette {
-      position: fixed; inset: 0;
-      background: radial-gradient(ellipse at 50% 40%, transparent 25%, rgba(14,11,6,.75) 80%),
-                  linear-gradient(to bottom, rgba(14,11,6,.15) 0%, rgba(14,11,6,.9) 100%);
-      z-index: -1;
+      position: fixed;
+      inset: 0;
+      background: 
+        radial-gradient(ellipse at 50% 40%, transparent 25%, rgba(14, 11, 6, 0.75) 80%),
+        linear-gradient(to bottom, rgba(14, 11, 6, 0.15) 0%, rgba(14, 11, 6, 0.9) 100%);
+      z-index: 1;
       pointer-events: none;
     }
 
-    /* ── TITLE BLOCK ── */
+    /* TITLE BLOCK */
     .title-block {
       position: relative;
       z-index: 2;
       text-align: center;
-      padding: 0 1.5rem;
-      animation: fadeUp .9s ease both;
+      animation: fadeUp 0.9s ease both;
     }
+
     @keyframes fadeUp {
-      from { opacity:0; transform:translateY(24px); }
-      to   { opacity:1; transform:translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .title-eyebrow {
       font-family: 'Cinzel', serif;
-      font-size: .65rem;
-      letter-spacing: .5em;
+      font-size: 0.65rem;
+      letter-spacing: 0.5em;
       text-transform: uppercase;
       color: var(--gold-dk);
       margin-bottom: 1rem;
@@ -88,268 +102,591 @@
       font-family: 'Cinzel Decorative', serif;
       font-size: clamp(2.2rem, 8vw, 5.5rem);
       color: var(--gold-lt);
-      text-shadow: 0 0 50px rgba(201,168,76,.45), 0 4px 20px rgba(0,0,0,.9);
+      text-shadow: 0 0 50px rgba(201, 168, 76, 0.45), 0 4px 20px rgba(0, 0, 0, 0.9);
       line-height: 1;
-      margin-bottom: .4rem;
+      margin-bottom: 0.4rem;
     }
 
     .title-sub {
       font-family: 'Cinzel', serif;
-      font-size: clamp(.85rem, 2.5vw, 1.4rem);
+      font-size: clamp(0.85rem, 2.5vw, 1.4rem);
       color: var(--parch-dim);
-      letter-spacing: .12em;
+      letter-spacing: 0.12em;
       margin-bottom: 2.8rem;
     }
 
-    /* ── RULE ── */
+    /* DECORATIVE RULE */
     .rule {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: .9rem;
+      gap: 0.9rem;
       margin-bottom: 2.8rem;
     }
+
     .rule-line {
       width: 90px;
       height: 1px;
       background: linear-gradient(to right, transparent, var(--gold));
     }
-    .rule-line.r { background: linear-gradient(to left, transparent, var(--gold)); }
+
+    .rule-line.r {
+      background: linear-gradient(to left, transparent, var(--gold));
+    }
+
     .rule-diamond {
-      width: 8px; height: 8px;
+      width: 8px;
+      height: 8px;
       background: var(--gold);
       transform: rotate(45deg);
       box-shadow: 0 0 8px var(--gold);
     }
 
-    /* ── NAV ── */
+    /* NAVIGATION */
     nav {
       position: relative;
       z-index: 10;
       display: flex;
       flex-wrap: wrap;
-      gap: .75rem;
+      gap: 0.75rem;
       justify-content: center;
+      margin-bottom: 2rem;
     }
 
     .nav-link, .nav-btn {
       font-family: 'Cinzel', serif;
-      font-size: .72rem;
-      letter-spacing: .18em;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       text-decoration: none;
       color: var(--parchment);
-      border: 1px solid rgba(201,168,76,.35);
-      background: rgba(14,11,6,.6);
-      padding: .55rem 1.25rem;
+      border: 1px solid rgba(201, 168, 76, 0.35);
+      background: rgba(14, 11, 6, 0.6);
+      padding: 0.55rem 1.25rem;
       cursor: pointer;
       position: relative;
-      transition: color .25s, border-color .25s, background .25s, box-shadow .25s;
+      transition: color 0.25s, border-color 0.25s, background 0.25s, box-shadow 0.25s;
       backdrop-filter: blur(4px);
     }
+
     .nav-link::before, .nav-btn::before {
       content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(201,168,76,.12), transparent 60%);
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(201, 168, 76, 0.12), transparent 60%);
       opacity: 0;
-      transition: opacity .25s;
+      transition: opacity 0.25s;
     }
+
     .nav-link:hover, .nav-btn:hover {
       border-color: var(--gold);
       color: var(--gold-lt);
-      box-shadow: 0 0 18px rgba(201,168,76,.25);
+      box-shadow: 0 0 18px rgba(201, 168, 76, 0.25);
       outline: none;
     }
-    .nav-link:hover::before, .nav-btn:hover::before { opacity:1; }
+
+    .nav-link:hover::before, .nav-btn:hover::before {
+      opacity: 1;
+    }
 
     /* DROPDOWN */
-    .dropdown { position: relative; }
-    .dropdown-menu {
-      position: absolute; top: calc(100% + 8px); left: 50%;
-      transform: translateX(-50%) scaleY(0); transform-origin: top center;
-      min-width: 160px; background: rgba(14,11,6,.96);
-      border: 1px solid rgba(201,168,76,.35);
-      transition: transform .22s ease, opacity .22s ease;
-      opacity: 0; pointer-events: none; z-index: 100;
+    .dropdown {
+      position: relative;
     }
-    .dropdown.open .dropdown-menu {
-      transform: translateX(-50%) scaleY(1); opacity: 1; pointer-events: all;
-    }
-    .dropdown-menu a {
-      display: block; font-family: 'Cinzel', serif; font-size: .68rem;
-      letter-spacing: .15em; text-transform: uppercase; text-decoration: none;
-      color: var(--parch-dim); padding: .65rem 1.2rem;
-      border-bottom: 1px solid rgba(201,168,76,.1); transition: color .2s, background .2s;
-    }
-    .dropdown-menu a:hover { color: var(--gold-lt); background: rgba(201,168,76,.08); }
 
-    /* ── SHOPS ── */
+    .dropdown-menu {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%) scaleY(0);
+      transform-origin: top center;
+      min-width: 160px;
+      background: rgba(14, 11, 6, 0.96);
+      border: 1px solid rgba(201, 168, 76, 0.35);
+      transition: transform 0.22s ease, opacity 0.22s ease;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    .dropdown.open .dropdown-menu {
+      transform: translateX(-50%) scaleY(1);
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .dropdown-menu a {
+      display: block;
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--parch-dim);
+      padding: 0.65rem 1.2rem;
+      border-bottom: 1px solid rgba(201, 168, 76, 0.1);
+      transition: color 0.2s, background 0.2s;
+    }
+
+    .dropdown-menu a:hover {
+      color: var(--gold-lt);
+      background: rgba(201, 168, 76, 0.08);
+    }
+
+    /* SHOPS SECTION */
     .shops-section {
       position: relative;
       z-index: 2;
-      margin-top: 3rem;
       display: flex;
       flex-wrap: wrap;
-      gap: 1rem;
+      gap: 0.75rem;
       justify-content: center;
-      max-width: 1000px;
+      max-width: 100%;
+      padding: 0 1rem;
+      margin-top: 2rem;
+      margin-bottom: 2rem;
     }
 
     .shops-label {
-      width: 100%; text-align: center; font-family: 'Cinzel', serif; font-size: 0.8rem;
-      letter-spacing: .4em; text-transform: uppercase; color: rgba(201,168,76,.6);
-      margin-bottom: 1rem;
+      width: 100%;
+      text-align: center;
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: rgba(201, 168, 76, 0.6);
+      margin-bottom: 1.5rem;
     }
 
     .shop-tag {
       font-family: 'Cinzel', serif;
-      font-size: 0.95rem;
+      font-size: 0.85rem;
       font-weight: 600;
-      letter-spacing: .12em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--gold-lt);
-      border: 1px solid rgba(201,168,76,.5);
-      background: rgba(14,11,6,.75);
-      padding: .65rem 1.5rem;
-      transition: all .3s;
+      border: 1px solid rgba(201, 168, 76, 0.5);
+      background: rgba(14, 11, 6, 0.75);
+      padding: 0.6rem 1.2rem;
+      transition: all 0.3s;
       cursor: pointer;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-    }
-    .shop-tag:hover, .shop-tag.active {
-      color: #fff; border-color: var(--gold); background: rgba(201,168,76,.15);
-      box-shadow: 0 0 20px rgba(201,168,76,.4); transform: translateY(-2px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
     }
 
-    /* ── INVENTORY AREA ── */
+    .shop-tag:hover, .shop-tag.active {
+      color: #fff;
+      border-color: var(--gold);
+      background: rgba(201, 168, 76, 0.15);
+      box-shadow: 0 0 20px rgba(201, 168, 76, 0.4);
+      transform: translateY(-2px);
+    }
+
+    /* INVENTORY AREA */
     .inventory-area {
       display: none;
-      width: 100%; max-width: 800px; margin-top: 2rem;
-      background: var(--panel-bg); border: 1px solid var(--gold-dk);
-      padding: 1.5rem; border-radius: 4px; box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-      position: relative; z-index: 5;
+      width: 100%;
+      max-width: 90%;
+      margin: 1rem auto;
+      background: var(--panel-bg);
+      border: 1px solid var(--gold-dk);
+      padding: 1.5rem;
+      border-radius: 4px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+      position: relative;
+      z-index: 5;
     }
+
     .inventory-area.active {
       display: block;
       animation: fadeInDown 0.4s ease forwards;
     }
+
     .inventory-header {
-      font-family: 'Cinzel Decorative', serif; font-size: 1.5rem; color: var(--gold);
-      border-bottom: 1px solid rgba(201,168,76,.3); padding-bottom: 0.5rem; margin-bottom: 1rem;
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1.3rem;
+      color: var(--gold);
+      border-bottom: 1px solid rgba(201, 168, 76, 0.3);
+      padding-bottom: 0.75rem;
+      margin-bottom: 1rem;
       text-align: left;
     }
+
     .item-row {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 0.75rem 0; border-bottom: 1px dashed rgba(201,168,76,.15);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 0.75rem 0;
+      border-bottom: 1px dashed rgba(201, 168, 76, 0.15);
     }
-    .item-row:last-child { border-bottom: none; }
-    
-    .item-info { display: flex; flex-direction: column; }
-    .item-name { 
-      font-family: 'Cinzel', serif; font-size: 1rem; color: var(--parchment); 
-      cursor: help; text-decoration: underline dotted rgba(201,168,76,.5);
+
+    .item-row:last-child {
+      border-bottom: none;
+    }
+
+    .item-info {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .item-name {
+      font-family: 'Cinzel', serif;
+      font-size: 0.95rem;
+      color: var(--parchment);
+      cursor: help;
+      text-decoration: underline dotted rgba(201, 168, 76, 0.5);
       transition: color 0.2s;
     }
-    .item-name:hover { color: var(--gold-lt); }
-    .item-type { font-size: 0.75rem; color: var(--parch-dim); font-style: italic; }
-    .item-weight { font-size: 0.7rem; color: rgba(201,168,76,.6); margin-top: 0.2rem; }
-    
-    .item-actions { display: flex; align-items: center; gap: 1.5rem; }
-    .item-price { font-family: 'Cinzel', serif; color: var(--gold-lt); font-weight: bold; }
-    .btn-add {
-      background: rgba(201,168,76,.1); border: 1px solid var(--gold-dk); color: var(--gold-lt);
-      padding: 0.4rem 0.8rem; cursor: pointer; font-family: 'Cinzel', serif; font-size: 0.7rem;
-      text-transform: uppercase; transition: all 0.2s;
-    }
-    .btn-add:hover { background: var(--gold-dk); color: var(--ink); box-shadow: 0 0 10px var(--gold); }
 
-    /* ── MAP MODAL ── */
+    .item-name:hover {
+      color: var(--gold-lt);
+    }
+
+    .item-type {
+      font-size: 0.7rem;
+      color: var(--parch-dim);
+      font-style: italic;
+      margin-top: 0.2rem;
+    }
+
+    .item-weight {
+      font-size: 0.65rem;
+      color: rgba(201, 168, 76, 0.6);
+      margin-top: 0.15rem;
+    }
+
+    .item-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .item-price {
+      font-family: 'Cinzel', serif;
+      color: var(--gold-lt);
+      font-weight: bold;
+      font-size: 0.9rem;
+      white-space: nowrap;
+    }
+
+    .btn-add {
+      background: rgba(201, 168, 76, 0.1);
+      border: 1px solid var(--gold-dk);
+      color: var(--gold-lt);
+      padding: 0.4rem 0.8rem;
+      cursor: pointer;
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .btn-add:hover {
+      background: var(--gold-dk);
+      color: var(--ink);
+      box-shadow: 0 0 10px var(--gold);
+    }
+
+    /* MAP MODAL */
     .modal-overlay {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.85);
-      z-index: 1000; display: flex; justify-content: center; align-items: center;
-      opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
       backdrop-filter: blur(5px);
     }
-    .modal-overlay.active { opacity: 1; pointer-events: all; }
-    .modal-content {
-      position: relative; max-width: 90vw; max-height: 90vh;
-      transform: scale(0.95); transition: transform 0.3s ease;
-    }
-    .modal-overlay.active .modal-content { transform: scale(1); }
-    .modal-content img {
-      display: block; max-width: 100%; max-height: 90vh;
-      border: 2px solid var(--gold); border-radius: 4px; box-shadow: 0 0 40px rgba(201,168,76,0.3);
-    }
-    .close-modal {
-      position: absolute; top: -15px; right: -15px; background: var(--ink); color: var(--gold);
-      border: 1px solid var(--gold); width: 34px; height: 34px; border-radius: 50%;
-      font-size: 1.2rem; cursor: pointer; font-family: sans-serif; display: flex;
-      justify-content: center; align-items: center; transition: all 0.2s;
-    }
-    .close-modal:hover { background: var(--gold); color: var(--ink); transform: scale(1.1); }
 
-    /* ── FLOATING CART & PANEL ── */
-    .cart-float-btn {
-      position: fixed; bottom: 2rem; right: 2rem; background: var(--ink);
-      border: 1px solid var(--gold); color: var(--gold-lt); padding: 0.8rem 1.5rem;
-      font-family: 'Cinzel', serif; font-size: 1rem; cursor: pointer; z-index: 90;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.8); transition: all 0.3s;
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: all;
     }
-    .cart-float-btn:hover { background: var(--gold-dk); color: var(--ink); }
+
+    .modal-content {
+      position: relative;
+      max-width: 90vw;
+      max-height: 90vh;
+      transform: scale(0.95);
+      transition: transform 0.3s ease;
+    }
+
+    .modal-overlay.active .modal-content {
+      transform: scale(1);
+    }
+
+    .modal-content img {
+      display: block;
+      max-width: 100%;
+      max-height: 90vh;
+      border: 2px solid var(--gold);
+      border-radius: 4px;
+      box-shadow: 0 0 40px rgba(201, 168, 76, 0.3);
+    }
+
+    .close-modal {
+      position: absolute;
+      top: -15px;
+      right: -15px;
+      background: var(--ink);
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.2s;
+    }
+
+    .close-modal:hover {
+      background: var(--gold);
+      color: var(--ink);
+      transform: scale(1.1);
+    }
+
+    /* CART */
+    .cart-float-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--ink);
+      border: 1px solid var(--gold);
+      color: var(--gold-lt);
+      padding: 0.8rem 1.5rem;
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      cursor: pointer;
+      z-index: 90;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
+      transition: all 0.3s;
+    }
+
+    .cart-float-btn:hover {
+      background: var(--gold-dk);
+      color: var(--ink);
+    }
+
     .cart-float-btn .badge {
-      background: var(--crimson); color: #fff; border-radius: 50%; padding: 0.1rem 0.5rem;
-      font-size: 0.8rem; margin-left: 0.5rem; font-family: sans-serif;
+      background: var(--crimson);
+      color: #fff;
+      border-radius: 50%;
+      padding: 0.1rem 0.5rem;
+      font-size: 0.8rem;
+      margin-left: 0.5rem;
     }
 
     .cart-panel {
-      position: fixed; top: 0; right: -400px; width: 350px; height: 100%;
-      background: var(--panel-bg); border-left: 1px solid var(--gold);
-      z-index: 900; transition: right 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-      display: flex; flex-direction: column; box-shadow: -5px 0 30px rgba(0,0,0,0.8);
+      position: fixed;
+      top: 0;
+      right: -400px;
+      width: 350px;
+      height: 100%;
+      background: var(--panel-bg);
+      border-left: 1px solid var(--gold);
+      z-index: 900;
+      transition: right 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+      display: flex;
+      flex-direction: column;
+      box-shadow: -5px 0 30px rgba(0, 0, 0, 0.8);
     }
-    .cart-panel.open { right: 0; }
-    .cart-header {
-      padding: 1.5rem; border-bottom: 1px solid rgba(201,168,76,.3);
-      display: flex; justify-content: space-between; align-items: center;
-    }
-    .cart-header h2 { font-family: 'Cinzel Decorative', serif; color: var(--gold); font-size: 1.3rem; }
-    .close-cart { background: none; border: none; color: var(--parchment); font-size: 1.5rem; cursor: pointer; }
-    .close-cart:hover { color: var(--crimson); }
-    
-    .cart-items { flex-grow: 1; overflow-y: auto; padding: 1rem; }
-    .cart-item {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-    .cart-item-info { display: flex; flex-direction: column; width: 60%; }
-    .cart-item-title { font-family: 'Cinzel', serif; font-size: 0.85rem; color: var(--parchment); }
-    .cart-item-weight { font-size: 0.7rem; color: rgba(201,168,76,.6); margin-top: 0.2rem; }
-    .cart-item-controls { display: flex; gap: 0.5rem; align-items: center; font-family: sans-serif; font-size: 0.8rem; }
-    .cart-btn-sm { background: none; border: 1px solid rgba(201,168,76,.5); color: var(--gold); cursor: pointer; padding: 0.1rem 0.4rem; }
-    .cart-btn-sm:hover { background: var(--gold); color: var(--ink); }
-    
-    .cart-footer { padding: 1.5rem; border-top: 1px solid rgba(201,168,76,.3); background: rgba(0,0,0,0.4); }
-    .cart-total { font-family: 'Cinzel', serif; font-size: 1rem; color: var(--gold-lt); text-align: right; margin-bottom: 0.5rem; }
-    .cart-weight { font-family: 'Cinzel', serif; font-size: 0.9rem; color: rgba(201,168,76,.7); text-align: right; }
 
-    /* ── TOOLTIP ── */
-    .item-tooltip {
-      position: fixed; background: rgba(14,11,6,.98); border: 1px solid var(--gold);
-      color: var(--parch-dim); padding: 1rem; width: 320px; z-index: 2000;
-      pointer-events: none; opacity: 0; transition: opacity 0.2s;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.9); font-size: 0.85rem; border-radius: 4px;
-      line-height: 1.4; font-family: sans-serif;
+    .cart-panel.open {
+      right: 0;
     }
-    .item-tooltip.visible { opacity: 1; }
-    .item-tooltip strong { color: var(--gold-lt); font-family: 'Cinzel', serif; font-weight: normal; }
-    .item-tooltip hr { border: 0; border-top: 1px solid rgba(201,168,76,.2); margin: 0.5rem 0; }
-    .item-tooltip p { margin-bottom: 0.5rem; }
-    .item-tooltip p:last-child { margin-bottom: 0; }
+
+    .cart-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid rgba(201, 168, 76, 0.3);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cart-header h2 {
+      font-family: 'Cinzel Decorative', serif;
+      color: var(--gold);
+      font-size: 1.3rem;
+    }
+
+    .close-cart {
+      background: none;
+      border: none;
+      color: var(--parchment);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .close-cart:hover {
+      color: var(--crimson);
+    }
+
+    .cart-items {
+      flex-grow: 1;
+      overflow-y: auto;
+      padding: 1rem;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.5rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .cart-item-info {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .cart-item-title {
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem;
+      color: var(--parchment);
+    }
+
+    .cart-item-weight {
+      font-size: 0.65rem;
+      color: rgba(201, 168, 76, 0.6);
+      margin-top: 0.15rem;
+    }
+
+    .cart-item-controls {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      font-size: 0.75rem;
+      white-space: nowrap;
+    }
+
+    .cart-btn-sm {
+      background: none;
+      border: 1px solid rgba(201, 168, 76, 0.5);
+      color: var(--gold);
+      cursor: pointer;
+      padding: 0.2rem 0.5rem;
+      font-size: 0.65rem;
+    }
+
+    .cart-btn-sm:hover {
+      background: var(--gold);
+      color: var(--ink);
+    }
+
+    .cart-footer {
+      padding: 1.5rem;
+      border-top: 1px solid rgba(201, 168, 76, 0.3);
+      background: rgba(0, 0, 0, 0.4);
+    }
+
+    .cart-total {
+      font-family: 'Cinzel', serif;
+      font-size: 0.95rem;
+      color: var(--gold-lt);
+      text-align: right;
+      margin-bottom: 0.5rem;
+    }
+
+    .cart-weight {
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      color: rgba(201, 168, 76, 0.7);
+      text-align: right;
+    }
+
+    /* TOOLTIP */
+    .item-tooltip {
+      position: fixed;
+      background: rgba(14, 11, 6, 0.98);
+      border: 1px solid var(--gold);
+      color: var(--parch-dim);
+      padding: 1rem;
+      width: 300px;
+      z-index: 2000;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.9);
+      font-size: 0.8rem;
+      border-radius: 4px;
+      line-height: 1.4;
+    }
+
+    .item-tooltip.visible {
+      opacity: 1;
+    }
+
+    .item-tooltip strong {
+      color: var(--gold-lt);
+      font-family: 'Cinzel', serif;
+      font-weight: normal;
+    }
+
+    .item-tooltip hr {
+      border: 0;
+      border-top: 1px solid rgba(201, 168, 76, 0.2);
+      margin: 0.5rem 0;
+    }
+
+    .item-tooltip p {
+      margin-bottom: 0.5rem;
+    }
+
+    .item-tooltip p:last-child {
+      margin-bottom: 0;
+    }
 
     @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .shop-tag {
+        font-size: 0.75rem;
+        padding: 0.5rem 1rem;
+      }
+
+      .item-row {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .item-actions {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .cart-panel {
+        width: 80%;
+        max-width: 350px;
+      }
+
+      .item-tooltip {
+        width: 250px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -372,7 +709,7 @@
     <nav>
       <div class="dropdown" id="dd-personaggi">
         <button class="nav-btn" onclick="toggleDD('dd-personaggi')" aria-haspopup="menu">
-          Personaggi <span class="chevron">▾</span>
+          Personaggi ▾
         </button>
         <div class="dropdown-menu" role="menu">
           <a href="Raffaele.html">Raffaele</a>
@@ -385,7 +722,7 @@
     </nav>
 
     <div class="shops-section" id="shops-wrapper">
-      <p class="shops-label">✦ &nbsp; Mercanti & Negozi &nbsp; ✦</p>
+      <p class="shops-label">✦ Mercanti & Negozi ✦</p>
     </div>
 
     <div id="inventory-area" class="inventory-area">
@@ -421,8 +758,6 @@
 <div id="item-tooltip" class="item-tooltip"></div>
 
 <script>
-  /* ─── MAPPING YAML FILES TO SHOP NAMES ─── */
-  // Map YAML filenames to shop names
   const yamlShopMapping = {
     "Lame_Per_Radure.yml": "Lame per Radure",
     "Storie_Bizzarre.yml": "Storie Bizzarre",
@@ -435,8 +770,13 @@
   };
 
   let shopsData = {};
+  const shopsWrapper = document.getElementById('shops-wrapper');
+  const inventoryArea = document.getElementById('inventory-area');
+  const inventoryTitle = document.getElementById('inventory-title');
+  const inventoryList = document.getElementById('inventory-list');
+  const tooltip = document.getElementById('item-tooltip');
+  let cart = [];
 
-  /* ─── LOAD YAML FILES ─── */
   async function loadShops() {
     for (const [yamlFile, shopName] of Object.entries(yamlShopMapping)) {
       try {
@@ -447,22 +787,17 @@
         }
         const yamlText = await response.text();
         const yamlData = jsyaml.load(yamlText);
-        
-        // Convert YAML data to shop items format
         shopsData[shopName] = convertYamlToShopItems(yamlData);
-        console.log(`Loaded shop: ${shopName}`, shopsData[shopName]);
+        console.log(`Loaded shop: ${shopName}`);
       } catch (error) {
         console.error(`Error loading ${yamlFile}:`, error);
       }
     }
-    
     initializeShops();
   }
 
-  /* ─── CONVERT YAML ITEM DATA TO SHOP FORMAT ─── */
   function convertYamlToShopItems(yamlData) {
     const items = [];
-    
     if (yamlData.items && Array.isArray(yamlData.items)) {
       yamlData.items.forEach(item => {
         const shopItem = {
@@ -475,20 +810,15 @@
         items.push(shopItem);
       });
     }
-    
     return items;
   }
 
-  /* ─── HELPER: Calculate weight from bulk ─── */
   function calculateWeight(bulkValue) {
-    // In Pathfinder 2e, bulk is stored directly; convert to decimal
     return bulkValue !== undefined ? parseFloat(bulkValue) : 0;
   }
 
-  /* ─── HELPER: Extract price from system object ─── */
   function extractPrice(priceObj) {
-    if (!priceObj || !priceObj.value) return { mr: 0 };
-    
+    if (!priceObj || !priceObj.value) return { mo: 0, ma: 0, mr: 0 };
     const value = priceObj.value;
     return {
       mo: value.gp || 0,
@@ -497,23 +827,12 @@
     };
   }
 
-  /* ─── HELPER: Capitalize first letter ─── */
   function capitalizeFirst(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
 
-  /* ─── GESTIONE INTERFACCIA E NEGOZI ─── */
-  const shopsWrapper = document.getElementById('shops-wrapper');
-  const inventoryArea = document.getElementById('inventory-area');
-  const inventoryTitle = document.getElementById('inventory-title');
-  const inventoryList = document.getElementById('inventory-list');
-  const tooltip = document.getElementById('item-tooltip');
-
   function initializeShops() {
-    // Clear existing shop buttons (except the label)
     document.querySelectorAll('.shop-tag').forEach(btn => btn.remove());
-
-    // Generate shop buttons from loaded data
     Object.keys(shopsData).forEach(shopName => {
       const btn = document.createElement('button');
       btn.className = 'shop-tag';
@@ -529,11 +848,10 @@
 
     inventoryTitle.innerText = "Inventario: " + shopName;
     inventoryList.innerHTML = '';
-    
+
     const items = shopsData[shopName] || [];
     items.forEach(item => {
       const priceStr = formatPriceObj(item.price);
-      
       const row = document.createElement('div');
       row.className = 'item-row';
       const cleanDesc = item.desc.replace(/"/g, '&quot;');
@@ -564,10 +882,10 @@
   function moveTooltip(e) {
     let x = e.clientX + 15;
     let y = e.clientY + 15;
-    
-    if (x + 320 > window.innerWidth) x = e.clientX - 335;
+
+    if (x + 300 > window.innerWidth) x = e.clientX - 315;
     if (y + tooltip.offsetHeight > window.innerHeight) y = e.clientY - tooltip.offsetHeight - 15;
-    
+
     tooltip.style.left = x + 'px';
     tooltip.style.top = y + 'px';
   }
@@ -575,9 +893,6 @@
   function hideTooltip() {
     tooltip.classList.remove('visible');
   }
-
-  /* ─── SISTEMA DEL CARRELLO ─── */
-  let cart = [];
 
   function formatPriceObj(priceObj) {
     let parts = [];
@@ -600,7 +915,7 @@
     const mo = Math.floor(totalCp / 100);
     const ma = Math.floor((totalCp % 100) / 10);
     const mr = totalCp % 10;
-    
+
     let parts = [];
     if (mo > 0) parts.push(`${mo} mo`);
     if (ma > 0) parts.push(`${ma} ma`);
@@ -616,7 +931,7 @@
       cart.push({ ...itemData, qty: 1 });
     }
     updateCartUI();
-    
+
     const badge = document.getElementById('cart-badge');
     badge.style.transform = 'scale(1.5)';
     setTimeout(() => badge.style.transform = 'scale(1)', 200);
@@ -636,7 +951,7 @@
     const cartBadge = document.getElementById('cart-badge');
     const cartTotalEl = document.getElementById('cart-total');
     const cartWeightEl = document.getElementById('cart-weight');
-    
+
     cartItemsContainer.innerHTML = '';
     let totalCp = 0;
     let totalItems = 0;
@@ -653,19 +968,19 @@
       div.innerHTML = `
         <div class="cart-item-info">
           <span class="cart-item-title">${item.name}</span>
-          <span style="color:var(--parch-dim); font-size:0.75rem;">${formatPriceObj(item.price)} cad.</span>
-          <span class="cart-item-weight">${item.weight} Volume cad.</span>
+          <span style="color:var(--parch-dim); font-size:0.7rem;">${formatPriceObj(item.price)} cad.</span>
+          <span class="cart-item-weight">${item.weight} V cad.</span>
         </div>
         <div class="cart-item-controls">
           <span>x${item.qty}</span>
-          <button class="cart-btn-sm" onclick="removeFromCart(${index})">Rimuovi</button>
+          <button class="cart-btn-sm" onclick="removeFromCart(${index})">Rm</button>
         </div>
       `;
       cartItemsContainer.appendChild(div);
     });
 
     if (cart.length === 0) {
-      cartItemsContainer.innerHTML = '<p style="color:var(--parch-dim); font-size:0.9rem; text-align:center; margin-top:2rem;">Il carrello è vuoto.</p>';
+      cartItemsContainer.innerHTML = '<p style="color:var(--parch-dim); font-size:0.85rem; text-align:center; margin-top:2rem;">Il carrello è vuoto.</p>';
     }
 
     cartBadge.innerText = totalItems;
@@ -697,8 +1012,7 @@
   function closeMap() {
     mapModal.classList.remove('active');
   }
-  
-  // Load shops on page load
+
   loadShops();
   updateCartUI();
 </script>
