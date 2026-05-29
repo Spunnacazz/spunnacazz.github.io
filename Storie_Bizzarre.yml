@@ -1,0 +1,1137 @@
+_id: Tqyw7dS1BeOOezZu
+name: Odd Stories
+type: loot
+img: systems/pf2e/icons/default-icons/loot.svg
+items:
+  - img: systems/pf2e/icons/equipment/staves/staff-of-fire.webp
+    name: Staff of Fire
+    system:
+      description:
+        gm: ''
+        value: >-
+          <p>This staff resembles a blackened and burned length of ashen wood.
+          You can Interact to touch the tip of this staff to a torch, tinder, or
+          a flammable substance to ignite a flame.</p>
+
+          <p><strong>Activate</strong> Cast a Spell; <strong>Effect</strong> You
+          expend a number of charges from the staff to cast a spell from its
+          list.</p>
+
+          <hr />
+
+          <ul>
+
+          <li><strong>Cantrip</strong>
+          @UUID[Compendium.pf2e.spells-srd.Item.6DfLZBl8wKIV03Iq]{Ignition}</li>
+
+          <li><strong>1st</strong>
+          @UUID[Compendium.pf2e.spells-srd.Item.y6rAdMK6EFlV6U0t]{Breathe
+          Fire}</li>
+
+          </ul>
+
+          <hr />
+
+          <p><strong>Craft Requirements</strong> Supply one casting of all
+          listed ranks of all listed spells.</p>
+      rules: []
+      slug: staff-of-fire
+      _migration:
+        version: 0.925
+        lastMigration: null
+        previous: null
+      traits:
+        otherTags: []
+        value:
+          - magical
+          - staff
+          - two-hand-d8
+        rarity: common
+      publication:
+        title: Pathfinder GM Core
+        authors: ''
+        license: ORC
+        remaster: true
+      level:
+        value: 3
+      quantity: 1
+      baseItem: staff
+      bulk:
+        value: 1
+      hp:
+        value: 0
+        max: 0
+      hardness: 0
+      price:
+        value:
+          gp: 60
+      equipped:
+        carryType: worn
+        invested: null
+        handsHeld: 0
+      containerId: null
+      size: med
+      material:
+        type: null
+        grade: null
+      identification:
+        status: identified
+        unidentified:
+          name: ''
+          img: ''
+          data:
+            description:
+              value: ''
+        misidentified: {}
+      usage:
+        value: held-in-one-hand
+      category: simple
+      group: club
+      bonus:
+        value: 0
+      damage:
+        dice: 1
+        die: d4
+        damageType: bludgeoning
+        persistent: null
+      bonusDamage:
+        value: 0
+      splashDamage:
+        value: 0
+      range: null
+      reload:
+        value: ''
+      runes:
+        potency: 0
+        striking: 0
+        property: []
+      specific: null
+      subitems: []
+      property1:
+        value: ''
+        dice: 0
+        die: ''
+        damageType: ''
+        critDice: 0
+        critDie: ''
+        critDamage: ''
+        critDamageType: ''
+    type: weapon
+    flags:
+      core:
+        sourceId: Compendium.pf2e.equipment-srd.Item.opfpl1JmKgrfds9P
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+      eJdAkXPIlso4614X: 3
+    _stats:
+      systemId: pf2e
+      systemVersion: 5.15.0
+      coreVersion: '11.315'
+      createdTime: 1687033970606
+      modifiedTime: 1712316002031
+      lastModifiedBy: bPBBb4WESqtrNJTN
+    _id: Gi9salxyOMVhOpxR
+    _key: '!actors.items!Tqyw7dS1BeOOezZu.Gi9salxyOMVhOpxR'
+  - img: icons/weapons/staves/staff-ornate-bird.webp
+    name: Animal Staff
+    system:
+      description:
+        gm: ''
+        value: >-
+          <p>This staff is topped with carved animal and monster heads. While
+          wielding the staff, you gain a +2 circumstance bonus to Nature checks
+          to identify animals.</p>
+
+          <p><strong>Activate</strong> Cast a Spell; <strong>Effect</strong> You
+          expend a number of charges from the staff to cast a spell from its
+          list.</p>
+
+          <hr />
+
+          <ul>
+
+          <li><strong>Cantrip</strong>
+          @UUID[Compendium.pf2e.spells-srd.Item.tXa5vOu5giBNCjdR]{Know the
+          Way}</li>
+
+          <li><strong>1st</strong>
+          @UUID[Compendium.pf2e.spells-srd.Item.EE7Q5BHIrfWNCPtT]{Runic Body}
+          @UUID[Compendium.pf2e.spells-srd.Item.4YnON9JHYqtLzccu]{Summon
+          Animal}</li>
+
+          </ul>
+
+          <hr />
+
+          <p><strong>Craft Requirements</strong> Supply one casting of all
+          listed ranks of all listed spells.</p>
+      rules:
+        - key: FlatModifier
+          label: Animal Staff (identify animals)
+          predicate:
+            - target:trait:animal
+            - or:
+                - action:recall-knowledge
+                - action:identify
+          selector: nature
+          type: circumstance
+          value: 2
+      slug: animal-staff
+      _migration:
+        version: 0.925
+        lastMigration: null
+        previous: null
+      traits:
+        otherTags: []
+        value:
+          - magical
+          - staff
+          - two-hand-d8
+        rarity: common
+      publication:
+        title: Pathfinder GM Core
+        authors: ''
+        license: ORC
+        remaster: true
+      level:
+        value: 4
+      quantity: 1
+      baseItem: staff
+      bulk:
+        value: 1
+      hp:
+        value: 0
+        max: 0
+      hardness: 0
+      price:
+        value:
+          gp: 90
+      equipped:
+        carryType: worn
+        invested: null
+        handsHeld: 0
+      containerId: null
+      size: med
+      material:
+        type: null
+        grade: null
+      identification:
+        status: identified
+        unidentified:
+          name: ''
+          img: ''
+          data:
+            description:
+              value: ''
+        misidentified: {}
+      usage:
+        value: held-in-one-hand
+      category: simple
+      group: club
+      bonus:
+        value: 0
+      damage:
+        dice: 1
+        die: d4
+        damageType: bludgeoning
+        persistent: null
+      bonusDamage:
+        value: 0
+      splashDamage:
+        value: 0
+      range: null
+      reload:
+        value: ''
+      runes:
+        potency: 0
+        striking: 0
+        property: []
+      specific: null
+      subitems: []
+      property1:
+        value: ''
+        dice: 0
+        die: ''
+        damageType: ''
+        critDice: 0
+        critDie: ''
+        critDamage: ''
+        critDamageType: ''
+    type: weapon
+    flags:
+      core:
+        sourceId: Compendium.pf2e.equipment-srd.Item.WcuknnE3xYfSdbhm
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+      eJdAkXPIlso4614X: 3
+    _stats:
+      systemId: pf2e
+      systemVersion: 5.15.0
+      coreVersion: '11.315'
+      createdTime: 1687033975682
+      modifiedTime: 1712316002096
+      lastModifiedBy: bPBBb4WESqtrNJTN
+    _id: jc6sIZjHIqlWeSD2
+    _key: '!actors.items!Tqyw7dS1BeOOezZu.jc6sIZjHIqlWeSD2'
+  - img: systems/pf2e/icons/equipment/staves/mentalist-staff.webp
+    name: Mentalist's Staff
+    system:
+      description:
+        gm: ''
+        value: >-
+          <p>This polished wooden staff bears a swirling motif reminiscent of
+          the folds of a brain. While wielding the staff, you gain a +2
+          circumstance bonus to checks to identify mental magic.</p>
+
+          <p><strong>Activate</strong> Cast a Spell; <strong>Effect</strong> You
+          expend a number of charges from the staff to cast a spell from its
+          list.</p>
+
+          <hr />
+
+          <ul>
+
+          <li><strong>Cantrip</strong>
+          @UUID[Compendium.pf2e.spells-srd.Item.4gBIw4IDrSfFHik4]{Daze}</li>
+
+          <li><strong>1st</strong>
+          @UUID[Compendium.pf2e.spells-srd.Item.D442XMADp01qJ7Cs]{Mindlink}
+          @UUID[Compendium.pf2e.spells-srd.Item.R8bqnYiThB6MYTxD]{Phantom
+          Pain}</li>
+
+          </ul>
+
+          <hr />
+
+          <p><strong>Craft Requirements</strong> Supply one casting of all
+          listed levels of all listed spells.</p>
+      rules:
+        - key: FlatModifier
+          label: Mentalist's Staff (identifying mental magic)
+          predicate:
+            - action:identify-magic
+            - mental
+          selector: skill-check
+          type: circumstance
+          value: 2
+      slug: mentalists-staff
+      _migration:
+        version: 0.925
+        lastMigration: null
+        previous: null
+      traits:
+        otherTags: []
+        value:
+          - magical
+          - staff
+          - two-hand-d8
+        rarity: common
+      publication:
+        title: Pathfinder GM Core
+        authors: ''
+        license: ORC
+        remaster: true
+      level:
+        value: 4
+      quantity: 1
+      baseItem: staff
+      bulk:
+        value: 1
+      hp:
+        value: 0
+        max: 0
+      hardness: 0
+      price:
+        value:
+          gp: 90
+      equipped:
+        carryType: worn
+        invested: null
+        handsHeld: 0
+      containerId: null
+      size: med
+      material:
+        type: null
+        grade: null
+      identification:
+        status: identified
+        unidentified:
+          name: ''
+          img: ''
+          data:
+            description:
+              value: ''
+        misidentified: {}
+      usage:
+        value: held-in-one-hand
+      category: simple
+      group: club
+      bonus:
+        value: 0
+      damage:
+        dice: 1
+        die: d4
+        damageType: bludgeoning
+        persistent: null
+      bonusDamage:
+        value: 0
+      splashDamage:
+        value: 0
+      range: null
+      reload:
+        value: ''
+      runes:
+        potency: 0
+        striking: 0
+        property: []
+      specific: null
+      subitems: []
+      property1:
+        value: ''
+        dice: 0
+        die: ''
+        damageType: ''
+        critDice: 0
+        critDie: ''
+        critDamage: ''
+        critDamageType: ''
+    type: weapon
+    flags:
+      core:
+        sourceId: Compendium.pf2e.equipment-srd.Item.xwiZBOjispKVZzGA
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+      eJdAkXPIlso4614X: 3
+    _stats:
+      systemId: pf2e
+      systemVersion: 5.15.0
+      coreVersion: '11.315'
+      createdTime: 1687033982265
+      modifiedTime: 1712316002107
+      lastModifiedBy: bPBBb4WESqtrNJTN
+    _id: 9kMo1IhGVCIEecLW
+    _key: '!actors.items!Tqyw7dS1BeOOezZu.9kMo1IhGVCIEecLW'
+  - img: icons/sundries/books/book-worn-blue.webp
+    name: Basic Crafter's Book
+    system:
+      description:
+        gm: ''
+        value: >-
+          <p>This book contains the formulas for Crafting the 0-level common
+          items in Chapter 6 of the Pathfinder Player Core.</p>
+      rules: []
+      slug: basic-crafters-book
+      _migration:
+        version: 0.925
+        lastMigration: null
+        previous: null
+      traits:
+        otherTags: []
+        value: []
+        rarity: common
+      publication:
+        title: Pathfinder Player Core
+        authors: ''
+        license: ORC
+        remaster: true
+      level:
+        value: 0
+      quantity: 1
+      baseItem: null
+      bulk:
+        value: 0.1
+      hp:
+        value: 0
+        max: 0
+      hardness: 0
+      price:
+        value:
+          sp: 1
+      equipped:
+        carryType: worn
+        invested: null
+        handsHeld: 0
+      containerId: null
+      size: med
+      material:
+        type: null
+        grade: null
+      identification:
+        status: identified
+        unidentified:
+          name: ''
+          img: ''
+          data:
+            description:
+              value: ''
+        misidentified: {}
+      usage:
+        value: held-in-two-hands
+      subitems: []
+    type: equipment
+    flags:
+      core:
+        sourceId: Compendium.pf2e.equipment-srd.Item.w4Hd6nunVVqw3GWj
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+      eJdAkXPIlso4614X: 3
+    _stats:
+      systemId: pf2e
+      systemVersion: 5.15.0
+      coreVersion: '11.315'
+      createdTime: 1687033987275
+      modifiedTime: 1712316002113
+      lastModifiedBy: bPBBb4WESqtrNJTN
+    _id: TT5s70cOUVJBUU9O
+    _key: '!actors.items!Tqyw7dS1BeOOezZu.TT5s70cOUVJBUU9O'
+  - img: icons/sundries/books/book-tooled-brass-brown.webp
+    name: Formula Book (Blank)
+    system:
+      description:
+        gm: ''
+        value: >-
+          <p>A formula book holds the formulas necessary to make items other
+          than the common equipment from this chapter; characters of the
+          alchemist class typically get one for free. Each formula book can hold
+          the formulas for up to 100 different items. Formulas can also appear
+          on parchment sheets, tablets, and almost any other medium; there's no
+          need for you to copy them into a specific book as long as you can keep
+          them on hand to reference them.</p>
+      rules: []
+      slug: formula-book-blank
+      _migration:
+        version: 0.925
+        lastMigration: null
+        previous: null
+      traits:
+        otherTags: []
+        value: []
+        rarity: common
+      publication:
+        title: Pathfinder Player Core
+        authors: ''
+        license: ORC
+        remaster: true
+      level:
+        value: 0
+      quantity: 1
+      baseItem: null
+      bulk:
+        value: 0.1
+      hp:
+        value: 0
+        max: 0
+      hardness: 0
+      price:
+        value:
+          gp: 1
+      equipped:
+        carryType: worn
+        invested: null
+        handsHeld: 0
+      containerId: null
+      size: med
+      material:
+        type: null
+        grade: null
+      identification:
+        status: identified
+        unidentified:
+          name: ''
+          img: ''
+          data:
+            description:
+              value: ''
+        misidentified: {}
+      usage:
+        value: held-in-one-hand
+      subitems: []
+    type: equipment
+    flags:
+      core:
+        sourceId: Compendium.pf2e.equipment-srd.Item.qCEOZ6109Yo34tRx
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+      eJdAkXPIlso4614X: 3
+    _stats:
+      systemId: pf2e
+      systemVersion: 5.15.0
+      coreVersion: '11.315'
+      createdTime: 1687033991988
+      modifiedTime: 1712316002118
+      lastModifiedBy: bPBBb4WESqtrNJTN
+    _id: DhIMYdTwAkKsFK37
+    _key: '!actors.items!Tqyw7dS1BeOOezZu.DhIMYdTwAkKsFK37'
+  - img: icons/sundries/books/book-symbol-spiral-silver-blue.webp
+    name: Spellbook (Blank)
+    system:
+      description:
+        gm: ''
+        value: >-
+          <p>A spellbook holds the written knowledge necessary to learn and
+          prepare various spells, a necessity for wizards (who typically get one
+          for free) and a useful luxury for other spellcasters looking to learn
+          additional spells. Each spellbook can hold up to 100 spells. The Price
+          listed is for a blank spellbook.</p>
+      rules: []
+      slug: spellbook-blank
+      _migration:
+        version: 0.925
+        lastMigration: null
+        previous: null
+      traits:
+        otherTags: []
+        value: []
+        rarity: common
+      publication:
+        title: Pathfinder Player Core
+        authors: ''
+        license: ORC
+        remaster: true
+      level:
+        value: 0
+      quantity: 1
+      baseItem: null
+      bulk:
+        value: 0.1
+      hp:
+        value: 0
+        max: 0
+      hardness: 0
+      price:
+        value:
+          gp: 1
+      equipped:
+        carryType: worn
+        invested: null
+        handsHeld: 0
+      containerId: null
+      size: med
+      material:
+        type: null
+        grade: null
+      identification:
+        status: identified
+        unidentified:
+          name: ''
+          img: ''
+          data:
+            description:
+              value: ''
+        misidentified: {}
+      usage:
+        value: held-in-one-hand
+      subitems: []
+    type: equipment
+    flags:
+      core:
+        sourceId: Compendium.pf2e.equipment-srd.Item.FOWF5f0tCaApv9RE
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+      eJdAkXPIlso4614X: 3
+    _stats:
+      systemId: pf2e
+      systemVersion: 5.15.0
+      coreVersion: '11.315'
+      createdTime: 1687033995540
+      modifiedTime: 1712316002123
+      lastModifiedBy: bPBBb4WESqtrNJTN
+    _id: i84pKR9cqlPiqX89
+    _key: '!actors.items!Tqyw7dS1BeOOezZu.i84pKR9cqlPiqX89'
+  - img: icons/tools/scribal/ink-quill-red.webp
+    name: Writing Set
+    system:
+      description:
+        gm: ''
+        value: >-
+          <p>Using a writing set, you can draft correspondence and scribe
+          scrolls. A set includes stationery, including a variety of paper and
+          parchment, as well as ink, a quill or inkpen, sealing wax, and a
+          simple seal. If you've written a large amount, you can refill your kit
+          with extra ink and paper.</p>
+      rules: []
+      slug: writing-set
+      _migration:
+        version: 0.925
+        lastMigration: null
+        previous: null
+      traits:
+        otherTags: []
+        value: []
+        rarity: common
+      publication:
+        title: Pathfinder Player Core
+        authors: ''
+        license: ORC
+        remaster: true
+      level:
+        value: 0
+      quantity: 1
+      baseItem: null
+      bulk:
+        value: 0.1
+      hp:
+        value: 0
+        max: 0
+      hardness: 0
+      price:
+        value:
+          gp: 1
+      equipped:
+        carryType: worn
+        invested: null
+        handsHeld: 0
+      containerId: null
+      size: med
+      material:
+        type: null
+        grade: null
+      identification:
+        status: identified
+        unidentified:
+          name: ''
+          img: ''
+          data:
+            description:
+              value: ''
+        misidentified: {}
+      usage:
+        value: held-in-two-hands
+      subitems: []
+    type: equipment
+    flags:
+      core:
+        sourceId: Compendium.pf2e.equipment-srd.Item.QJb8S927Yj81EgHH
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+      eJdAkXPIlso4614X: 3
+    _stats:
+      systemId: pf2e
+      systemVersion: 5.15.0
+      coreVersion: '11.315'
+      createdTime: 1687033999882
+      modifiedTime: 1712316002128
+      lastModifiedBy: bPBBb4WESqtrNJTN
+    _id: 13QTj8C61ZQ2i8p6
+    _key: '!actors.items!Tqyw7dS1BeOOezZu.13QTj8C61ZQ2i8p6'
+  - img: icons/sundries/scrolls/scroll-plain-tan.webp
+    name: Writing Set (Extra Ink and Paper)
+    system:
+      description:
+        gm: ''
+        value: <p>Extra ink and paper to refill your writing set.</p>
+      rules: []
+      slug: writing-set-extra-ink-and-paper
+      _migration:
+        version: 0.925
+        lastMigration: null
+        previous: null
+      traits:
+        otherTags: []
+        value: []
+        rarity: common
+      publication:
+        title: Pathfinder Player Core
+        authors: ''
+        license: ORC
+        remaster: true
+      level:
+        value: 0
+      quantity: 1
+      baseItem: null
+      bulk:
+        value: 0
+      hp:
+        value: 0
+        max: 0
+      hardness: 0
+      price:
+        value:
+          sp: 1
+      equipped:
+        carryType: worn
+        invested: null
+        handsHeld: 0
+      containerId: null
+      size: med
+      material:
+        type: null
+        grade: null
+      identification:
+        status: identified
+        unidentified:
+          name: ''
+          img: ''
+          data:
+            description:
+              value: ''
+        misidentified: {}
+      usage:
+        value: other
+      subitems: []
+    type: equipment
+    flags:
+      core:
+        sourceId: Compendium.pf2e.equipment-srd.Item.3yLu12TCwN8utY0u
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+      eJdAkXPIlso4614X: 3
+    _stats:
+      systemId: pf2e
+      systemVersion: 5.15.0
+      coreVersion: '11.315'
+      createdTime: 1687034003370
+      modifiedTime: 1712316002134
+      lastModifiedBy: bPBBb4WESqtrNJTN
+    _id: qLvtTXfvG00zfpTm
+    _key: '!actors.items!Tqyw7dS1BeOOezZu.qLvtTXfvG00zfpTm'
+  - img: systems/pf2e/icons/equipment/staves/poisoners-staff.webp
+    name: Poisoner's Staff
+    system:
+      description:
+        gm: ''
+        value: >-
+          <p>This gnarled staff is covered with thorns and coated with a
+          glistening lacquer that acts as a minor irritant. While holding the
+          staff, you aren't affected by its coating or thorns, and you reduce
+          the DC of your flat checks to overcome persistent poison damage from
+          15 to 13.</p>
+
+          <hr />
+
+          <p><strong>Activate</strong>
+          @UUID[Compendium.pf2e.actionspf2e.Item.aBQ8ajvEBByv45yz]{Cast a
+          Spell}</p>
+
+          <hr />
+
+          <p><strong>Effect</strong> You expend a number of charges from the
+          staff to cast a spell from its list.</p>
+
+          <hr />
+
+          <ul>
+
+          <li><strong>Cantrips</strong>
+          @UUID[Compendium.pf2e.spells-srd.Item.izcxFQFwf3woCnFs]{Guidance}</li>
+
+          <li><strong>1st</strong>
+          @UUID[Compendium.pf2e.spells-srd.Item.QqxwHeYEVylkYjsO]{Detect
+          Poison},
+          @UUID[Compendium.pf2e.spells-srd.Item.DYdvMZ8G2LiSLVWw]{Spider
+          Sting}</li>
+
+          </ul>
+
+          <hr />
+
+          <p><strong>Craft Requirements</strong> Supply one casting of all
+          listed levels of all listed spells.</p>
+      rules:
+        - itemType: condition
+          key: ItemAlteration
+          mode: downgrade
+          predicate:
+            - item:damage:type:poison
+          property: pd-recovery-dc
+          value: 13
+      slug: poisoners-staff
+      _migration:
+        version: 0.925
+        lastMigration: null
+        previous: null
+      traits:
+        otherTags: []
+        value:
+          - magical
+          - staff
+          - two-hand-d8
+        rarity: uncommon
+      publication:
+        title: 'Pathfinder #160: Assault on Hunting Lodge Seven'
+        authors: ''
+        license: OGL
+        remaster: false
+      level:
+        value: 4
+      quantity: 1
+      baseItem: staff
+      bulk:
+        value: 1
+      hp:
+        value: 0
+        max: 0
+      hardness: 0
+      price:
+        value:
+          gp: 90
+      equipped:
+        carryType: worn
+        invested: null
+        handsHeld: 0
+      containerId: null
+      size: med
+      material:
+        type: null
+        grade: null
+      identification:
+        status: identified
+        unidentified:
+          name: ''
+          img: ''
+          data:
+            description:
+              value: ''
+        misidentified: {}
+      usage:
+        value: held-in-one-hand
+      category: simple
+      group: club
+      bonus:
+        value: 0
+      damage:
+        dice: 1
+        die: d4
+        damageType: bludgeoning
+        persistent: null
+      bonusDamage:
+        value: 0
+      splashDamage:
+        value: 0
+      range: null
+      reload:
+        value: ''
+      runes:
+        potency: 0
+        striking: 0
+        property: []
+      specific: null
+      subitems: []
+      property1:
+        value: ''
+        dice: 0
+        die: ''
+        damageType: ''
+        critDice: 0
+        critDie: ''
+        critDamage: ''
+        critDamageType: ''
+    type: weapon
+    flags:
+      core:
+        sourceId: Compendium.pf2e.equipment-srd.Item.SeZfwtBYwmxKrphR
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+      eJdAkXPIlso4614X: 3
+    _stats:
+      systemId: pf2e
+      systemVersion: 5.15.0
+      coreVersion: '11.315'
+      createdTime: 1687034010213
+      modifiedTime: 1712316002197
+      lastModifiedBy: bPBBb4WESqtrNJTN
+    _id: s2SJgM5rUd6ndesK
+    _key: '!actors.items!Tqyw7dS1BeOOezZu.s2SJgM5rUd6ndesK'
+  - img: icons/sundries/books/book-backed-blue-gold.webp
+    name: Illustrated book
+    system:
+      description:
+        gm: ''
+        value: ''
+      rules: []
+      slug: illustrated-book
+      _migration:
+        version: 0.925
+        lastMigration: null
+        previous: null
+      traits:
+        otherTags: []
+        value: []
+        rarity: common
+      publication:
+        title: Pathfinder Gamemastery Guide
+        authors: ''
+        license: OGL
+        remaster: false
+      level:
+        value: 0
+      quantity: 1
+      baseItem: null
+      bulk:
+        value: 0
+      hp:
+        value: 0
+        max: 0
+      hardness: 0
+      price:
+        value:
+          gp: 4
+      equipped:
+        carryType: worn
+        handsHeld: 0
+      containerId: null
+      size: med
+      material:
+        type: null
+        grade: null
+      identification:
+        status: identified
+        unidentified:
+          name: ''
+          img: ''
+          data:
+            description:
+              value: ''
+        misidentified: {}
+      stackGroup: null
+      subitems: []
+    type: treasure
+    flags:
+      core:
+        sourceId: Compendium.pf2e.equipment-srd.Item.G5WuYX1ghrZcJ1J1
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+      eJdAkXPIlso4614X: 3
+    _stats:
+      systemId: pf2e
+      systemVersion: 5.15.0
+      coreVersion: '11.315'
+      createdTime: 1687034015535
+      modifiedTime: 1712316002259
+      lastModifiedBy: bPBBb4WESqtrNJTN
+    _id: xoyMCt7pDyP04NOU
+    _key: '!actors.items!Tqyw7dS1BeOOezZu.xoyMCt7pDyP04NOU'
+effects: []
+folder: null
+sort: 0
+flags:
+  pf2e:
+    editLoot:
+      value: false
+  exportSource:
+    world: abominationvaults
+    system: pf2e
+    coreVersion: 0.8.7
+    systemVersion: 2.4.0.6221
+  core: {}
+system:
+  attributes: {}
+  details:
+    description: ''
+    level:
+      value: 0
+  lootSheetType: Merchant
+  hiddenWhenEmpty: false
+  _migration:
+    version: 0.925
+    previous:
+      schema: 0.842
+      foundry: '11.315'
+      system: 5.15.0
+  traits:
+    rarity: common
+    size:
+      value: med
+    value: []
+ownership:
+  default: 1
+  sarkMXaT0ELIQ2fE: 3
+prototypeToken:
+  flags:
+    pf2e:
+      linkToActorSize: false
+      autoscale: false
+  name: Odd Stories
+  displayName: 20
+  width: 1
+  height: 1
+  lockRotation: false
+  rotation: 0
+  actorLink: true
+  disposition: 0
+  displayBars: 40
+  bar1:
+    attribute: attributes.hp
+  bar2:
+    attribute: null
+  randomImg: false
+  alpha: 1
+  light:
+    alpha: 1
+    angle: 360
+    bright: 0
+    coloration: 1
+    dim: 0
+    luminosity: 0.5
+    saturation: 0
+    contrast: 0
+    shadows: 0
+    animation:
+      speed: 5
+      intensity: 5
+      type: null
+      reverse: false
+    darkness:
+      min: 0
+      max: 1
+    color: null
+    attenuation: 0.5
+  texture:
+    src: systems/pf2e/icons/default-icons/loot.svg
+    tint: null
+    scaleX: 1
+    scaleY: 1
+    offsetX: 0
+    offsetY: 0
+    rotation: 0
+  sight:
+    angle: 360
+    enabled: false
+    range: 0
+    brightness: 0
+    visionMode: basic
+    attenuation: 0.1
+    saturation: 0
+    contrast: 0
+  appendNumber: false
+  prependAdjective: false
+  detectionModes: []
+_stats:
+  systemId: pf2e
+  systemVersion: 5.15.0
+  coreVersion: '11.315'
+  createdTime: 1686850703482
+  modifiedTime: 1712316002259
+  lastModifiedBy: bPBBb4WESqtrNJTN
+_key: '!actors!Tqyw7dS1BeOOezZu'
+

@@ -1,0 +1,3046 @@
+_id: a2y3WhzVAv31TsiX
+name: Crooks Nook
+type: loot
+img: systems/pf2e/icons/default-icons/loot.svg
+items:
+  - img: >-
+      systems/pf2e/icons/equipment/consumables/other-consumables/dagger-of-eternal-sleep.webp
+    name: Dagger of Eternal Sleep
+    system:
+      description:
+        gm: ''
+        value: >-
+          <p>This tiny serrated dagger looks like a miniature sawtooth sabre.
+          Until activated, it is too small and ornamental to function as a
+          weapon, which might allow it to be passed off as a weapon-shaped
+          decoration.</p>
+
+          <p><strong>Activate</strong> <span class="action-glyph">A</span>
+          Interact</p>
+
+          <hr />
+
+          <p><strong>Effect</strong> You transform the dagger of eternal sleep
+          into a +1
+          @UUID[Compendium.pf2e.equipment-srd.Item.qUnDHEXteUQGE8yp]{Grievous}
+          striking dagger and Strike an unconscious target with the dagger.</p>
+
+          <p>If you are not in an encounter or otherwise threatened and you roll
+          a hit with your Strike, you get a critical hit instead. The damage
+          from the Strike and the bleed from the critical specialization effect
+          do not awaken the target, though the target becomes temporarily immune
+          to this effect until the next time it wakes up, meaning further
+          daggers of eternal sleep awaken it as normal. The dagger disintegrates
+          immediately after use.</p>
+      rules: []
+      slug: dagger-of-eternal-sleep
+      _migration:
+        version: 0.925
+        lastMigration: null
+        previous: null
+      traits:
+        otherTags: []
+        value:
+          - agile
+          - consumable
+          - finesse
+          - magical
+          - thrown-10
+          - versatile-s
+        rarity: uncommon
+      publication:
+        title: 'Pathfinder Lost Omens: Gods & Magic'
+        authors: ''
+        license: OGL
+        remaster: false
+      level:
+        value: 5
+      quantity: 1
+      baseItem: dagger
+      bulk:
+        value: 0.1
+      hp:
+        value: 0
+        max: 0
+      hardness: 0
+      price:
+        value:
+          gp: 25
+      equipped:
+        carryType: worn
+        invested: null
+        handsHeld: 0
+      containerId: null
+      size: med
+      material:
+        type: null
+        grade: null
+      identification:
+        status: identified
+        unidentified:
+          name: ''
+          img: ''
+          data:
+            description:
+              value: ''
+        misidentified: {}
+      usage:
+        value: held-in-one-hand
+      category: simple
+      group: knife
+      bonus:
+        value: 1
+      damage:
+        dice: 1
+        die: d4
+        damageType: piercing
+        persistent: null
+      bonusDamage:
+        value: 0
+      splashDamage:
+        value: null
+      range: null
+      reload:
+        value: '-'
+      runes:
+        potency: 1
+        striking: 1
+        property:
+          - grievous
+      specific:
+        material:
+          grade: null
+          type: null
+        runes:
+          potency: 1
+          property:
+            - grievous
+          striking: 1
+      subitems: []
+      property1:
+        value: ''
+        dice: 0
+        die: ''
+        damageType: ''
+        critDice: 0
+        critDie: ''
+        critDamage: ''
+        critDamageType: ''
+    type: weapon
+    flags:
+      core:
+        sourceId: Compendium.pf2e.equipment-srd.Item.1S3RgLWa1DBitB9V
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+      eJdAkXPIlso4614X: 3
+    _stats:
+      systemId: pf2e
+      systemVersion: 5.15.0
+      coreVersion: '11.315'
+      createdTime: 1687033573431
+      modifiedTime: 1712316008826
+      lastModifiedBy: bPBBb4WESqtrNJTN
+    _id: GcjPFK2NynpD7Xi6
+    _key: '!actors.items!a2y3WhzVAv31TsiX.GcjPFK2NynpD7Xi6'
+  - img: >-
+      systems/pf2e/icons/equipment/weapons/specific-magic-weapons/dagger-of-venom.webp
+    name: Serpent Dagger
+    system:
+      description:
+        gm: ''
+        value: >-
+          <p>The serrated blade of this <em>+1 striking dagger</em> has a
+          greenish tinge, and the hilt is sculpted to look like the head of a
+          serpent about to strike.</p>
+
+          <p>When you critically succeed at an attack roll with the <em>serpent
+          dagger</em>, the target becomes
+          @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened
+          1} unless it succeeds at a @Check[type:fortitude|dc:19] save. This is
+          a poison effect.</p>
+
+          <p>In addition, you can activate the dagger to poison a creature with
+          a more potent poison.</p>
+
+          <hr />
+
+          <p><strong>Activate—Drip Poison</strong> <span
+          class="action-glyph">F</span> (manipulate)</p>
+
+          <p><strong>Frequency</strong> once per day</p>
+
+          <p><strong>Trigger</strong> You damage a creature with the <em>serpent
+          dagger</em></p>
+
+          <p><strong>Effect</strong> You poison the creature you hit with dagger
+          venom.</p>
+
+          <hr />
+
+          <p><strong>Dagger Venom</strong> (poison)</p>
+
+          <p><strong>Saving Throw</strong> @Check[type:fortitude|dc:21]</p>
+
+          <p><strong>Maximum Duration</strong> 4 rounds</p>
+
+          <p><strong>Stage 1</strong> @Damage[1d8[poison]] damage and
+          @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled
+          1}</p>
+      rules:
+        - key: Note
+          outcome:
+            - criticalSuccess
+          selector: '{item|id}-attack'
+          text: PF2E.SpecificRule.Equipment.SerpentDagger.Note
+          title: '{item|name}'
+      slug: serpent-dagger
+      _migration:
+        version: 0.925
+        lastMigration: null
+        previous: null
+      traits:
+        otherTags: []
+        value:
+          - agile
+          - finesse
+          - magical
+          - poison
+          - thrown-10
+          - versatile-s
+        rarity: common
+      publication:
+        title: Pathfinder GM Core
+        authors: ''
+        license: ORC
+        remaster: true
+      level:
+        value: 5
+      quantity: 1
+      baseItem: dagger
+      bulk:
+        value: 0.1
+      hp:
+        value: 0
+        max: 0
+      hardness: 0
+      price:
+        value:
+          gp: 150
+      equipped:
+        carryType: worn
+        invested: null
+        handsHeld: 0
+      containerId: null
+      size: med
+      material:
+        type: null
+        grade: null
+      identification:
+        status: identified
+        unidentified:
+          name: ''
+          img: ''
+          data:
+            description:
+              value: ''
+        misidentified: {}
+      usage:
+        value: held-in-one-hand
+        canBeAmmo: false
+      category: simple
+      group: knife
+      bonus:
+        value: 1
+      damage:
+        dice: 1
+        die: d4
+        damageType: piercing
+        persistent: null
+      bonusDamage:
+        value: 0
+      splashDamage:
+        value: 0
+      range: null
+      reload:
+        value: '-'
+      runes:
+        potency: 1
+        striking: 1
+        property: []
+      specific:
+        material:
+          grade: null
+          type: null
+        runes:
+          potency: 1
+          property: []
+          striking: 1
+      subitems: []
+      property1:
+        value: ''
+        dice: 0
+        die: ''
+        damageType: ''
+        critDice: 0
+        critDie: ''
+        critDamage: ''
+        critDamageType: ''
+    type: weapon
+    flags:
+      core:
+        sourceId: Compendium.pf2e.equipment-srd.Item.ZvIEJCY60fHqzl6r
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+      eJdAkXPIlso4614X: 3
+    _stats:
+      systemId: pf2e
+      systemVersion: 5.15.0
+      coreVersion: '11.315'
+      createdTime: 1687033575158
+      modifiedTime: 1712316008835
+      lastModifiedBy: bPBBb4WESqtrNJTN
+    _id: jNUCSivP6ciJKzAd
+    _key: '!actors.items!a2y3WhzVAv31TsiX.jNUCSivP6ciJKzAd'
+  - img: icons/weapons/daggers/dagger-bone-engraved-black.webp
+    name: Poisonous Dagger
+    system:
+      description:
+        gm: ''
+        value: >-
+          <p>This +1 striking dagger has an image of a snake emblazoned on its
+          blade. When you critically succeed at an attack roll with the dagger,
+          magical fangs emerge and poison the target, dealing
+          @Damage[1d4[persistent,poison]].</p>
+      rules:
+        - category: persistent
+          critical: true
+          damageType: poison
+          diceNumber: 1
+          dieSize: d4
+          key: DamageDice
+          selector: '{item|_id}-damage'
+      slug: poisonous-dagger
+      _migration:
+        version: 0.925
+        lastMigration: null
+        previous: null
+      traits:
+        otherTags: []
+        value:
+          - agile
+          - finesse
+          - magical
+          - poison
+          - thrown-10
+          - versatile-s
+        rarity: common
+      publication:
+        title: Pathfinder Beginner Box
+        authors: ''
+        license: OGL
+        remaster: false
+      level:
+        value: 5
+      quantity: 1
+      baseItem: dagger
+      bulk:
+        value: 0.1
+      hp:
+        value: 0
+        max: 0
+      hardness: 0
+      price:
+        value:
+          gp: 150
+      equipped:
+        carryType: worn
+        invested: null
+        handsHeld: 0
+      containerId: null
+      size: med
+      material:
+        type: null
+        grade: null
+      identification:
+        status: identified
+        unidentified:
+          name: ''
+          img: ''
+          data:
+            description:
+              value: ''
+        misidentified: {}
+      usage:
+        value: held-in-one-hand
+      category: simple
+      group: knife
+      bonus:
+        value: 0
+      damage:
+        dice: 1
+        die: d4
+        damageType: piercing
+        persistent: null
+      bonusDamage:
+        value: 0
+      splashDamage:
+        value: 0
+      range: null
+      reload:
+        value: '-'
+      runes:
+        potency: 1
+        striking: 1
+        property: []
+      specific:
+        material:
+          grade: null
+          type: null
+        runes:
+          potency: 1
+          property: []
+          striking: 1
+      subitems: []
+      property1:
+        value: ''
+        dice: 0
+        die: ''
+        damageType: ''
+        critDice: 0
+        critDie: ''
+        critDamage: ''
+        critDamageType: ''
+    type: weapon
+    flags:
+      core:
+        sourceId: Compendium.pf2e.equipment-srd.Item.hK5xPjOFd2hb81mi
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+      eJdAkXPIlso4614X: 3
+    _stats:
+      systemId: pf2e
+      systemVersion: 5.15.0
+      coreVersion: '11.315'
+      createdTime: 1687033578240
+      modifiedTime: 1712316008902
+      lastModifiedBy: bPBBb4WESqtrNJTN
+    _id: 8w7FnNSa52aOk7D8
+    _key: '!actors.items!a2y3WhzVAv31TsiX.8w7FnNSa52aOk7D8'
+  - img: icons/weapons/daggers/dagger-crooked-black.webp
+    name: Flaying Knife
+    system:
+      description:
+        gm: ''
+        value: >-
+          <p>This long, thin +1 striking
+          @UUID[Compendium.pf2e.equipment-srd.Item.fo6Yhq5mbQXsnZs0]{Wounding}
+          dagger has a smooth edge on one side and a serrated edge on the
+          other.</p>
+
+          <p>Its persistent bleed damage comes from slicing away long strips of
+          the target's flesh, and it deals @Damage[1d8[bleed]] on a hit instead
+          of 1d6. A creature takes a -2 status penalty to saving throws against
+          diseases for as long as it has persistent bleed damage from this
+          knife.</p>
+      rules:
+        - key: Note
+          outcome:
+            - success
+          selector: '{item|_id}-attack'
+          text: PF2E.PersistentDamage.Bleed1d8.success
+        - key: Note
+          outcome:
+            - criticalSuccess
+          selector: '{item|_id}-attack'
+          text: PF2E.PersistentDamage.Bleed1d8.criticalSuccess
+      slug: flaying-knife
+      _migration:
+        version: 0.925
+        lastMigration: null
+        previous: null
+      traits:
+        otherTags: []
+        value:
+          - agile
+          - finesse
+          - magical
+          - thrown-10
+          - versatile-s
+        rarity: uncommon
+      publication:
+        title: 'Pathfinder Adventure: The Slithering'
+        authors: ''
+        license: OGL
+        remaster: false
+      level:
+        value: 8
+      quantity: 1
+      baseItem: dagger
+      bulk:
+        value: 1
+      hp:
+        value: 0
+        max: 0
+      hardness: 0
+      price:
+        value:
+          gp: 480
+      equipped:
+        carryType: worn
+        invested: null
+        handsHeld: 0
+      containerId: null
+      size: med
+      material:
+        type: null
+        grade: null
+      identification:
+        status: identified
+        unidentified:
+          name: ''
+          img: ''
+          data:
+            description:
+              value: ''
+        misidentified: {}
+      usage:
+        value: held-in-one-hand
+      category: simple
+      group: knife
+      bonus:
+        value: 0
+      damage:
+        dice: 1
+        die: d4
+        damageType: piercing
+        persistent: null
+      bonusDamage:
+        value: 0
+      splashDamage:
+        value: 0
+      range: null
+      reload:
+        value: '-'
+      runes:
+        potency: 1
+        striking: 1
+        property: []
+      specific:
+        material:
+          grade: null
+          type: null
+        runes:
+          potency: 1
+          property:
+            - wounding
+          striking: 1
+      subitems: []
+      property1:
+        value: ''
+        dice: 0
+        die: ''
+        damageType: ''
+        critDice: 0
+        critDie: ''
+        critDamage: ''
+        critDamageType: ''
+    type: weapon
+    flags:
+      core:
+        sourceId: Compendium.pf2e.equipment-srd.Item.dfheZ5lK0thQUTVT
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+      eJdAkXPIlso4614X: 3
+    _stats:
+      systemId: pf2e
+      systemVersion: 5.15.0
+      coreVersion: '11.315'
+      createdTime: 1687033583128
+      modifiedTime: 1712316008912
+      lastModifiedBy: bPBBb4WESqtrNJTN
+    _id: RQXFEkhUKLHBSQdf
+    _key: '!actors.items!a2y3WhzVAv31TsiX.RQXFEkhUKLHBSQdf'
+  - img: icons/tools/hand/lockpicks-steel-grey.webp
+    name: Thieves' Toolkit
+    system:
+      description:
+        gm: ''
+        value: >-
+          <p>You need a thieves' toolkit to
+          @UUID[Compendium.pf2e.actionspf2e.Item.2EE4aF4SZpYf0R6H]{Pick Locks}
+          or @UUID[Compendium.pf2e.actionspf2e.Item.cYdz2grcOcRt4jk6]{Disable
+          Devices} (of some types) using the Thievery skill.</p>
+
+          <p>If your thieves' toolkit is broken, you can repair it by replacing
+          the lock picks with
+          @UUID[Compendium.pf2e.equipment-srd.Item.Sw7MBLASN3xK4Y44]{Replacement
+          Picks} appropriate to your toolkit; this doesn't require using the
+          Repair action. If you wear your thieves' toolkit, you can draw and
+          replace it as part of the action that uses it.</p>
+      rules: []
+      slug: thieves-toolkit
+      _migration:
+        version: 0.925
+        lastMigration: null
+        previous: null
+      traits:
+        otherTags: []
+        value: []
+        rarity: common
+      publication:
+        title: Pathfinder Player Core
+        authors: ''
+        license: ORC
+        remaster: true
+      level:
+        value: 0
+      quantity: 1
+      baseItem: null
+      bulk:
+        value: 0.1
+      hp:
+        value: 0
+        max: 0
+      hardness: 0
+      price:
+        value:
+          gp: 3
+      equipped:
+        carryType: worn
+        invested: null
+        handsHeld: 0
+      containerId: null
+      size: med
+      material:
+        type: null
+        grade: null
+      identification:
+        status: identified
+        unidentified:
+          name: ''
+          img: ''
+          data:
+            description:
+              value: ''
+        misidentified: {}
+      usage:
+        value: other
+      subitems: []
+    type: equipment
+    flags:
+      core:
+        sourceId: Compendium.pf2e.equipment-srd.Item.zvLyCVD8g2PdHJAc
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+      eJdAkXPIlso4614X: 3
+    _stats:
+      systemId: pf2e
+      systemVersion: 5.15.0
+      coreVersion: '11.315'
+      createdTime: 1687033615607
+      modifiedTime: 1712316008922
+      lastModifiedBy: bPBBb4WESqtrNJTN
+    _id: 96IAzqgVMpiihjBF
+    _key: '!actors.items!a2y3WhzVAv31TsiX.96IAzqgVMpiihjBF'
+  - img: icons/tools/hand/lockpicks-steel-grey.webp
+    name: Thieves' Toolkit (Infiltrator)
+    system:
+      description:
+        gm: ''
+        value: >-
+          <p>You need a thieves' toolkit to
+          @UUID[Compendium.pf2e.actionspf2e.Item.2EE4aF4SZpYf0R6H]{Pick Locks}
+          or @UUID[Compendium.pf2e.actionspf2e.Item.cYdz2grcOcRt4jk6]{Disable
+          Devices} (of some types) using the Thievery skill. An infiltrator
+          thieves' toolkit add a +1 item bonus to checks to Pick Locks and
+          Disable Devices.</p>
+
+          <p>If your thieves' toolkit is broken, you can repair it by replacing
+          the lock picks with
+          @UUID[Compendium.pf2e.equipment-srd.Item.BznmPaRjI4Orb0IH]{Replacement
+          Picks} appropriate to your tools; this doesn't require using the
+          Repair action. If you wear your thieves' toolkit, you can draw and
+          replace it as part of the action that uses it.</p>
+      rules:
+        - key: FlatModifier
+          predicate:
+            - or:
+                - action:disable-a-device
+                - action:pick-a-lock
+          selector: thievery
+          type: item
+          value: 1
+      slug: thieves-toolkit-infiltrator
+      _migration:
+        version: 0.925
+        lastMigration: null
+        previous: null
+      traits:
+        otherTags: []
+        value: []
+        rarity: common
+      publication:
+        title: Pathfinder Player Core
+        authors: ''
+        license: ORC
+        remaster: true
+      level:
+        value: 3
+      quantity: 1
+      baseItem: null
+      bulk:
+        value: 0.1
+      hp:
+        value: 0
+        max: 0
+      hardness: 0
+      price:
+        value:
+          gp: 50
+      equipped:
+        carryType: worn
+        invested: null
+        handsHeld: 0
+      containerId: null
+      size: med
+      material:
+        type: null
+        grade: null
+      identification:
+        status: identified
+        unidentified:
+          name: ''
+          img: ''
+          data:
+            description:
+              value: ''
+        misidentified: {}
+      usage:
+        value: other
+      subitems: []
+    type: equipment
+    flags:
+      core:
+        sourceId: Compendium.pf2e.equipment-srd.Item.6nrCxNQFycUVFOV2
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+      eJdAkXPIlso4614X: 3
+    _stats:
+      systemId: pf2e
+      systemVersion: 5.15.0
+      coreVersion: '11.315'
+      createdTime: 1687033619347
+      modifiedTime: 1712316008931
+      lastModifiedBy: bPBBb4WESqtrNJTN
+    _id: qKnclAk2eWKYG9Yq
+    _key: '!actors.items!a2y3WhzVAv31TsiX.qKnclAk2eWKYG9Yq'
+  - img: icons/tools/hand/lockpicks-steel-grey.webp
+    name: Thieves' Toolkit (Replacement Picks)
+    system:
+      description:
+        gm: ''
+        value: >-
+          <p>These are replacement picks for a
+          @UUID[Compendium.pf2e.equipment-srd.Item.zvLyCVD8g2PdHJAc]{Thieves'
+          Toolkit}.</p>
+      rules: []
+      slug: thieves-toolkit-replacement-picks
+      _migration:
+        version: 0.925
+        lastMigration: null
+        previous: null
+      traits:
+        otherTags: []
+        value: []
+        rarity: common
+      publication:
+        title: Pathfinder Player Core
+        authors: ''
+        license: ORC
+        remaster: true
+      level:
+        value: 0
+      quantity: 1
+      baseItem: null
+      bulk:
+        value: 0
+      hp:
+        value: 0
+        max: 0
+      hardness: 0
+      price:
+        value:
+          sp: 3
+      equipped:
+        carryType: worn
+        invested: null
+        handsHeld: 0
+      containerId: null
+      size: med
+      material:
+        type: null
+        grade: null
+      identification:
+        status: identified
+        unidentified:
+          name: ''
+          img: ''
+          data:
+            description:
+              value: ''
+        misidentified: {}
+      usage:
+        value: other
+      subitems: []
+    type: equipment
+    flags:
+      core:
+        sourceId: Compendium.pf2e.equipment-srd.Item.Sw7MBLASN3xK4Y44
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+      eJdAkXPIlso4614X: 3
+    _stats:
+      systemId: pf2e
+      systemVersion: 5.15.0
+      coreVersion: '11.315'
+      createdTime: 1687033621902
+      modifiedTime: 1712316008940
+      lastModifiedBy: bPBBb4WESqtrNJTN
+    _id: 6fGIATFILnRJPSBL
+    _key: '!actors.items!a2y3WhzVAv31TsiX.6fGIATFILnRJPSBL'
+  - img: icons/tools/hand/lockpicks-steel-grey.webp
+    name: Thieves' Toolkit (Infiltrator Picks)
+    system:
+      description:
+        gm: ''
+        value: >-
+          <p>These are replacement picks for
+          @UUID[Compendium.pf2e.equipment-srd.Item.6nrCxNQFycUVFOV2]{Thieves'
+          Toolkit (Infiltrator)}.</p>
+      rules: []
+      slug: thieves-toolkit-infiltrator-picks
+      _migration:
+        version: 0.925
+        lastMigration: null
+        previous: null
+      traits:
+        otherTags: []
+        value: []
+        rarity: common
+      publication:
+        title: Pathfinder Player Core
+        authors: ''
+        license: ORC
+        remaster: true
+      level:
+        value: 3
+      quantity: 1
+      baseItem: null
+      bulk:
+        value: 0
+      hp:
+        value: 0
+        max: 0
+      hardness: 0
+      price:
+        value:
+          gp: 3
+      equipped:
+        carryType: worn
+        invested: null
+        handsHeld: 0
+      containerId: null
+      size: med
+      material:
+        type: null
+        grade: null
+      identification:
+        status: identified
+        unidentified:
+          name: ''
+          img: ''
+          data:
+            description:
+              value: ''
+        misidentified: {}
+      usage:
+        value: other
+      subitems: []
+    type: equipment
+    flags:
+      core:
+        sourceId: Compendium.pf2e.equipment-srd.Item.BznmPaRjI4Orb0IH
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+      eJdAkXPIlso4614X: 3
+    _stats:
+      systemId: pf2e
+      systemVersion: 5.15.0
+      coreVersion: '11.315'
+      createdTime: 1687033623498
+      modifiedTime: 1712316008948
+      lastModifiedBy: bPBBb4WESqtrNJTN
+    _id: k6S1DMF3v6ldMuYx
+    _key: '!actors.items!a2y3WhzVAv31TsiX.k6S1DMF3v6ldMuYx'
+  - img: icons/tools/hand/lockpicks-steel-grey.webp
+    name: Thieves' Tools (Concealable)
+    system:
+      description:
+        gm: ''
+        value: >-
+          <p>You need thieves' tools to
+          @UUID[Compendium.pf2e.actionspf2e.Item.2EE4aF4SZpYf0R6H]{Pick Locks}
+          or @UUID[Compendium.pf2e.actionspf2e.Item.cYdz2grcOcRt4jk6]{Disable
+          Devices} (of some types) using the Thievery skill. Infiltrator
+          thieves' tools add a +1 item bonus to checks to Pick Locks and Disable
+          Devices.</p>
+
+          <p>Smaller and made of stronger materials than most sets of thieves'
+          tools, the items in this kit are much easier to conceal. You gain a +1
+          item bonus to Stealth checks to
+          @UUID[Compendium.pf2e.actionspf2e.Item.qVNVSmsgpKFGk9hV]{Conceal}
+          these tools.</p>
+
+          <p>If your thieves' tools are broken, you can repair them by replacing
+          the lock picks with
+          @UUID[Compendium.pf2e.equipment-srd.Item.TxMFNfkoccirCitP]{Replacement
+          Picks} appropriate to your tools; this doesn't require using the
+          Repair action.</p>
+      rules:
+        - key: FlatModifier
+          predicate:
+            - or:
+                - action:disable-a-device
+                - action:pick-a-lock
+          selector: thievery
+          type: item
+          value: 1
+        - key: FlatModifier
+          predicate:
+            - action:conceal-an-object
+            - target:concealable-tools
+          selector: stealth
+          type: item
+          value: 1
+      slug: thieves-tools-concealable
+      _migration:
+        version: 0.925
+        lastMigration: null
+        previous: null
+      traits:
+        otherTags: []
+        value: []
+        rarity: uncommon
+      publication:
+        title: 'Pathfinder Lost Omens: Pathfinder Society Guide'
+        authors: ''
+        license: OGL
+        remaster: false
+      level:
+        value: 4
+      quantity: 1
+      baseItem: null
+      bulk:
+        value: 0.1
+      hp:
+        value: 0
+        max: 0
+      hardness: 0
+      price:
+        value:
+          gp: 80
+      equipped:
+        carryType: worn
+        invested: null
+        handsHeld: 0
+      containerId: null
+      size: med
+      material:
+        type: null
+        grade: null
+      identification:
+        status: identified
+        unidentified:
+          name: ''
+          img: ''
+          data:
+            description:
+              value: ''
+        misidentified: {}
+      usage:
+        value: held-in-two-hands
+      subitems: []
+    type: equipment
+    flags:
+      core:
+        sourceId: Compendium.pf2e.equipment-srd.Item.Ejmv9IHGp9Ad9dgu
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+      eJdAkXPIlso4614X: 3
+    _stats:
+      systemId: pf2e
+      systemVersion: 5.15.0
+      coreVersion: '11.315'
+      createdTime: 1687033626343
+      modifiedTime: 1712316009013
+      lastModifiedBy: bPBBb4WESqtrNJTN
+    _id: gFyS21Nc0C8cwfqZ
+    _key: '!actors.items!a2y3WhzVAv31TsiX.gFyS21Nc0C8cwfqZ'
+  - img: icons/tools/hand/lockpicks-steel-grey.webp
+    name: Thieves' Tools (Concealable Picks)
+    system:
+      description:
+        gm: ''
+        value: >-
+          <p>These are replacement picks for
+          @UUID[Compendium.pf2e.equipment-srd.Item.Ejmv9IHGp9Ad9dgu]{Thieves'
+          Tools (Concealable)}.</p>
+      rules: []
+      slug: thieves-tools-concealable-picks
+      _migration:
+        version: 0.925
+        lastMigration: null
+        previous: null
+      traits:
+        otherTags: []
+        value: []
+        rarity: uncommon
+      publication:
+        title: 'Pathfinder Lost Omens: Pathfinder Society Guide'
+        authors: ''
+        license: OGL
+        remaster: false
+      level:
+        value: 4
+      quantity: 1
+      baseItem: null
+      bulk:
+        value: 0
+      hp:
+        value: 0
+        max: 0
+      hardness: 0
+      price:
+        value:
+          gp: 10
+      equipped:
+        carryType: worn
+        invested: null
+        handsHeld: 0
+      containerId: null
+      size: med
+      material:
+        type: null
+        grade: null
+      identification:
+        status: identified
+        unidentified:
+          name: ''
+          img: ''
+          data:
+            description:
+              value: ''
+        misidentified: {}
+      usage:
+        value: held-in-one-hand
+      subitems: []
+    type: equipment
+    flags:
+      core:
+        sourceId: Compendium.pf2e.equipment-srd.Item.TxMFNfkoccirCitP
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+      eJdAkXPIlso4614X: 3
+    _stats:
+      systemId: pf2e
+      systemVersion: 5.15.0
+      coreVersion: '11.315'
+      createdTime: 1687033627852
+      modifiedTime: 1712316009080
+      lastModifiedBy: bPBBb4WESqtrNJTN
+    _id: bqXI8X16NLuy4dGo
+    _key: '!actors.items!a2y3WhzVAv31TsiX.bqXI8X16NLuy4dGo'
+  - img: icons/commodities/materials/bowl-powder-teal.webp
+    name: Arsenic
+    system:
+      description:
+        gm: ''
+        value: >-
+          <p>This toxin is a compound of arsenic and other substances. You can't
+          reduce your sickened condition while affected.</p>
+
+          <hr />
+
+          <p><strong>Activate</strong> <span class="action-glyph">A</span>
+          (manipulate)</p>
+
+          <p><strong>Saving Throw</strong> @Check[type:fortitude|dc:18]</p>
+
+          <p><strong>Onset</strong> 10 minutes</p>
+
+          <p><strong>Maximum Duration</strong> 5 minutes</p>
+
+          <p><strong>Stage 1</strong> @Damage[1d4[poison]] damage and
+          @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened
+          1} (1 minute)</p>
+
+          <p><strong>Stage 2</strong> @Damage[1d6[poison]] damage and
+          @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened
+          2} (1 minute)</p>
+
+          <p><strong>Stage 3</strong> @Damage[1d8[poison]] damage and
+          @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened
+          3} (1 minute)</p>
+      rules: []
+      slug: arsenic
+      _migration:
+        version: 0.925
+        lastMigration: null
+        previous: null
+      traits:
+        otherTags: []
+        value:
+          - alchemical
+          - consumable
+          - ingested
+          - poison
+        rarity: common
+      publication:
+        title: Pathfinder GM Core
+        authors: ''
+        license: ORC
+        remaster: true
+      level:
+        value: 1
+      quantity: 5
+      baseItem: null
+      bulk:
+        value: 0.1
+      hp:
+        value: 0
+        max: 0
+      hardness: 0
+      price:
+        value:
+          gp: 3
+      equipped:
+        carryType: worn
+        handsHeld: 0
+      containerId: null
+      size: med
+      material:
+        type: null
+        grade: null
+      identification:
+        status: identified
+        unidentified:
+          name: ''
+          img: ''
+          data:
+            description:
+              value: ''
+        misidentified: {}
+      category: poison
+      uses:
+        value: 1
+        max: 1
+        autoDestroy: true
+      damage: null
+      usage:
+        value: held-in-one-hand
+      stackGroup: null
+      spell: null
+      subitems: []
+    type: consumable
+    flags:
+      core:
+        sourceId: Compendium.pf2e.equipment-srd.Item.OIirLySQDLZgT15S
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+      eJdAkXPIlso4614X: 3
+    _stats:
+      systemId: pf2e
+      systemVersion: 5.15.0
+      coreVersion: '11.315'
+      createdTime: 1687033632485
+      modifiedTime: 1712316009146
+      lastModifiedBy: bPBBb4WESqtrNJTN
+    _id: aj1HiOOpBJIcUCg7
+    _key: '!actors.items!a2y3WhzVAv31TsiX.aj1HiOOpBJIcUCg7'
+  - img: >-
+      systems/pf2e/icons/equipment/alchemical-items/alchemical-poisons/spear-frog-poison.webp
+    name: Spear Frog Poison
+    system:
+      description:
+        gm: ''
+        value: >-
+          <p>A single spear frog yields enough toxin to Craft 1 dose of spear
+          frog poison.</p>
+
+          <hr />
+
+          <p><strong>Activate</strong> <span class="action-glyph">2</span>
+          Interact (Injury)</p>
+
+          <p><strong>Saving Throw</strong> @Check[type:fortitude|dc:15]</p>
+
+          <p><strong>Maximum Duration</strong> 6 rounds</p>
+
+          <p><strong>Stage 1</strong> @Damage[1d4[poison]] damage (1 round)</p>
+
+          <p><strong>Stage 2</strong> @Damage[1d6[poison]] damage and
+          @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled
+          1} (1 round)</p>
+      rules: []
+      slug: spear-frog-poison
+      _migration:
+        version: 0.925
+        lastMigration: null
+        previous: null
+      traits:
+        otherTags: []
+        value:
+          - alchemical
+          - consumable
+          - injury
+          - poison
+        rarity: common
+      publication:
+        title: Pathfinder Bestiary 2
+        authors: ''
+        license: OGL
+        remaster: false
+      level:
+        value: 1
+      quantity: 5
+      baseItem: null
+      bulk:
+        value: 0.1
+      hp:
+        value: 0
+        max: 0
+      hardness: 0
+      price:
+        value:
+          gp: 3
+      equipped:
+        carryType: worn
+        handsHeld: 0
+      containerId: null
+      size: med
+      material:
+        type: null
+        grade: null
+      identification:
+        status: identified
+        unidentified:
+          name: ''
+          img: ''
+          data:
+            description:
+              value: ''
+        misidentified: {}
+      category: poison
+      uses:
+        value: 1
+        max: 1
+        autoDestroy: true
+      damage: null
+      usage:
+        value: held-in-one-hand
+      stackGroup: null
+      spell: null
+      subitems: []
+    type: consumable
+    flags:
+      core:
+        sourceId: Compendium.pf2e.equipment-srd.Item.CeKPffF0FaEyhLMp
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+      eJdAkXPIlso4614X: 3
+    _stats:
+      systemId: pf2e
+      systemVersion: 5.15.0
+      coreVersion: '11.315'
+      createdTime: 1687033637258
+      modifiedTime: 1712316009217
+      lastModifiedBy: bPBBb4WESqtrNJTN
+    _id: W8MlIt3NGgegvybc
+    _key: '!actors.items!a2y3WhzVAv31TsiX.W8MlIt3NGgegvybc'
+  - img: >-
+      systems/pf2e/icons/equipment/alchemical-items/alchemical-poisons/giant-centipede-venom.webp
+    name: Giant Centipede Venom
+    system:
+      description:
+        gm: ''
+        value: >-
+          <p>Giant centipede venom causes severe muscle stiffness.</p>
+
+          <hr />
+
+          <p><strong>Activate</strong> <span class="action-glyph">2</span>
+          (manipulate)</p>
+
+          <p><strong>Saving Throw</strong> @Check[type:fortitude|dc:17]</p>
+
+          <p><strong>Maximum Duration</strong> 6 rounds</p>
+
+          <p><strong>Stage 1</strong> @Damage[1d4[poison]] damage (1 round)</p>
+
+          <p><strong>Stage 2</strong> @Damage[1d4[poison]] damage and
+          @UUID[Compendium.pf2e.conditionitems.Item.HL2l2VRSaQHu9lUw]{Fatigued}
+          (1 round)</p>
+
+          <p><strong>Stage 3</strong> @Damage[1d4[poison]] damage,
+          @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{Clumsy 1},
+          and
+          @UUID[Compendium.pf2e.conditionitems.Item.HL2l2VRSaQHu9lUw]{Fatigued}
+          (1 round)</p>
+      rules: []
+      slug: giant-centipede-venom
+      _migration:
+        version: 0.925
+        lastMigration: null
+        previous: null
+      traits:
+        otherTags: []
+        value:
+          - alchemical
+          - consumable
+          - injury
+          - poison
+        rarity: common
+      publication:
+        title: Pathfinder GM Core
+        authors: ''
+        license: ORC
+        remaster: true
+      level:
+        value: 1
+      quantity: 5
+      baseItem: null
+      bulk:
+        value: 0.1
+      hp:
+        value: 0
+        max: 0
+      hardness: 0
+      price:
+        value:
+          gp: 4
+      equipped:
+        carryType: worn
+        handsHeld: 0
+      containerId: null
+      size: med
+      material:
+        type: null
+        grade: null
+      identification:
+        status: identified
+        unidentified:
+          name: ''
+          img: ''
+          data:
+            description:
+              value: ''
+        misidentified: {}
+      category: poison
+      uses:
+        value: 1
+        max: 1
+        autoDestroy: true
+      damage: null
+      usage:
+        value: held-in-two-hands
+      stackGroup: null
+      spell: null
+      subitems: []
+    type: consumable
+    flags:
+      core:
+        sourceId: Compendium.pf2e.equipment-srd.Item.txmX5ghhPS72GKXy
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+      eJdAkXPIlso4614X: 3
+    _stats:
+      systemId: pf2e
+      systemVersion: 5.15.0
+      coreVersion: '11.315'
+      createdTime: 1687033642102
+      modifiedTime: 1712316009293
+      lastModifiedBy: bPBBb4WESqtrNJTN
+    _id: RhbWFFKECnjkHHQr
+    _key: '!actors.items!a2y3WhzVAv31TsiX.RhbWFFKECnjkHHQr'
+  - img: >-
+      systems/pf2e/icons/equipment/alchemical-items/alchemical-poisons/belladonna.webp
+    name: Belladonna
+    system:
+      description:
+        gm: ''
+        value: >-
+          <p>Sometimes called "deadly nightshade", belladonna is a widely
+          available toxin produced from a plant similar to a tomato.</p>
+
+          <hr />
+
+          <p><strong>Activate</strong> <span class="action-glyph">2</span>
+          Interact (Ingested)</p>
+
+          <p><strong>Saving Throw</strong> @Check[type:fortitude|dc:19]</p>
+
+          <p><strong>Onset</strong> 10 minutes</p>
+
+          <p><strong>Maximum Duration</strong> 30 minutes</p>
+
+          <p><strong>Stage 1</strong>
+          @UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{Dazzled}
+          (10 minutes)</p>
+
+          <p><strong>Stage 2</strong> @Damage[1d6[poison]] damage and
+          @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened
+          1} (10 minutes)</p>
+
+          <p><strong>Stage 3</strong> @Damage[1d6[poison]] damage,
+          @UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{Confused},
+          and sickened 1 (1 minute)</p>
+      rules: []
+      slug: belladonna
+      _migration:
+        version: 0.925
+        lastMigration: null
+        previous: null
+      traits:
+        otherTags: []
+        value:
+          - alchemical
+          - consumable
+          - ingested
+          - poison
+        rarity: common
+      publication:
+        title: Pathfinder Core Rulebook
+        authors: ''
+        license: OGL
+        remaster: false
+      level:
+        value: 2
+      quantity: 5
+      baseItem: null
+      bulk:
+        value: 0.1
+      hp:
+        value: 0
+        max: 0
+      hardness: 0
+      price:
+        value:
+          gp: 5
+      equipped:
+        carryType: worn
+        handsHeld: 0
+      containerId: null
+      size: med
+      material:
+        type: null
+        grade: null
+      identification:
+        status: identified
+        unidentified:
+          name: ''
+          img: ''
+          data:
+            description:
+              value: ''
+        misidentified: {}
+      category: poison
+      uses:
+        value: 1
+        max: 1
+        autoDestroy: true
+      damage: null
+      usage:
+        value: held-in-one-hand
+      stackGroup: null
+      spell: null
+      subitems: []
+    type: consumable
+    flags:
+      core:
+        sourceId: Compendium.pf2e.equipment-srd.Item.FL8QU8TcNauBMMhD
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+      eJdAkXPIlso4614X: 3
+    _stats:
+      systemId: pf2e
+      systemVersion: 5.15.0
+      coreVersion: '11.315'
+      createdTime: 1687033647950
+      modifiedTime: 1712316009367
+      lastModifiedBy: bPBBb4WESqtrNJTN
+    _id: UWvDwU0vCd6mdacZ
+    _key: '!actors.items!a2y3WhzVAv31TsiX.UWvDwU0vCd6mdacZ'
+  - img: icons/consumables/potions/potion-flask-corked-tied-necklace-teal.webp
+    name: Black Smear Poison
+    system:
+      description:
+        gm: ''
+        value: >-
+          <p>Many calignis use a debilitating poison crafted from subterranean
+          fungi.</p>
+
+          <hr />
+
+          <p><strong>Activate</strong> <span class="action-glyph">3</span>
+          Interact (Injury)</p>
+
+          <p><strong>Saving Throw</strong> @Check[type:fortitude|dc:16]</p>
+
+          <p><strong>Maximum Duration</strong> 6 rounds</p>
+
+          <p><strong>Stage 1</strong> @Damage[1d6[poison]] damage and
+          @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled
+          1} (1 round)</p>
+
+          <p><strong>Stage 2</strong> As stage 1</p>
+
+          <p><strong>Stage 3</strong> @Damage[1d6[poison]] damage, and
+          @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled
+          2} (1 round)</p>
+      rules: []
+      slug: black-smear-poison
+      _migration:
+        version: 0.925
+        lastMigration: null
+        previous: null
+      traits:
+        otherTags: []
+        value:
+          - alchemical
+          - consumable
+          - injury
+          - poison
+        rarity: uncommon
+      publication:
+        title: Pathfinder Bestiary
+        authors: ''
+        license: OGL
+        remaster: false
+      level:
+        value: 2
+      quantity: 5
+      baseItem: null
+      bulk:
+        value: 0.1
+      hp:
+        value: 0
+        max: 0
+      hardness: 0
+      price:
+        value:
+          gp: 5
+      equipped:
+        carryType: worn
+        handsHeld: 0
+      containerId: null
+      size: med
+      material:
+        type: null
+        grade: null
+      identification:
+        status: identified
+        unidentified:
+          name: ''
+          img: ''
+          data:
+            description:
+              value: ''
+        misidentified: {}
+      category: poison
+      uses:
+        value: 1
+        max: 1
+        autoDestroy: true
+      damage: null
+      usage:
+        value: held-in-one-hand
+      stackGroup: null
+      spell: null
+      subitems: []
+    type: consumable
+    flags:
+      core:
+        sourceId: Compendium.pf2e.equipment-srd.Item.cTBmQgWUyf50x3dY
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+      eJdAkXPIlso4614X: 3
+    _stats:
+      systemId: pf2e
+      systemVersion: 5.15.0
+      coreVersion: '11.315'
+      createdTime: 1687033653326
+      modifiedTime: 1712316009431
+      lastModifiedBy: bPBBb4WESqtrNJTN
+    _id: S2Vj7ta4G7j0LQK8
+    _key: '!actors.items!a2y3WhzVAv31TsiX.S2Vj7ta4G7j0LQK8'
+  - img: >-
+      systems/pf2e/icons/equipment/alchemical-items/alchemical-poisons/black-adder-venom.webp
+    name: Black Adder Venom
+    system:
+      description:
+        gm: ''
+        value: >-
+          <p>Adder venom is a simple but effective way to enhance a weapon.</p>
+
+          <hr />
+
+          <p><strong>Activate</strong> <span class="action-glyph">2</span>
+          (manipulate)</p>
+
+          <p><strong>Saving Throw</strong> @Check[type:fortitude|dc:18]</p>
+
+          <p><strong>Maximum Duration</strong> 3 rounds</p>
+
+          <p><strong>Stage 1</strong> @Damage[1d4[poison]] damage (1 round)</p>
+
+          <p><strong>Stage 2</strong> @Damage[1d6[poison]] damage (1 round)</p>
+
+          <p><strong>Stage 3</strong> @Damage[1d8[poison]] damage (1 round)</p>
+      rules: []
+      slug: black-adder-venom
+      _migration:
+        version: 0.925
+        lastMigration: null
+        previous: null
+      traits:
+        otherTags: []
+        value:
+          - alchemical
+          - consumable
+          - injury
+          - poison
+        rarity: common
+      publication:
+        title: Pathfinder GM Core
+        authors: ''
+        license: ORC
+        remaster: true
+      level:
+        value: 2
+      quantity: 5
+      baseItem: null
+      bulk:
+        value: 0.1
+      hp:
+        value: 0
+        max: 0
+      hardness: 0
+      price:
+        value:
+          gp: 6
+      equipped:
+        carryType: worn
+        handsHeld: 0
+      containerId: null
+      size: med
+      material:
+        type: null
+        grade: null
+      identification:
+        status: identified
+        unidentified:
+          name: ''
+          img: ''
+          data:
+            description:
+              value: ''
+        misidentified: {}
+      category: poison
+      uses:
+        value: 1
+        max: 1
+        autoDestroy: true
+      damage: null
+      usage:
+        value: held-in-two-hands
+      stackGroup: null
+      spell: null
+      subitems: []
+    type: consumable
+    flags:
+      core:
+        sourceId: Compendium.pf2e.equipment-srd.Item.ScclzFrjyB0YJlrb
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+      eJdAkXPIlso4614X: 3
+    _stats:
+      systemId: pf2e
+      systemVersion: 5.15.0
+      coreVersion: '11.315'
+      createdTime: 1687033656007
+      modifiedTime: 1712316009496
+      lastModifiedBy: bPBBb4WESqtrNJTN
+    _id: XRcVinv7eMVpkCTJ
+    _key: '!actors.items!a2y3WhzVAv31TsiX.XRcVinv7eMVpkCTJ'
+  - img: >-
+      systems/pf2e/icons/equipment/alchemical-items/alchemical-poisons/looters-lethargy.webp
+    name: Looter's Lethargy
+    system:
+      description:
+        gm: ''
+        value: >-
+          <p><strong>Activate</strong> <span class="action-glyph">3</span>
+          Interact</p>
+
+          <p>The poison known as looter's lethargy ensures no thieves are strong
+          enough to walk off with pilfered treasures. Commonly smeared on locks,
+          chests, and even valuable items themselves, the poison slowly saps the
+          strength of those who touch it. Nearby guardians can then simply
+          follow the resulting trail of discarded valuables to find the weakened
+          trespasser.</p>
+
+          <p><strong>Saving Throw</strong> @Check[type:fortitude|dc:19]</p>
+
+          <p><strong>Onset</strong> 1 minute</p>
+
+          <p><strong>Maximum Duration</strong> 1 hour</p>
+
+          <p><strong>Stage 1</strong> reduce Bulk limit by 3 (1 minute)</p>
+
+          <p><strong>Stage 2</strong>
+          @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Off-Guard},
+          reduce Bulk limit by 4 (10 minutes)</p>
+
+          <p><strong>Stage 3</strong> off-guard, reduce Bulk limit by 5 (10
+          minutes)</p>
+      rules: []
+      slug: looters-lethargy
+      _migration:
+        version: 0.925
+        lastMigration: null
+        previous: null
+      traits:
+        otherTags: []
+        value:
+          - alchemical
+          - consumable
+          - contact
+          - poison
+        rarity: uncommon
+      publication:
+        title: Pathfinder Treasure Vault
+        authors: ''
+        license: OGL
+        remaster: false
+      level:
+        value: 2
+      quantity: 5
+      baseItem: null
+      bulk:
+        value: 0.1
+      hp:
+        value: 0
+        max: 0
+      hardness: 0
+      price:
+        value:
+          gp: 6
+      equipped:
+        carryType: worn
+        handsHeld: 0
+      containerId: null
+      size: med
+      material:
+        type: null
+        grade: null
+      identification:
+        status: identified
+        unidentified:
+          name: ''
+          img: ''
+          data:
+            description:
+              value: ''
+        misidentified: {}
+      category: poison
+      uses:
+        value: 1
+        max: 1
+        autoDestroy: true
+      damage: null
+      usage:
+        value: held-in-one-hand
+      stackGroup: null
+      spell: null
+      subitems: []
+    type: consumable
+    flags:
+      core:
+        sourceId: Compendium.pf2e.equipment-srd.Item.p3RduziOxQxtREg9
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+      eJdAkXPIlso4614X: 3
+    _stats:
+      systemId: pf2e
+      systemVersion: 5.15.0
+      coreVersion: '11.315'
+      createdTime: 1687033659637
+      modifiedTime: 1712316009561
+      lastModifiedBy: bPBBb4WESqtrNJTN
+    _id: 3K44Hy4OtD5VUrcW
+    _key: '!actors.items!a2y3WhzVAv31TsiX.3K44Hy4OtD5VUrcW'
+  - img: >-
+      systems/pf2e/icons/equipment/alchemical-items/alchemical-poisons/toad-tears.webp
+    name: Toad Tears
+    system:
+      description:
+        gm: ''
+        value: >-
+          <p>Toad tears can be mixed with any other foodstuff or drink, but the
+          poison can also be ingested as is. The process of refining giant toad
+          poison lessens its deadly qualities, and as a result, toad tears are
+          rarely directly fatal. Yet those who are exposed to toad tears often
+          lose control of their actions, making it a dangerous poison
+          nevertheless.</p>
+
+          <hr />
+
+          <p><strong>Activate</strong> <span class="action-glyph">A</span>
+          Interact (Ingested)</p>
+
+          <p><strong>Saving Throw</strong> @Check[type:fortitude|dc:19]</p>
+
+          <p><strong>Onset</strong> 5 minutes</p>
+
+          <p><strong>Maximum Duration</strong> 30 minutes</p>
+
+          <p><strong>Stage 1</strong>
+          @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied
+          1} (10 minutes)</p>
+
+          <p><strong>Stage 2</strong> stupefied 1 and
+          @UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{Confused}
+          (1 minute)</p>
+      rules: []
+      slug: toad-tears
+      _migration:
+        version: 0.925
+        lastMigration: null
+        previous: null
+      traits:
+        otherTags: []
+        value:
+          - alchemical
+          - consumable
+          - ingested
+          - poison
+        rarity: common
+      publication:
+        title: Pathfinder Bestiary 2
+        authors: ''
+        license: OGL
+        remaster: false
+      level:
+        value: 2
+      quantity: 5
+      baseItem: null
+      bulk:
+        value: 0.1
+      hp:
+        value: 0
+        max: 0
+      hardness: 0
+      price:
+        value:
+          gp: 6
+      equipped:
+        carryType: worn
+        handsHeld: 0
+      containerId: null
+      size: med
+      material:
+        type: null
+        grade: null
+      identification:
+        status: identified
+        unidentified:
+          name: ''
+          img: ''
+          data:
+            description:
+              value: ''
+        misidentified: {}
+      category: poison
+      uses:
+        value: 1
+        max: 1
+        autoDestroy: true
+      damage: null
+      usage:
+        value: held-in-one-hand
+      stackGroup: null
+      spell: null
+      subitems: []
+    type: consumable
+    flags:
+      core:
+        sourceId: Compendium.pf2e.equipment-srd.Item.mDNDs5P8ZAJXYbDL
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+      eJdAkXPIlso4614X: 3
+    _stats:
+      systemId: pf2e
+      systemVersion: 5.15.0
+      coreVersion: '11.315'
+      createdTime: 1687033663912
+      modifiedTime: 1712316009627
+      lastModifiedBy: bPBBb4WESqtrNJTN
+    _id: yCoOoMGrL2aqEA3g
+    _key: '!actors.items!a2y3WhzVAv31TsiX.yCoOoMGrL2aqEA3g'
+  - img: >-
+      systems/pf2e/icons/equipment/alchemical-items/alchemical-poisons/lethargy-poison.webp
+    name: Lethargy Poison
+    system:
+      description:
+        gm: ''
+        value: >-
+          <p>Lethargy poison is commonly used in hit-and-run tactics by
+          attackers who want their victims alive; the ambusher retreats until
+          the poison sets in and the victim falls unconscious. Further exposure
+          to lethargy poison does not require the target to attempt additional
+          saving throws; only failing an saving throw against an ongoing
+          exposure can progress its stage.</p>
+
+          <hr />
+
+          <p><strong>Activate</strong> <span class="action-glyph">2</span>
+          (manipulate)</p>
+
+          <p><strong>Saving Throw</strong> @Check[type:fortitude|dc:18]</p>
+
+          <p><strong>Maximum Duration</strong> 4 hours</p>
+
+          <p><strong>Stage 1</strong>
+          @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 1}
+          (1 round)</p>
+
+          <p><strong>Stage 2</strong>
+          @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 1}
+          (1 minute)</p>
+
+          <p><strong>Stage 3</strong>
+          @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{Unconscious}
+          with no Perception check to wake up (1 round)</p>
+
+          <p><strong>Stage 4</strong>
+          @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{Unconscious}
+          with no Perception check to wake up ([[/br 1d4 #hours]]{1d4
+          hours}).</p>
+      rules: []
+      slug: lethargy-poison
+      _migration:
+        version: 0.925
+        lastMigration: null
+        previous: null
+      traits:
+        otherTags: []
+        value:
+          - alchemical
+          - consumable
+          - incapacitation
+          - injury
+          - poison
+          - sleep
+        rarity: uncommon
+      publication:
+        title: Pathfinder GM Core
+        authors: ''
+        license: ORC
+        remaster: true
+      level:
+        value: 2
+      quantity: 3
+      baseItem: null
+      bulk:
+        value: 0.1
+      hp:
+        value: 0
+        max: 0
+      hardness: 0
+      price:
+        value:
+          gp: 7
+      equipped:
+        carryType: worn
+        handsHeld: 0
+      containerId: null
+      size: med
+      material:
+        type: null
+        grade: null
+      identification:
+        status: identified
+        unidentified:
+          name: ''
+          img: ''
+          data:
+            description:
+              value: ''
+        misidentified: {}
+      category: poison
+      uses:
+        value: 1
+        max: 1
+        autoDestroy: true
+      damage: null
+      usage:
+        value: held-in-two-hands
+      stackGroup: null
+      spell: null
+      subitems: []
+    type: consumable
+    flags:
+      core:
+        sourceId: Compendium.pf2e.equipment-srd.Item.zo0ophqfKunJFxZN
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+      eJdAkXPIlso4614X: 3
+    _stats:
+      systemId: pf2e
+      systemVersion: 5.15.0
+      coreVersion: '11.315'
+      createdTime: 1687033667960
+      modifiedTime: 1712316009697
+      lastModifiedBy: bPBBb4WESqtrNJTN
+    _id: nhNMptpv9xKY5WXv
+    _key: '!actors.items!a2y3WhzVAv31TsiX.nhNMptpv9xKY5WXv'
+  - img: >-
+      systems/pf2e/icons/equipment/alchemical-items/alchemical-poisons/yellow-musk-vial.webp
+    name: Yellow Musk Poison
+    system:
+      description:
+        gm: ''
+        value: >-
+          <p>The powdered pollen from a yellow musk creeper addles the mind.</p>
+
+          <hr />
+
+          <p><strong>Activate</strong> <span class="action-glyph">A</span>
+          Interact (Inhaled)</p>
+
+          <p><strong>Saving Throw</strong> @Check[type:will|dc:16]</p>
+
+          <p><strong>Maximum Duration</strong> 2 rounds</p>
+
+          <p><strong>Stage 1</strong>
+          @UUID[Compendium.pf2e.conditionitems.Item.AdPVz7rbaVSRxHFg]{Fascinated}
+          by the poison cloud (1 round)</p>
+
+          <p><strong>Stage 2</strong> fascinated by the poison cloud, and can
+          use no actions but to move closer to the cloud's point of origin (1
+          round)</p>
+      rules: []
+      slug: yellow-musk-poison
+      _migration:
+        version: 0.925
+        lastMigration: null
+        previous: null
+      traits:
+        otherTags: []
+        value:
+          - alchemical
+          - consumable
+          - inhaled
+          - mental
+          - poison
+        rarity: uncommon
+      publication:
+        title: Pathfinder Bestiary 2
+        authors: ''
+        license: OGL
+        remaster: false
+      level:
+        value: 2
+      quantity: 3
+      baseItem: null
+      bulk:
+        value: 0.1
+      hp:
+        value: 0
+        max: 0
+      hardness: 0
+      price:
+        value:
+          gp: 7
+      equipped:
+        carryType: worn
+        handsHeld: 0
+      containerId: null
+      size: med
+      material:
+        type: null
+        grade: null
+      identification:
+        status: identified
+        unidentified:
+          name: ''
+          img: ''
+          data:
+            description:
+              value: ''
+        misidentified: {}
+      category: poison
+      uses:
+        value: 1
+        max: 1
+        autoDestroy: true
+      damage: null
+      usage:
+        value: held-in-one-hand
+      stackGroup: null
+      spell: null
+      subitems: []
+    type: consumable
+    flags:
+      core:
+        sourceId: Compendium.pf2e.equipment-srd.Item.bJVk50mhaODgsOUe
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+      eJdAkXPIlso4614X: 3
+    _stats:
+      systemId: pf2e
+      systemVersion: 5.15.0
+      coreVersion: '11.315'
+      createdTime: 1687033674179
+      modifiedTime: 1712316009762
+      lastModifiedBy: bPBBb4WESqtrNJTN
+    _id: WalWEiw2u7rnuMZz
+    _key: '!actors.items!a2y3WhzVAv31TsiX.WalWEiw2u7rnuMZz'
+  - img: >-
+      systems/pf2e/icons/equipment/alchemical-items/alchemical-poisons/blue-dragonfly-poison.webp
+    name: Blue Dragonfly Poison
+    system:
+      description:
+        gm: ''
+        value: >-
+          <p><strong>Activate</strong> <span class="action-glyph">1</span>
+          Interact</p>
+
+          <p>Boggards brew a potent toxin made from blue dragonflies. Swampseers
+          consume this mixture to awaken their divine powers, but the poison
+          causes debilitating hallucinations in most other creatures.</p>
+
+          <p><strong>Saving Throw</strong> @Check[type:fortitude|dc:17]</p>
+
+          <p><strong>Onset</strong> 10 minutes</p>
+
+          <p><strong>Maximum Duration</strong> 30 minutes</p>
+
+          <p><strong>Stage 1</strong>
+          @UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{Dazzled}
+          (10 minutes)</p>
+
+          <p><strong>Stage 2</strong> dazzled and
+          @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened
+          1} (10 minutes)</p>
+
+          <p><strong>Stage 3</strong> frightened 1 and
+          @UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{Confused}
+          1 (1 minute)</p>
+      rules: []
+      slug: blue-dragonfly-poison
+      _migration:
+        version: 0.925
+        lastMigration: null
+        previous: null
+      traits:
+        otherTags: []
+        value:
+          - alchemical
+          - consumable
+          - ingested
+          - poison
+        rarity: uncommon
+      publication:
+        title: Pathfinder Monster Core
+        authors: ''
+        license: ORC
+        remaster: true
+      level:
+        value: 3
+      quantity: 3
+      baseItem: null
+      bulk:
+        value: 0.1
+      hp:
+        value: 0
+        max: 0
+      hardness: 0
+      price:
+        value:
+          gp: 7
+      equipped:
+        carryType: worn
+        handsHeld: 0
+      containerId: null
+      size: med
+      material:
+        type: null
+        grade: null
+      identification:
+        status: identified
+        unidentified:
+          name: ''
+          img: ''
+          data:
+            description:
+              value: ''
+        misidentified: {}
+      category: poison
+      uses:
+        value: 1
+        max: 1
+        autoDestroy: true
+      damage: null
+      usage:
+        value: held-in-one-hand
+      stackGroup: null
+      spell: null
+      subitems: []
+    type: consumable
+    flags:
+      core:
+        sourceId: Compendium.pf2e.equipment-srd.Item.rfyWXgrVD2lm91CC
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+      eJdAkXPIlso4614X: 3
+    _stats:
+      systemId: pf2e
+      systemVersion: 5.15.0
+      coreVersion: '11.315'
+      createdTime: 1687033680978
+      modifiedTime: 1712316009830
+      lastModifiedBy: bPBBb4WESqtrNJTN
+    _id: mA5DLjwHoEYBuYqQ
+    _key: '!actors.items!a2y3WhzVAv31TsiX.mA5DLjwHoEYBuYqQ'
+  - img: icons/commodities/materials/liquid-purple.webp
+    name: Cytillesh Oil
+    system:
+      description:
+        gm: ''
+        value: >-
+          <p>This thick substance is distilled from the mind-robbing cytillesh
+          fungus, though it lacks memory-altering capabilities.</p>
+
+          <hr />
+
+          <p><strong>Activate</strong> <span class="action-glyph">2</span>
+          Interact (Injury)</p>
+
+          <p><strong>Saving Throw</strong> @Check[type:fortitude|dc:19]</p>
+
+          <p><strong>Maximum Duration</strong> 4 rounds</p>
+
+          <p><strong>Stage 1</strong> @Damage[1d10[poison]] damage (1 round)</p>
+
+          <p><strong>Stage 2</strong> @Damage[1d12[poison]] damage (1 round)</p>
+
+          <p><strong>Stage 3</strong> @Damage[2d10[poison]] damage (1 round)</p>
+      rules: []
+      slug: cytillesh-oil
+      _migration:
+        version: 0.925
+        lastMigration: null
+        previous: null
+      traits:
+        otherTags: []
+        value:
+          - alchemical
+          - consumable
+          - injury
+          - poison
+        rarity: common
+      publication:
+        title: Pathfinder Core Rulebook
+        authors: ''
+        license: OGL
+        remaster: false
+      level:
+        value: 3
+      quantity: 3
+      baseItem: null
+      bulk:
+        value: 0.1
+      hp:
+        value: 0
+        max: 0
+      hardness: 0
+      price:
+        value:
+          gp: 10
+      equipped:
+        carryType: worn
+        handsHeld: 0
+      containerId: null
+      size: med
+      material:
+        type: null
+        grade: null
+      identification:
+        status: identified
+        unidentified:
+          name: ''
+          img: ''
+          data:
+            description:
+              value: ''
+        misidentified: {}
+      category: poison
+      uses:
+        value: 1
+        max: 1
+        autoDestroy: true
+      damage: null
+      usage:
+        value: held-in-one-hand
+      stackGroup: null
+      spell: null
+      subitems: []
+    type: consumable
+    flags:
+      core:
+        sourceId: Compendium.pf2e.equipment-srd.Item.aZm1x9tpvBAT8YCd
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+      eJdAkXPIlso4614X: 3
+    _stats:
+      systemId: pf2e
+      systemVersion: 5.15.0
+      coreVersion: '11.315'
+      createdTime: 1687033685740
+      modifiedTime: 1712316009896
+      lastModifiedBy: bPBBb4WESqtrNJTN
+    _id: 3iTUEpFTYpmQD3Z0
+    _key: '!actors.items!a2y3WhzVAv31TsiX.3iTUEpFTYpmQD3Z0'
+  - img: >-
+      systems/pf2e/icons/equipment/alchemical-items/alchemical-poisons/graveroot.webp
+    name: Graveroot
+    system:
+      description:
+        gm: ''
+        value: >-
+          <p>The opaque white sap from the graveroot shrub clouds the mind.</p>
+
+          <hr />
+
+          <p><strong>Activate</strong> <span class="action-glyph">2</span>
+          (manipulate)</p>
+
+          <p><strong>Saving Throw</strong> @Check[type:fortitude|dc:19]</p>
+
+          <p><strong>Maximum Duration</strong> 4 rounds</p>
+
+          <p><strong>Stage 1</strong> @Damage[1d8[poison]] damage (1 round)</p>
+
+          <p><strong>Stage 2</strong> @Damage[1d10[poison]] damage and
+          @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied
+          1} (1 round)</p>
+
+          <p><strong>Stage 3</strong> @Damage[2d6[poison]] damage and
+          @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied
+          2} (1 round)</p>
+      rules: []
+      slug: graveroot
+      _migration:
+        version: 0.925
+        lastMigration: null
+        previous: null
+      traits:
+        otherTags: []
+        value:
+          - alchemical
+          - consumable
+          - injury
+          - poison
+        rarity: common
+      publication:
+        title: Pathfinder GM Core
+        authors: ''
+        license: ORC
+        remaster: true
+      level:
+        value: 3
+      quantity: 3
+      baseItem: null
+      bulk:
+        value: 0.1
+      hp:
+        value: 0
+        max: 0
+      hardness: 0
+      price:
+        value:
+          gp: 10
+      equipped:
+        carryType: worn
+        handsHeld: 0
+      containerId: null
+      size: med
+      material:
+        type: null
+        grade: null
+      identification:
+        status: identified
+        unidentified:
+          name: ''
+          img: ''
+          data:
+            description:
+              value: ''
+        misidentified: {}
+      category: poison
+      uses:
+        value: 1
+        max: 1
+        autoDestroy: true
+      damage: null
+      usage:
+        value: held-in-one-hand
+      stackGroup: null
+      spell: null
+      subitems: []
+    type: consumable
+    flags:
+      core:
+        sourceId: Compendium.pf2e.equipment-srd.Item.qQqAY59NgGNoy2xr
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+      eJdAkXPIlso4614X: 3
+    _stats:
+      systemId: pf2e
+      systemVersion: 5.15.0
+      coreVersion: '11.315'
+      createdTime: 1687033691137
+      modifiedTime: 1712316009965
+      lastModifiedBy: bPBBb4WESqtrNJTN
+    _id: WSukpUqT9OAS3mV3
+    _key: '!actors.items!a2y3WhzVAv31TsiX.WSukpUqT9OAS3mV3'
+  - img: >-
+      systems/pf2e/icons/equipment/alchemical-items/alchemical-poisons/violet-venom.webp
+    name: Violet Venom
+    system:
+      description:
+        gm: ''
+        value: >-
+          <p>The delicate process of extracting violet venom from a violet
+          fungus leaves it diluted at the best of times. Alchemists are still on
+          the hunt for a truly pure, unadulterated version of this highly toxic
+          poison.</p>
+
+          <hr />
+
+          <p><strong>Activate</strong> <span class="action-glyph">A</span>
+          Interact (Contact)</p>
+
+          <p><strong>Saving Throw</strong> @Check[type:fortitude|dc:17]</p>
+
+          <p><strong>Onset</strong> 1 minute</p>
+
+          <p><strong>Maximum Duration</strong> 6 rounds</p>
+
+          <p><strong>Stage 1</strong> @Damage[1d6[poison]] damage plus
+          @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled
+          1} (1 round)</p>
+
+          <p><strong>Stage 2</strong> @Damage[1d6[poison]] damage plus
+          @UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{Drained 1}
+          (1 round)</p>
+
+          <p><strong>Stage 3</strong> @Damage[2d6[poison]] damage plus enfeebled
+          1 (1 round)</p>
+      rules: []
+      slug: violet-venom
+      _migration:
+        version: 0.925
+        lastMigration: null
+        previous: null
+      traits:
+        otherTags: []
+        value:
+          - alchemical
+          - consumable
+          - contact
+          - poison
+        rarity: uncommon
+      publication:
+        title: Pathfinder Bestiary 2
+        authors: ''
+        license: OGL
+        remaster: false
+      level:
+        value: 3
+      quantity: 3
+      baseItem: null
+      bulk:
+        value: 0.1
+      hp:
+        value: 0
+        max: 0
+      hardness: 0
+      price:
+        value:
+          gp: 12
+      equipped:
+        carryType: worn
+        handsHeld: 0
+      containerId: null
+      size: med
+      material:
+        type: null
+        grade: null
+      identification:
+        status: identified
+        unidentified:
+          name: ''
+          img: ''
+          data:
+            description:
+              value: ''
+        misidentified: {}
+      category: poison
+      uses:
+        value: 1
+        max: 1
+        autoDestroy: true
+      damage: null
+      usage:
+        value: held-in-one-hand
+      stackGroup: null
+      spell: null
+      subitems: []
+    type: consumable
+    flags:
+      core:
+        sourceId: Compendium.pf2e.equipment-srd.Item.Oip645RjC5y57wFa
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+      eJdAkXPIlso4614X: 3
+    _stats:
+      systemId: pf2e
+      systemVersion: 5.15.0
+      coreVersion: '11.315'
+      createdTime: 1687033695187
+      modifiedTime: 1712316010036
+      lastModifiedBy: bPBBb4WESqtrNJTN
+    _id: FxWuViE2ODNH8ITQ
+    _key: '!actors.items!a2y3WhzVAv31TsiX.FxWuViE2ODNH8ITQ'
+  - img: >-
+      systems/pf2e/icons/equipment/alchemical-items/alchemical-poisons/leadenleg.webp
+    name: Leadenleg
+    system:
+      description:
+        gm: ''
+        value: >-
+          <p>Once injected, this synthetic toxin sinks into the extremities,
+          numbing them nearly to paralysis.</p>
+
+          <hr />
+
+          <p><strong>Activate</strong> <span class="action-glyph">2</span>
+          Interact (Injury)</p>
+
+          <p><strong>Saving Throw</strong> @Check[type:fortitude|dc:20]</p>
+
+          <p><strong>Maximum Duration</strong> 6 rounds</p>
+
+          <p><strong>Stage 1</strong> @Damage[1d10[poison]] damage and -5-foot
+          status penalty to all Speeds (1 round)</p>
+
+          <p><strong>Stage 2</strong> @Damage[2d6[poison]] damage and -10-foot
+          status penalty to all Speeds (1 round)</p>
+
+          <p><strong>Stage 3</strong> @Damage[2d6[poison]] damage and -20-foot
+          status penalty to all Speeds (1 round)</p>
+      rules: []
+      slug: leadenleg
+      _migration:
+        version: 0.925
+        lastMigration: null
+        previous: null
+      traits:
+        otherTags: []
+        value:
+          - alchemical
+          - consumable
+          - injury
+          - poison
+        rarity: common
+      publication:
+        title: Pathfinder Advanced Player's Guide
+        authors: ''
+        license: OGL
+        remaster: false
+      level:
+        value: 4
+      quantity: 3
+      baseItem: null
+      bulk:
+        value: 0.1
+      hp:
+        value: 0
+        max: 0
+      hardness: 0
+      price:
+        value:
+          gp: 15
+      equipped:
+        carryType: worn
+        handsHeld: 0
+      containerId: null
+      size: med
+      material:
+        type: null
+        grade: null
+      identification:
+        status: identified
+        unidentified:
+          name: ''
+          img: ''
+          data:
+            description:
+              value: ''
+        misidentified: {}
+      category: poison
+      uses:
+        value: 1
+        max: 1
+        autoDestroy: true
+      damage: null
+      usage:
+        value: held-in-two-hands
+      stackGroup: null
+      spell: null
+      subitems: []
+    type: consumable
+    flags:
+      core:
+        sourceId: Compendium.pf2e.equipment-srd.Item.QJ1fTrX42PoEWpK5
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+      eJdAkXPIlso4614X: 3
+    _stats:
+      systemId: pf2e
+      systemVersion: 5.15.0
+      coreVersion: '11.315'
+      createdTime: 1687033699678
+      modifiedTime: 1712316010101
+      lastModifiedBy: bPBBb4WESqtrNJTN
+    _id: IBJ6RYENtohUL3wG
+    _key: '!actors.items!a2y3WhzVAv31TsiX.IBJ6RYENtohUL3wG'
+  - img: >-
+      systems/pf2e/icons/equipment/alchemical-items/alchemical-poisons/false-death.webp
+    name: False Death
+    system:
+      description:
+        gm: ''
+        value: >-
+          <p>Typically used to fake one's death, this poison swiftly causes the
+          imbiber to lose consciousness and suppresses vital signs. A creature
+          examining the unconscious target must succeed at a Medicine check
+          against the imbiber's Deception DC + 4 to determine that the target is
+          alive, and a critical success allows the examiner to determine that a
+          toxin is causing the effect. The false death toxin has an extremely
+          bitter taste (@Check[type:perception|dc:10|traits:action:seek] to
+          detect), making it difficult to trick a creature into consuming the
+          poison against its wishes.</p>
+
+          <hr />
+
+          <p><strong>Activate</strong> <span class="action-glyph">A</span>
+          Interact</p>
+
+          <p><strong>Saving Throw</strong> @Check[type:fortitude|dc:18]</p>
+
+          <p><strong>Onset</strong> 10 minutes</p>
+
+          <p><strong>Maximum Duration</strong> 5 days</p>
+
+          <p><strong>Stage 1</strong>
+          @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{Clumsy 2}
+          (1 round)</p>
+
+          <p><strong>Stage 2</strong> unconscious (1 hour)</p>
+
+          <p><strong>Stage 3</strong> unconscious (1 day)</p>
+      rules: []
+      slug: false-death
+      _migration:
+        version: 0.925
+        lastMigration: null
+        previous: null
+      traits:
+        otherTags: []
+        value:
+          - alchemical
+          - consumable
+          - ingested
+          - poison
+        rarity: uncommon
+      publication:
+        title: 'Pathfinder #149: Against the Scarlet Triad'
+        authors: ''
+        license: OGL
+        remaster: false
+      level:
+        value: 5
+      quantity: 3
+      baseItem: null
+      bulk:
+        value: 0.1
+      hp:
+        value: 0
+        max: 0
+      hardness: 0
+      price:
+        value:
+          gp: 25
+      equipped:
+        carryType: worn
+        handsHeld: 0
+      containerId: null
+      size: med
+      material:
+        type: null
+        grade: null
+      identification:
+        status: identified
+        unidentified:
+          name: ''
+          img: ''
+          data:
+            description:
+              value: ''
+        misidentified: {}
+      category: poison
+      uses:
+        value: 1
+        max: 1
+        autoDestroy: true
+      damage: null
+      usage:
+        value: held-in-one-hand
+      stackGroup: null
+      spell: null
+      subitems: []
+    type: consumable
+    flags:
+      core:
+        sourceId: Compendium.pf2e.equipment-srd.Item.iUOcC9vFboSFI8fU
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+      eJdAkXPIlso4614X: 3
+    _stats:
+      systemId: pf2e
+      systemVersion: 5.15.0
+      coreVersion: '11.315'
+      createdTime: 1687033703682
+      modifiedTime: 1712316010165
+      lastModifiedBy: bPBBb4WESqtrNJTN
+    _id: dOdy3cFdyQVGsZeu
+    _key: '!actors.items!a2y3WhzVAv31TsiX.dOdy3cFdyQVGsZeu'
+  - img: >-
+      systems/pf2e/icons/equipment/alchemical-items/alchemical-poisons/hunting-spider-venom.webp
+    name: Spider Venom
+    system:
+      description:
+        gm: ''
+        value: >-
+          <p>This venom erodes its target's defenses, aiding the spider in
+          securing prey.</p>
+
+          <hr />
+
+          <p><strong>Activate</strong> <span class="action-glyph">2</span>
+          (manipulate)</p>
+
+          <p><strong>Saving Throw</strong> @Check[type:fortitude|dc:22]</p>
+
+          <p><strong>Maximum Duration</strong> 6 rounds</p>
+
+          <p><strong>Stage 1</strong> @Damage[1d10[poison]] damage and
+          @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened
+          1} (1 round)</p>
+
+          <p><strong>Stage 2</strong> @Damage[1d12[poison]] damage,
+          @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{Clumsy 1},
+          and
+          @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened
+          2} (1 round)</p>
+
+          <p><strong>Stage 3</strong> @Damage[2d6[poison]] damage,
+          @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{Clumsy 2},
+          and
+          @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened
+          3} (1 round)</p>
+      rules: []
+      slug: spider-venom
+      _migration:
+        version: 0.925
+        lastMigration: null
+        previous: null
+      traits:
+        otherTags: []
+        value:
+          - alchemical
+          - consumable
+          - injury
+          - poison
+        rarity: common
+      publication:
+        title: Pathfinder GM Core
+        authors: ''
+        license: ORC
+        remaster: true
+      level:
+        value: 5
+      quantity: 3
+      baseItem: null
+      bulk:
+        value: 0.1
+      hp:
+        value: 0
+        max: 0
+      hardness: 0
+      price:
+        value:
+          gp: 25
+      equipped:
+        carryType: worn
+        handsHeld: 0
+      containerId: null
+      size: med
+      material:
+        type: null
+        grade: null
+      identification:
+        status: identified
+        unidentified:
+          name: ''
+          img: ''
+          data:
+            description:
+              value: ''
+        misidentified: {}
+      category: poison
+      uses:
+        value: 1
+        max: 1
+        autoDestroy: true
+      damage: null
+      usage:
+        value: held-in-two-hands
+      stackGroup: null
+      spell: null
+      subitems: []
+    type: consumable
+    flags:
+      core:
+        sourceId: Compendium.pf2e.equipment-srd.Item.5RGNjhDxZ0yMhTds
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+      eJdAkXPIlso4614X: 3
+    _stats:
+      systemId: pf2e
+      systemVersion: 5.15.0
+      coreVersion: '11.315'
+      createdTime: 1687033708281
+      modifiedTime: 1712316010231
+      lastModifiedBy: bPBBb4WESqtrNJTN
+    _id: Gq6xBr2lkXigiz27
+    _key: '!actors.items!a2y3WhzVAv31TsiX.Gq6xBr2lkXigiz27'
+effects: []
+folder: null
+sort: 0
+flags:
+  pf2e:
+    editLoot:
+      value: false
+  exportSource:
+    world: abominationvaults
+    system: pf2e
+    coreVersion: 0.8.7
+    systemVersion: 2.4.0.6221
+  core: {}
+system:
+  attributes: {}
+  details:
+    description: ''
+    level:
+      value: 0
+  lootSheetType: Merchant
+  hiddenWhenEmpty: false
+  _migration:
+    version: 0.925
+    previous:
+      schema: 0.842
+      foundry: '11.315'
+      system: 5.15.0
+  traits:
+    rarity: common
+    size:
+      value: med
+    value: []
+  customModifiers: {}
+ownership:
+  default: 1
+  sarkMXaT0ELIQ2fE: 3
+prototypeToken:
+  flags:
+    pf2e:
+      linkToActorSize: false
+      autoscale: false
+  name: Crooks Nook
+  displayName: 20
+  width: 1
+  height: 1
+  lockRotation: false
+  rotation: 0
+  actorLink: true
+  disposition: 0
+  displayBars: 40
+  bar1:
+    attribute: attributes.hp
+  bar2:
+    attribute: null
+  randomImg: false
+  alpha: 1
+  light:
+    alpha: 1
+    angle: 360
+    bright: 0
+    coloration: 1
+    dim: 0
+    luminosity: 0.5
+    saturation: 0
+    contrast: 0
+    shadows: 0
+    animation:
+      speed: 5
+      intensity: 5
+      type: null
+      reverse: false
+    darkness:
+      min: 0
+      max: 1
+    color: null
+    attenuation: 0.5
+  texture:
+    src: systems/pf2e/icons/default-icons/loot.svg
+    tint: null
+    scaleX: 1
+    scaleY: 1
+    offsetX: 0
+    offsetY: 0
+    rotation: 0
+  sight:
+    angle: 360
+    enabled: false
+    range: 0
+    brightness: 0
+    visionMode: basic
+    attenuation: 0.1
+    saturation: 0
+    contrast: 0
+  appendNumber: false
+  prependAdjective: false
+  detectionModes: []
+_stats:
+  systemId: pf2e
+  systemVersion: 5.15.0
+  coreVersion: '11.315'
+  createdTime: 1686850703482
+  modifiedTime: 1712316010231
+  lastModifiedBy: bPBBb4WESqtrNJTN
+_key: '!actors!a2y3WhzVAv31TsiX'
+
