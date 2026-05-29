@@ -660,6 +660,7 @@
       border-radius: 4px;
       line-height: 1.55;
       text-align: left;
+      pointer-events: none;
     }
 
     .item-tooltip.visible { opacity: 1; }
@@ -669,7 +670,6 @@
     .item-tooltip p { margin-bottom: 0.5rem; }
     .item-tooltip p:last-child { margin-bottom: 0; }
 
-    /* FIX DROP CAP: Applicato solo alla prima lettera del corpo descrittivo nativo dell'oggetto */
     .item-desc-body p:first-child::first-letter {
       font-family: 'Cinzel Decorative', serif;
       font-size: 1.7em;
@@ -788,6 +788,9 @@
   const inventoryTitle = document.getElementById('inventory-title');
   const inventoryList = document.getElementById('inventory-list');
   const tooltip = document.getElementById('item-tooltip');
+  const cartPanel = document.getElementById('cart-panel');
+  const cartBadge = document.getElementById('cart-badge');
+  const cartItemsContainer = document.getElementById('cart-items');
   let cart = [];
 
   function capitalizeFirst(str) {
@@ -814,7 +817,6 @@
     initializeShops();
   }
 
-  // NUOVA LOGICA: Estrazione completa dei tratti, del livello, della rarità e del danno da PF2e
   function convertYamlToShopItems(yamlData) {
     const items = [];
     const rawItems = Array.isArray(yamlData) ? yamlData : (yamlData?.items || []);
@@ -824,7 +826,6 @@
       const rarity = item.system?.traits?.rarity || 'common';
       const traits = item.system?.traits?.value || [];
       
-      // Estrazione del danno delle Armi
       let damageStr = '';
       if (item.system?.damage?.die) {
         const dice = item.system.damage.dice || 1;
@@ -836,7 +837,6 @@
         }
       }
 
-      // Estrazione di scudi o armature (Bonus CA) se presenti
       let acStr = '';
       if (item.system?.acBonus?.value) {
         acStr = `+${item.system.acBonus.value}`;
@@ -844,13 +844,10 @@
         acStr = `+${item.system.armor.value}`;
       }
 
-      // Costruzione HTML arricchito all'interno della descrizione
       let enrichedDesc = '';
 
-      // 1. Header superiore: Rarità & Livello
       enrichedDesc += `<div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(201, 168, 76, 0.25); padding-bottom: 0.4rem; margin-bottom: 0.5rem;">`;
       
-      // Colori dei badge ufficiali PF2e per la rarità
       const rarityColors = {
         common: '#5e5e5e',
         uncommon: '#c45500',
@@ -858,23 +855,21 @@
         unique: '#b71c1c'
       };
       const rColor = rarityColors[rarity.toLowerCase()] || '#5e5e5e';
-      enrichedDesc += `<span style="background: ${rColor}; color: #fff; padding: 2px 6px; font-size: 0.65rem; font-family: 'Cinzel', serif; text-transform: uppercase; border-radius: 2px; font-weight: bold; letter-spacing: 0.05em;">${rarity}</span>`;
+      enrichedDesc += `<span style="background: ${rColor}; color: #fff; padding: 2px 6px; font-size: 0.65rem; font-family: 'Cinzel', serif; text-transform: uppercase; border-radius: 2px; font-weight: 600;">${rarity}</span>`;
       
       if (level !== null) {
         enrichedDesc += `<span style="font-family: 'Cinzel', serif; font-size: 0.75rem; font-weight: bold; color: var(--gold-lt);">Livello ${level}</span>`;
       }
       enrichedDesc += `</div>`;
 
-      // 2. Box dei Tratti (Tags come agile, consumable, versatile etc.)
       if (traits.length > 0) {
         enrichedDesc += `<div style="display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 0.6rem;">`;
         traits.forEach(t => {
-          enrichedDesc += `<span style="background: rgba(201, 168, 76, 0.12); border: 1px solid var(--gold-dk); color: var(--gold-lt); padding: 1px 5px; font-size: 0.65rem; text-transform: uppercase; border-radius: 2px; font-family: 'Lora', serif;">${t}</span>`;
+          enrichedDesc += `<span style="background: rgba(201, 168, 76, 0.12); border: 1px solid var(--gold-dk); color: var(--gold-lt); padding: 1px 5px; font-size: 0.65rem; text-transform: uppercase; border-radius: 2px;">${t}</span>`;
         });
         enrichedDesc += `</div>`;
       }
 
-      // 3. Statistiche di combattimento (Danno / Armatura)
       if (damageStr || acStr) {
         enrichedDesc += `<div style="background: rgba(201, 168, 76, 0.05); border-left: 2px solid var(--gold); padding: 4px 8px; margin-bottom: 0.6rem; font-size: 0.78rem;">`;
         if (damageStr) enrichedDesc += `<div><strong>Danno:</strong> ${damageStr}</div>`;
@@ -882,9 +877,8 @@
         enrichedDesc += `</div>`;
       }
 
-      // 4. Testo della descrizione originale
       const baseDesc = item.system?.description?.value || "<p>Nessuna descrizione disponibile.</p>";
-      enrichedDesc += `<div class="item-desc-body">${baseDesc}</div>`;
+      enrichedDesc += `<div class="item-desc-body">${DOMPurify.sanitize(baseDesc)}</div>`;
 
       const shopItem = {
         name: item.name || "Unknown Item",
@@ -925,6 +919,10 @@
     return parts.length ? parts.join(' ') : 'Gratis';
   }
 
+  function priceToTotal(price) {
+    return price.mo * 100 + price.ma * 10 + price.mr;
+  }
+
   function initializeShops() {
     const label = shopsWrapper.querySelector('.shops-label');
     shopsWrapper.innerHTML = '';
@@ -948,10 +946,12 @@
   function displayInventory(shopName) {
     const items = shopsData[shopName];
     inventoryTitle.textContent = shopName;
+    inventoryTitle.classList.remove('stamp');
+    void inventoryTitle.offsetWidth;
     inventoryTitle.classList.add('stamp');
 
     inventoryList.innerHTML = '';
-    items.forEach((item, idx) => {
+    items.forEach((item) => {
       const row = document.createElement('div');
       row.className = 'item-row';
 
@@ -999,24 +999,33 @@
   }
 
   function showTooltip(item, event) {
-    if (event) event.stopPropagation(); // Blocca l'hide istantaneo
-    const sanitized = DOMPurify.sanitize(item.desc);
-    tooltip.innerHTML = sanitized;
+    tooltip.innerHTML = DOMPurify.sanitize(item.desc);
     tooltip.classList.add('visible');
+    
+    const x = event.pageX + 10;
+    const y = event.pageY + 10;
+    tooltip.style.left = x + 'px';
+    tooltip.style.top = y + 'px';
 
-    const rect = event.target.getBoundingClientRect();
-    tooltip.style.left = (rect.left + rect.width / 2 - 160) + 'px';
-    tooltip.style.top = (rect.bottom + 10) + 'px';
+    document.addEventListener('mousemove', updateTooltipPos);
+  }
+
+  function updateTooltipPos(event) {
+    const x = event.pageX + 10;
+    const y = event.pageY + 10;
+    tooltip.style.left = x + 'px';
+    tooltip.style.top = y + 'px';
   }
 
   function hideTooltip() {
     tooltip.classList.remove('visible');
+    document.removeEventListener('mousemove', updateTooltipPos);
   }
 
   function addToCart(item) {
-    const existing = cart.find(c => c.name === item.name);
-    if (existing) {
-      existing.quantity++;
+    const existingItem = cart.find(ci => ci.name === item.name);
+    if (existingItem) {
+      existingItem.quantity += 1;
     } else {
       cart.push({ ...item, quantity: 1 });
     }
@@ -1024,106 +1033,89 @@
   }
 
   function removeFromCart(itemName) {
-    cart = cart.filter(c => c.name !== itemName);
+    cart = cart.filter(ci => ci.name !== itemName);
     updateCart();
   }
 
-  function updateQuantity(itemName, delta) {
-    const item = cart.find(c => c.name === itemName);
+  function updateCartQuantity(itemName, quantity) {
+    const item = cart.find(ci => ci.name === itemName);
     if (item) {
-      item.quantity += delta;
-      if (item.quantity <= 0) {
-        removeFromCart(itemName);
-      } else {
-        updateCart();
-      }
+      item.quantity = Math.max(1, quantity);
+      updateCart();
     }
   }
 
   function updateCart() {
-    const cartItemsContainer = document.getElementById('cart-items');
+    cartBadge.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
     cartItemsContainer.innerHTML = '';
 
-    if (cart.length === 0) {
-      cartItemsContainer.innerHTML = '<p style="text-align: center; color: var(--parch-dim); padding: 2rem;">Il carrello è vuoto</p>';
-    } else {
-      cart.forEach(item => {
-        const cartItem = document.createElement('div');
-        cartItem.className = 'cart-item';
+    let totalPrice = 0;
+    let totalWeight = 0;
 
-        const itemInfo = document.createElement('div');
-        itemInfo.className = 'cart-item-info';
+    cart.forEach(item => {
+      const itemTotal = priceToTotal(item.price) * item.quantity;
+      totalPrice += itemTotal;
+      totalWeight += item.weight * item.quantity;
 
-        const title = document.createElement('div');
-        title.className = 'cart-item-title';
-        title.textContent = item.name;
+      const cartItem = document.createElement('div');
+      cartItem.className = 'cart-item';
 
-        const weight = document.createElement('div');
-        weight.className = 'cart-item-weight';
-        weight.textContent = `Vol: ${Number((item.weight * item.quantity).toFixed(2))}`;
+      const info = document.createElement('div');
+      info.className = 'cart-item-info';
 
-        itemInfo.appendChild(title);
-        itemInfo.appendChild(weight);
+      const title = document.createElement('div');
+      title.className = 'cart-item-title';
+      title.textContent = item.name;
 
-        const controls = document.createElement('div');
-        controls.className = 'cart-item-controls';
+      const weight = document.createElement('div');
+      weight.className = 'cart-item-weight';
+      weight.textContent = `Volume: ${(item.weight * item.quantity).toFixed(2)}`;
 
-        const btnMinus = document.createElement('button');
-        btnMinus.className = 'cart-btn-sm';
-        btnMinus.textContent = '−';
-        btnMinus.onclick = () => updateQuantity(item.name, -1);
+      info.appendChild(title);
+      info.appendChild(weight);
 
-        const qty = document.createElement('span');
-        qty.textContent = item.quantity;
+      const controls = document.createElement('div');
+      controls.className = 'cart-item-controls';
 
-        const btnPlus = document.createElement('button');
-        btnPlus.className = 'cart-btn-sm';
-        btnPlus.textContent = '+';
-        btnPlus.onclick = () => updateQuantity(item.name, 1);
+      const minusBtn = document.createElement('button');
+      minusBtn.className = 'cart-btn-sm';
+      minusBtn.textContent = '−';
+      minusBtn.onclick = () => updateCartQuantity(item.name, item.quantity - 1);
 
-        const btnRemove = document.createElement('button');
-        btnRemove.className = 'cart-btn-sm';
-        btnRemove.textContent = '✕';
-        btnRemove.onclick = () => removeFromCart(item.name);
+      const qty = document.createElement('span');
+      qty.textContent = item.quantity;
 
-        controls.appendChild(btnMinus);
-        controls.appendChild(qty);
-        controls.appendChild(btnPlus);
-        controls.appendChild(btnRemove);
+      const plusBtn = document.createElement('button');
+      plusBtn.className = 'cart-btn-sm';
+      plusBtn.textContent = '+';
+      plusBtn.onclick = () => updateCartQuantity(item.name, item.quantity + 1);
 
-        cartItem.appendChild(itemInfo);
-        cartItem.appendChild(controls);
-        cartItemsContainer.appendChild(cartItem);
-      });
-    }
+      const removeBtn = document.createElement('button');
+      removeBtn.className = 'cart-btn-sm';
+      removeBtn.textContent = '×';
+      removeBtn.onclick = () => removeFromCart(item.name);
 
-    const totalPrice = cart.reduce((acc, item) => {
-      acc.mo += item.price.mo * item.quantity;
-      acc.ma += item.price.ma * item.quantity;
-      acc.mr += item.price.mr * item.quantity;
-      return acc;
-    }, { mo: 0, ma: 0, mr: 0 });
+      controls.appendChild(minusBtn);
+      controls.appendChild(qty);
+      controls.appendChild(plusBtn);
+      controls.appendChild(removeBtn);
 
-    const totalWeight = cart.reduce((sum, item) => sum + (item.weight * item.quantity), 0);
+      cartItem.appendChild(info);
+      cartItem.appendChild(controls);
+      cartItemsContainer.appendChild(cartItem);
+    });
 
-    document.getElementById('cart-total').textContent = `Totale: ${formatPrice(totalPrice)}`;
-    document.getElementById('cart-weight').textContent = `Peso: ${Number(totalWeight.toFixed(2))} Volume`;
-    document.getElementById('cart-badge').textContent = cart.length;
+    document.getElementById('cart-total').textContent = `Totale: ${totalPrice} mr`;
+    document.getElementById('cart-weight').textContent = `Peso: ${totalWeight.toFixed(2)} Volume`;
   }
 
   function toggleCart() {
-    document.getElementById('cart-panel').classList.toggle('open');
+    cartPanel.classList.toggle('open');
   }
 
   function toggleDD(ddId) {
-    const dropdown = document.getElementById(ddId);
-    dropdown.classList.toggle('open');
-    document.addEventListener('click', function closeDD(e) {
-      if (!dropdown.contains(e.target)) {
-        dropdown.classList.remove('open');
-        document.removeEventListener('click', closeDD);
-      }
-    });
+    const dd = document.getElementById(ddId);
+    dd.classList.toggle('open');
   }
 
   function openMap() {
@@ -1134,12 +1126,13 @@
     document.getElementById('map-modal').classList.remove('active');
   }
 
-  // Event listeners globali
-  document.addEventListener('click', hideTooltip);
-  tooltip.addEventListener('click', (e) => e.stopPropagation());
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.item-name')) {
+      hideTooltip();
+    }
+  });
 
-  loadShops();
+  document.addEventListener('DOMContentLoaded', loadShops);
 </script>
-
 </body>
 </html>
